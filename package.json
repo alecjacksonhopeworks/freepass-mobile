@@ -10,18 +10,23 @@
     "ts:check": "tsc"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.56.0",
     "@types/react-native": "^0.70.19",
     "expo": "~53.0.22",
     "expo-constants": "~17.1.7",
     "expo-linking": "~7.1.7",
     "expo-router": "~5.1.5",
+    "expo-secure-store": "^14.2.3",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-hook-form": "^7.62.0",
     "react-native": "0.79.5",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
-    "react-dom": "19.0.0",
-    "react-native-web": "^0.20.0"
+    "react-native-web": "^0.20.0",
+    "yup": "^1.7.0",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
