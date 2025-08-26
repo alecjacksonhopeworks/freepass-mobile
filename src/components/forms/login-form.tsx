@@ -1,8 +1,9 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import LabeledTextInput from '../text-inputs'
 import { GlobalTheme } from '../../constants/global-themes'
 import { useRouter } from 'expo-router';
+import StyledButton from '../buttons';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -14,7 +15,7 @@ export default function LoginForm() {
   return (
     <View style={styles.container}>
         <LabeledTextInput
-            inputStyle={{ borderColor: GlobalTheme.colors.primary }}
+            inputStyle={styles.input}
             label="Email"
             placeholder="Enter email..."
             placeholderTextColor={GlobalTheme.colors.primary}
@@ -23,16 +24,20 @@ export default function LoginForm() {
         />
       
         <LabeledTextInput
-            inputStyle={{ borderColor: GlobalTheme.colors.primary }}
+            inputStyle={styles.input}
             label="Password"
             placeholder="Enter password..."
             placeholderTextColor={GlobalTheme.colors.primary}
             secureTextEntry
         />
 
-        <Pressable style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>LOGIN</Text>
-        </Pressable>
+        <StyledButton 
+          buttonStyles={{marginTop: GlobalTheme.spacing.lg}}
+          text="Login"
+          color="secondary"
+          width="75%"
+          rounded={true}
+        />
     </View>
   )
 }
@@ -46,17 +51,7 @@ const styles = StyleSheet.create({
     gap: GlobalTheme.spacing.md,
     backgroundColor: GlobalTheme.colors.white,
   },
-  button: {
-    backgroundColor: GlobalTheme.colors.secondary,
-    ...GlobalTheme.typography.medium,
-    paddingVertical: 11,
-    borderRadius: GlobalTheme.radius.lg,
-    alignItems: "center",
-    marginTop: GlobalTheme.spacing.sm,
-    width: "75%"
-  },
-  buttonText: {
-    color: GlobalTheme.colors.white,
-    ...GlobalTheme.typography.medium, 
-  },
+  input: {
+    borderColor: GlobalTheme.colors.primary
+  }
 })
