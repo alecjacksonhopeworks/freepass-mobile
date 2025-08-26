@@ -22,7 +22,7 @@ FreePass is intended to serve as a centralized hub for guidance, learning, and s
 
 ## Acknowledgments
 
-This project was developed by Hopeworks, a nonprofit social enterprise serving young adults in Camden, NJ and Philadelphia, PA. Hopeworks offers hands-on technology training such as web development and GIS combined with healing focused support and real world job experience to prepare participants for lasting employment and personal growth.
+This project was developed by [Hopeworks](https://hopeworks.org/), a nonprofit social enterprise serving young adults in Camden, NJ and Philadelphia, PA. Hopeworks offers hands-on technology training such as web development and GIS combined with healing focused support and real world job experience to prepare participants for lasting employment and personal growth.
 
 - **Alec Jackson**: Lead Developer
 
