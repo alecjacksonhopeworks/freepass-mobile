@@ -17,14 +17,14 @@ export default function RootLayout() {
 
   // If logged in → go home
   if (isLoggedIn) {
-    return <Redirect href="/home" />;
+    return <Redirect href="/" />;
   }
 
   // If not logged in → go login
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="login" />
-      <Stack.Screen name="home" />
+      <Stack.Screen name="index" />
     </Stack>
   );
 }

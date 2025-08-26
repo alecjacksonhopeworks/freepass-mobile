@@ -32,14 +32,10 @@ export default LabeledTextInput;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: GlobalTheme.spacing.sm,
+    gap: GlobalTheme.spacing.xs,
     width: "75%",
-    paddingVertical: GlobalTheme.spacing.md,
-    borderWidth: 1,
-    borderRadius: GlobalTheme.radius.sm,
   },
   label: {
     ...GlobalTheme.typography.medium,

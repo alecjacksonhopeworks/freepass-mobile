@@ -1,14 +1,8 @@
 import { View, Text, Image, Pressable, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
 import { GlobalTheme } from "../constants/global-themes";
-import LabeledTextInput from "../components/TextInputs";
+import LoginForm from "../components/forms/login-form";
 
 export default function Login() {
-  const router = useRouter();
-
-  const handleLogin = () => {
-    router.replace("/home");
-  };
 
   return (
     <View style={styles.screenContainer}>
@@ -18,29 +12,9 @@ export default function Login() {
         <Text style={styles.welcomeText}>Welcome Back!</Text>
         <Text style={styles.loginText}>Log Into Your Account</Text>
       </View>
+
       <View style={styles.loginContainer}>
-
-          <LabeledTextInput
-            inputStyle={{ borderColor: GlobalTheme.colors.primary }}
-            label="Email"
-            placeholder="Enter email..."
-            placeholderTextColor={GlobalTheme.colors.primary}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-
-          <LabeledTextInput
-            inputStyle={{ borderColor: GlobalTheme.colors.primary }}
-            label="Password"
-            placeholder="Enter password..."
-            placeholderTextColor={GlobalTheme.colors.primary}
-            secureTextEntry
-          />
-
-          <Pressable style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>LOGIN</Text>
-          </Pressable>
-          
+          <LoginForm />
           <View style={styles.forgotAccountContainer}>
             <Text style={styles.forgotPasswordText}>FORGOT YOUR PASSWORD?</Text>
             <View style={styles.divider}/>
@@ -66,7 +40,6 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalTheme.colors.primary,
     paddingTop: GlobalTheme.spacing.xl,
     paddingBottom: GlobalTheme.spacing.md,
-
   },
   banner: {
     width: "100%",
@@ -96,27 +69,14 @@ const styles = StyleSheet.create({
   loginContainer: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    gap: 50,
     backgroundColor: GlobalTheme.colors.white,
-    paddingTop: GlobalTheme.spacing.lg,
-  },
-  button: {
-    backgroundColor: GlobalTheme.colors.secondary,
-    ...GlobalTheme.typography.medium,
-    paddingVertical: 11,
-    borderRadius: GlobalTheme.radius.lg,
-    alignItems: "center",
-    marginTop: GlobalTheme.spacing.lg,
-    width: "75%"
-  },
-  buttonText: {
-    color: GlobalTheme.colors.white,
-    ...GlobalTheme.typography.medium, 
+    paddingVertical: GlobalTheme.spacing.lg,
   },
   forgotAccountContainer: {
     width: "100%",
-    marginTop: 50,
     alignItems: "center",
     gap: GlobalTheme.spacing.xs
   },
@@ -131,7 +91,6 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalTheme.colors.primary,   
   },
   createAccountTextContainer: {
-    display: "flex",
     flexDirection: "row",
     gap: GlobalTheme.spacing.xs,
   },
