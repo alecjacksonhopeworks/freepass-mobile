@@ -22,7 +22,7 @@ FreePass is intended to serve as a centralized hub for guidance, learning, and s
 
 ## Acknowledgments
 
-This project was developed by [Hopeworks](https://hopeworks.org/), a nonprofit organization that empowers young adults through technical training, healing, and entrepreneurship to transform lives. Hopeworks provides comprehensive reskilling for the AI era, preparing young adults—particularly those historically excluded from the digital economy—to thrive in the era of artificial intelligence.
+This project was developed by Hopeworks, a nonprofit social enterprise serving young adults in Camden, NJ and Philadelphia, PA. Hopeworks offers hands-on technology training such as web development and GIS combined with healing focused support and real world job experience to prepare participants for lasting employment and personal growth.
 
 - **Alec Jackson**: Lead Developer
 
