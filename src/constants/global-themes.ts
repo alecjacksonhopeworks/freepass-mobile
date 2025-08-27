@@ -53,6 +53,7 @@ export type GlobalTheme = {
   typography: TypographyTheme;
 };
 
+
 export const GlobalTheme: GlobalTheme = {
   colors: {
     primary: "#B84F2B",
@@ -96,3 +97,8 @@ export const GlobalTheme: GlobalTheme = {
   },
 };
 
+
+export type ThemeColor = keyof typeof GlobalTheme.colors;
+export type ThemeFontSize = keyof typeof GlobalTheme.typography;
+export type ThemeSpacing = keyof typeof GlobalTheme.spacing;
+export type ThemeRadius = keyof typeof GlobalTheme.radius;

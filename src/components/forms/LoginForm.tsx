@@ -1,9 +1,9 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import LabeledTextInput from '../text-inputs'
+import LabeledTextInput from '../LabledTextInput'
 import { GlobalTheme } from '../../constants/global-themes'
 import { useRouter } from 'expo-router';
-import StyledButton from '../buttons';
+import StyledButton from '../StyledButton';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalTheme.colors.white,
   },
   input: {
-    borderColor: GlobalTheme.colors.primary
+    borderColor: GlobalTheme.colors.primary,
+    width: "75%",
   }
 })

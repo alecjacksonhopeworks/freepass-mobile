@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: GlobalTheme.spacing.xs,
-    width: "75%",
+    width: "100%",
   },
   label: {
     ...GlobalTheme.typography.medium,
