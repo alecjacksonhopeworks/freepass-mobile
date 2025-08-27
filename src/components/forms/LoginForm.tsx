@@ -9,11 +9,12 @@ export default function LoginForm() {
   const router = useRouter();
   
   const handleLogin = () => {
-    router.replace("/");
+    router.replace("/home");
   };
 
   return (
     <View style={styles.container}>
+
         <LabeledTextInput
             inputStyle={styles.input}
             label="Email"
@@ -35,8 +36,8 @@ export default function LoginForm() {
           buttonStyles={{marginTop: GlobalTheme.spacing.lg}}
           text="Login"
           color="secondary"
-          width="75%"
           rounded={true}
+          onPress={handleLogin}
         />
     </View>
   )
@@ -45,14 +46,15 @@ export default function LoginForm() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: "75%",
     gap: GlobalTheme.spacing.md,
     backgroundColor: GlobalTheme.colors.white,
+    borderWidth: 2,
+    borderColor: GlobalTheme.colors.primary,
   },
   input: {
     borderColor: GlobalTheme.colors.primary,
-    width: "75%",
   }
 })

@@ -15,7 +15,7 @@ function StyledButton(props: StyledButtonProps) {
     text,
     color = 'primary',
     rounded = false,
-    width,
+    width = '100%',
     buttonStyles,
     textStyle,
     ...rest
@@ -24,10 +24,10 @@ function StyledButton(props: StyledButtonProps) {
   const borderStyles = rounded ? styles.rounded : styles.box;
 
   const allButtonStyles: ViewStyle = {
+    width, 
     ...styles.button,
     ...borderStyles,
     backgroundColor: GlobalTheme.colors[color],
-    width: width || 'auto',
     ...buttonStyles,       
   };
 
@@ -43,9 +43,9 @@ export default StyledButton;
 const styles = StyleSheet.create({
   button: {
     paddingVertical: 11,
+    paddingHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 'auto',
   },
   rounded: {
     borderRadius: GlobalTheme.radius.lg,

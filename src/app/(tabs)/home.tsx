@@ -10,27 +10,30 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { FreepassLogoImage } from "../../components/Images";
+import { Link } from "expo-router";
+import { StyledText } from "../../components/StyledText";
 
 const defaultResources = [
   {
     id: "1",
     name: "Local Food Bank",
     description: "Provides meals and groceries for those in need.",
-    image: require("../../assets/freepass-logo.png"),
+    image: null,
     favorite: false,
   },
   {
     id: "2",
     name: "Job Training Center",
     description: "Career development and skills training programs.",
-    image: require("../../assets/freepass-logo.png"),
+    image: null,
     favorite: true,
   },
   {
     id: "3",
     name: "Community Shelter",
     description: "Temporary housing and support services.",
-    image: require("../../assets/freepass-logo.png"),
+    image: null,
     favorite: false,
   },
 ];
@@ -58,11 +61,15 @@ export default function Home() {
     <View style={styles.container}>
       {/* Logo + Quick List */}
       <View style={styles.header}>
-        <Image source={require("../../assets/freepass-logo.png")} style={styles.logo} />
+        <FreepassLogoImage />
         <Pressable style={styles.quickListButton}>
           <Text style={styles.quickListText}>Quick List</Text>
         </Pressable>
       </View>
+
+      <Link href="/login">
+          <StyledText text=" Go Back To Login" color="primaryDark"/>
+      </Link>
 
       {/* Instruction Text */}
       <Text style={styles.instruction}>
@@ -102,7 +109,7 @@ export default function Home() {
         style={styles.list}
         renderItem={({ item }) => (
           <View style={styles.resourceCard}>
-            <Image source={item.image} style={styles.resourceImage} />
+            <Image style={styles.resourceImage} />
             <View style={styles.resourceText}>
               <Text style={styles.resourceName}>{item.name}</Text>
               <Text style={styles.resourceDesc}>{item.description}</Text>
