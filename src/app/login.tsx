@@ -14,14 +14,14 @@ export default function Login() {
         <Image source={require("../../assets/freepass-logo.png")}
           style={styles.logo}
         />
-        <StyledText  text="Welcome Back!" color="white" size="large"/>
+        <StyledText  text="Welcome Back!" color="white" font="large"/>
         <StyledText text="Log Into Your Account" color="white"/>
       </View>
 
       <View style={styles.loginContainer}>
         <LoginForm />
         <View style={styles.forgotAccountContainer}>
-          <StyledText text="FORGOT YOUR PASSWORD?" color="primary" size="small"/>
+          <StyledText text="FORGOT YOUR PASSWORD?" color="primary" font="small"/>
           <View style={styles.divider} />
           <View style={styles.createAccountTextContainer}>
             <StyledText text="Don't have an account?" color="primaryDark"/>

@@ -1,13 +1,13 @@
 import { Pressable, Text, StyleSheet, PressableProps, DimensionValue, ColorValue, ViewStyle, TextStyle } from 'react-native';
-import { GlobalTheme } from "../constants/global-themes";
+import { GlobalTheme, ThemeColor } from "../constants/global-themes";
 
 type StyledButtonProps = PressableProps & {
   text: string; 
-  color?: 'primary' | 'primaryDark' | 'secondary'; 
+  color?: ThemeColor; 
   rounded?: boolean;          
   width?: DimensionValue;     
-  buttonStyles?: ViewStyle;          // additional container styles
-  textStyle?: TextStyle;      // additional text styles
+  buttonStyles?: ViewStyle;      
+  textStyle?: TextStyle;  
 };
 
 function StyledButton(props: StyledButtonProps) {
