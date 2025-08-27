@@ -15,7 +15,6 @@ export function TextLink({noUnderline = false, textStyles, ...props}: TextLinkPr
     text,
     color,
     font,
-    width,
     ...linkProps
   } = props;
 
@@ -30,7 +29,6 @@ export function TextLink({noUnderline = false, textStyles, ...props}: TextLinkPr
         text={text}
         color={color}
         font={font}
-        width={width}
         style={textStyle}
       />
     </Link>

@@ -1,9 +1,8 @@
-import { View, Text, TextInput, TextInputProps, StyleSheet, StyleProp, TextStyle, ViewStyle, DimensionValue } from "react-native";
+import { View, Text, TextInput, TextInputProps, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { GlobalTheme } from "../constants/global-themes";
 
 type LabeledTextInputProps = TextInputProps & {
-  label?: string;
-  width?: DimensionValue;     
+  label: string;
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
@@ -12,7 +11,6 @@ type LabeledTextInputProps = TextInputProps & {
 function LabeledTextInput(props: LabeledTextInputProps) {
   const {
     label,
-    width = "100%",
     containerStyle,
     inputStyle,
     labelStyle,
@@ -20,7 +18,7 @@ function LabeledTextInput(props: LabeledTextInputProps) {
   } = props;
 
   return (
-     <View style={[{width}, styles.container, containerStyle]}>
+     <View style={[styles.container, containerStyle]}>
       {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
       <TextInput
         style={[styles.input, inputStyle]}
@@ -37,6 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: GlobalTheme.spacing.xs,
+    width: "100%",
   },
   label: {
     ...GlobalTheme.typography.medium,

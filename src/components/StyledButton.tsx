@@ -1,11 +1,10 @@
-import { Pressable, Text, StyleSheet, PressableProps, DimensionValue, ColorValue, ViewStyle, TextStyle } from 'react-native';
+import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle } from 'react-native';
 import { GlobalTheme, ThemeColor } from "../constants/global-themes";
 
 type StyledButtonProps = PressableProps & {
   text: string; 
   color?: ThemeColor; 
   rounded?: boolean;          
-  width?: DimensionValue;     
   buttonStyles?: ViewStyle;      
   textStyle?: TextStyle;  
 };
@@ -15,7 +14,6 @@ function StyledButton(props: StyledButtonProps) {
     text,
     color = 'primary',
     rounded = false,
-    width = '100%',
     buttonStyles,
     textStyle,
     ...rest
@@ -24,7 +22,6 @@ function StyledButton(props: StyledButtonProps) {
   const borderStyles = rounded ? styles.rounded : styles.box;
 
   const allButtonStyles: ViewStyle = {
-    width, 
     ...styles.button,
     ...borderStyles,
     backgroundColor: GlobalTheme.colors[color],
@@ -46,6 +43,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
   rounded: {
     borderRadius: GlobalTheme.radius.lg,
