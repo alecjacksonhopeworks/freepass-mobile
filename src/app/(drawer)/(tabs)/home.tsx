@@ -10,9 +10,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { FreepassLogoImage } from "../../components/Images";
+import { FreepassLogoImage } from "../../../components/Images";
 import { Link } from "expo-router";
-import { StyledText } from "../../components/StyledText";
+import { StyledText } from "../../../components/StyledText";
 
 const defaultResources = [
   {

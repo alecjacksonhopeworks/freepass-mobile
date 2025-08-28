@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
-import { GlobalTheme } from "../../constants/global-themes";
+import { GlobalTheme } from "../../../constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
+import { DrawerToggleButton } from '@react-navigation/drawer';
 
 export default function Layout() {
   return (
@@ -18,6 +19,7 @@ export default function Layout() {
         tabBarLabelStyle: {
           fontSize: 12,
         },
+        headerLeft: () => <DrawerToggleButton tintColor={GlobalTheme.colors.white} />
       }}
     >
       <Tabs.Screen

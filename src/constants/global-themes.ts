@@ -1,8 +1,36 @@
 // theme.ts
 // Centralized theme file for FreePass app
 // Provides strongly typed styles for consistency
+import { ColorValue} from "react-native";
 
-export type ColorTheme = {
+
+export type FontWeight =
+  | "normal"
+  | "bold"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900";
+
+export type ThemeFontWeight =
+  | "regular"
+  | "medium"
+  | "semibold"
+  | "bold";
+  
+export type ThemeFontFamily =
+  | "system"
+  | "heading"
+  | "body"
+  | "monospace";
+
+
+type GlobalColorTheme = {
   primary: string;
   primaryDark: string;
   secondary: string;
@@ -11,9 +39,10 @@ export type ColorTheme = {
   text: string;
   black: string;
   white: string;
+  gray: string
 };
 
-export type SpacingTheme = {
+type GlobalSpacingTheme = {
   xs: number;
   sm: number;
   md: number;
@@ -21,36 +50,53 @@ export type SpacingTheme = {
   xl: number;
 };
 
-export type RadiusTheme = {
+type GlobalRadiusTheme = {
   sm: number;
   md: number;
   lg: number;
   full: number;
 };
 
-export type TypographyTheme = {
-  large: {
-    fontSize: number;
-    fontWeight: "bold";
-    fontFamily: string;
-  };
-  medium: {
-    fontSize: number;
-    fontWeight: "600";
-    fontFamily: string;
-  };
-  small: {
-    fontSize: number;
-    fontWeight: "normal";
-    fontFamily: string;
-  };
+type GlobalTypographyTheme = {
+  large: TypographyEntry;
+  medium: TypographyEntry;
+  small: TypographyEntry;
 };
 
+
+export type TypographyEntry = {
+  fontSize: number;
+  fontWeight: ThemeFontWeight;
+  fontFamily: string;
+};
+
+
+export type GlobalFonts = {
+  weights: Record<ThemeFontWeight, string>;
+  families: Record<ThemeFontFamily, string>;
+}
+
 export type GlobalTheme = {
-  colors: ColorTheme;
-  spacing: SpacingTheme;
-  radius: RadiusTheme;
-  typography: TypographyTheme;
+  colors: GlobalColorTheme;
+  spacing: GlobalSpacingTheme;
+  radius: GlobalRadiusTheme;
+  typography: GlobalTypographyTheme;
+};
+
+
+export const GlobalFonts: GlobalFonts = {
+  weights: {
+    regular: "400" as const,
+    medium: "500" as const,
+    semibold: "600" as const,
+    bold: "700" as const,
+  },
+  families: {
+    system: "System",
+    heading: "Poppins-Bold",
+    body: "Poppins-Regular",
+    monospace: "Courier",
+  },
 };
 
 
@@ -64,6 +110,7 @@ export const GlobalTheme: GlobalTheme = {
     background: "#FFFFFF",
     black: "#000000",
     white: "#FFFFFF",
+    gray: "#9CA3AF"
   },
   spacing: {
     xs: 4,
@@ -86,16 +133,16 @@ export const GlobalTheme: GlobalTheme = {
     },
     medium: {
       fontSize: 14,
-      fontWeight: "600",
+      fontWeight: "medium",
       fontFamily: "Inter",
     },
     small: {
       fontSize: 12,
-      fontWeight: "normal",
+      fontWeight: "regular",
       fontFamily: "Inter",
     },
   },
-};
+} as const satisfies GlobalTheme;
 
 
 export type ThemeColor = keyof typeof GlobalTheme.colors;
