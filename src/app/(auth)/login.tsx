@@ -3,20 +3,23 @@ import { GlobalTheme } from "../../constants/global-themes";
 import LoginForm from "../../components/forms/LoginForm";
 import { StyledText } from "../../components/StyledText";
 import { TextLink } from "../../components/TextLink";
+import AuthHeader from "../../components/AuthHeader";
 
 export default function Login() {
   return (
-    <View style={styles.container}>
-      <LoginForm />
-      <View style={styles.footerContainer}>
-          <TextLink href="/reset-password" text="Forgot your password?" color="primaryDark" replace/>
-        <View style={styles.divider} />
-        <View style={styles.linksContainer}>
-          <StyledText text="Don't have an account?" color="primaryDark"/>
-          <TextLink href="/register" text="Sign Up!" color="primary" replace/>
+    <AuthHeader title="Welcome Back!" subtitle="Log in to your account">
+      <View style={styles.container}>
+        <LoginForm />
+        <View style={styles.footerContainer}>
+            <TextLink href="/reset-password" text="Forgot your password?" color="primaryDark" replace/>
+          <View style={styles.divider} />
+          <View style={styles.linksContainer}>
+            <StyledText text="Don't have an account?" color="primaryDark"/>
+            <TextLink href="/register" text="Sign Up!" color="primary" replace/>
+          </View>
         </View>
       </View>
-    </View>
+    </AuthHeader>
   );
 }
 
