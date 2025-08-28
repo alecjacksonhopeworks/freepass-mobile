@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: GlobalTheme.spacing.lg,
     backgroundColor: GlobalTheme.colors.white,
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     flexDirection: "row",
-    gap: GlobalTheme.spacing.xs,
-    marginTop: GlobalTheme.spacing.md,
+    gap: GlobalTheme.spacing.xs 
   },
 });

@@ -1,8 +1,6 @@
 // theme.ts
 // Centralized theme file for FreePass app
 // Provides strongly typed styles for consistency
-import { ColorValue} from "react-native";
-
 
 export type FontWeight =
   | "normal"
@@ -48,6 +46,8 @@ type GlobalSpacingTheme = {
   md: number;
   lg: number;
   xl: number;
+  xxl: number;
+  xxxl: number;
 };
 
 type GlobalRadiusTheme = {
@@ -118,6 +118,8 @@ export const GlobalTheme: GlobalTheme = {
     md: 16,
     lg: 24,
     xl: 32,
+    xxl: 40,
+    xxxl: 48,
   },
   radius: {
     sm: 4,

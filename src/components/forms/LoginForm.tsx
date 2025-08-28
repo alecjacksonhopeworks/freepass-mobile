@@ -14,31 +14,30 @@ export default function LoginForm() {
 
   return (
     <View style={styles.container}>
+      <LabeledTextInput
+          inputStyle={styles.input}
+          label="Email"
+          placeholder="Enter email..."
+          placeholderTextColor={GlobalTheme.colors.primary}
+          keyboardType="email-address"
+          autoCapitalize="none"
+      />
+    
+      <LabeledTextInput
+          inputStyle={styles.input}
+          label="Password"
+          placeholder="Enter password..."
+          placeholderTextColor={GlobalTheme.colors.primary}
+          secureTextEntry
+      />
 
-        <LabeledTextInput
-            inputStyle={styles.input}
-            label="Email"
-            placeholder="Enter email..."
-            placeholderTextColor={GlobalTheme.colors.primary}
-            keyboardType="email-address"
-            autoCapitalize="none"
-        />
-      
-        <LabeledTextInput
-            inputStyle={styles.input}
-            label="Password"
-            placeholder="Enter password..."
-            placeholderTextColor={GlobalTheme.colors.primary}
-            secureTextEntry
-        />
-
-        <StyledButton 
-          buttonStyles={{marginTop: GlobalTheme.spacing.lg}}
-          text="Login"
-          color="secondary"
-          rounded={true}
-          onPress={handleLogin}
-        />
+      <StyledButton 
+        buttonStyles={{marginTop: GlobalTheme.spacing.lg}}
+        text="Login"
+        color="secondary"
+        rounded={true}
+        onPress={handleLogin}
+      />
     </View>
   )
 }
@@ -46,13 +45,11 @@ export default function LoginForm() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     width: "75%",
     gap: GlobalTheme.spacing.md,
     backgroundColor: GlobalTheme.colors.white,
-    borderWidth: 2,
-    borderColor: GlobalTheme.colors.primary,
   },
   input: {
     borderColor: GlobalTheme.colors.primary,

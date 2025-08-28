@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: GlobalTheme.spacing.lg,
     backgroundColor: GlobalTheme.colors.white,
-    paddingVertical: GlobalTheme.spacing.lg,
+    paddingVertical: GlobalTheme.spacing.xl,
   },
   footerContainer: {
     width: "100%",
