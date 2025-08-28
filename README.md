@@ -15,10 +15,12 @@ FreePass is intended to serve as a centralized hub for guidance, learning, and s
 
 ## Technologies
 
+- **Language**: Typescript
 - **Frontend**: React Native (Expo)
 - **Backend**: Supabase (Authentication, Database, Realtime)
-- **State Management**: React Context API
+- **State Management**: TBD
 - **Navigation**: Expo Router
+- **External APIs**: Google Maps 
 
 ## Acknowledgments
 
