@@ -1,20 +1,14 @@
-import { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  Pressable,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { View, FlatList, StyleSheet, Pressable } from "react-native";
 import { FreepassLogoImage } from "../../../components/Images";
-import { Link } from "expo-router";
+import StyledButton from "../../../components/StyledButton";
 import { StyledText } from "../../../components/StyledText";
+import { GlobalTheme } from "../../../constants/global-themes";
+import { SearchBar } from "react-native-screens";
+import ResourceCard from "../../../components/resource/ResourceCard";
+import { Resource } from "../../../constants/types";
 
-const defaultResources = [
+const defaultResources: Resource[] = [
   {
     id: "1",
     name: "Local Food Bank",
@@ -42,87 +36,90 @@ export default function Home() {
   const [resources, setResources] = useState(defaultResources);
   const [search, setSearch] = useState("");
   const [showFavorites, setShowFavorites] = useState(false);
+  const [savingFavoriteId, setSavingFavoriteId] = useState<string | null>(null);
 
-  const filteredResources = resources.filter((r) =>
-    showFavorites ? r.favorite : true
-  ).filter((r) =>
-    r.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredResources = resources
+    .filter((r) => (showFavorites ? r.favorite : true))
+    .filter((r) => r.name.toLowerCase().includes(search.toLowerCase()));
 
   const toggleFavorite = (id: string) => {
-    setResources((prev) =>
-      prev.map((r) =>
-        r.id === id ? { ...r, favorite: !r.favorite } : r
-      )
-    );
+    setSavingFavoriteId(id);
+    setTimeout(() => {
+      setResources((prev) =>
+        prev.map((r) =>
+          r.id === id ? { ...r, favorite: !r.favorite } : r
+        )
+      );
+      setSavingFavoriteId(null);
+    }, 500); // simulate async save delay
   };
 
   return (
     <View style={styles.container}>
-      {/* Logo + Quick List */}
+      {/* Header */}
       <View style={styles.header}>
         <FreepassLogoImage />
-        <Pressable style={styles.quickListButton}>
-          <Text style={styles.quickListText}>Quick List</Text>
-        </Pressable>
+        <StyledButton
+          text="Quick List"
+          color="secondary"
+          rounded
+          onPress={() => {}}
+        />
       </View>
 
-      <Link href="/login">
-          <StyledText text=" Go Back To Login" color="primaryDark"/>
-      </Link>
-
-      {/* Instruction Text */}
-      <Text style={styles.instruction}>
-        To find relevant services in your area, you may use the Search bar, choose Search by Category, or view Resources near you.
-      </Text>
-
-      {/* Search Bar */}
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search resources..."
-        value={search}
-        onChangeText={setSearch}
+      {/* Instruction */}
+      <StyledText
+        text="To find relevant services in your area, you may use the Search bar, choose Search by Category, or view Resources near you."
+        font="small"
+        color="text"
+        style={{ marginBottom: GlobalTheme.spacing.md }}
       />
 
-      {/* All / Favorites Toggle */}
+      {/* Search Bar */}
+      <SearchBar
+        placeholder="Search resources..."
+        value="temp"
+        onChangeText={() => {}}
+        showIcon
+      />
+
+      {/* Favorites Toggle */}
       <View style={styles.toggleContainer}>
-        <TouchableOpacity onPress={() => setShowFavorites(false)} style={[styles.toggleButton, !showFavorites && styles.toggleActive]}>
-          <Text>All</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setShowFavorites(true)} style={[styles.toggleButton, showFavorites && styles.toggleActive]}>
-          <Text>Favorites</Text>
-        </TouchableOpacity>
+        <StyledButton
+          text="All"
+          color={!showFavorites ? "primary" : "gray"}
+          rounded
+          onPress={() => setShowFavorites(false)}
+        />
+        <StyledButton
+          text="Favorites"
+          color={showFavorites ? "primary" : "gray"}
+          rounded
+          onPress={() => setShowFavorites(true)}
+        />
       </View>
 
-      {/* Section Title */}
-      <Text style={styles.sectionTitle}>Below are relevant services in your area</Text>
-
-      {/* Find Resources Button */}
-      <Pressable style={styles.findButton}>
-        <Text style={styles.findButtonText}>Find Resources Near Me Now</Text>
-      </Pressable>
-
-      {/* Resource List */}
+      {/* Resources List */}
       <FlatList
         data={filteredResources}
         keyExtractor={(item) => item.id}
-        style={styles.list}
         renderItem={({ item }) => (
-          <View style={styles.resourceCard}>
-            <Image style={styles.resourceImage} />
-            <View style={styles.resourceText}>
-              <Text style={styles.resourceName}>{item.name}</Text>
-              <Text style={styles.resourceDesc}>{item.description}</Text>
-            </View>
-            <Pressable onPress={() => toggleFavorite(item.id)}>
-              <FontAwesome
-                name={item.favorite ? "star" : "star-o"}
-                size={24}
-                color={item.favorite ? "#FFD700" : "#ccc"}
-              />
-            </Pressable>
-          </View>
+          <ResourceCard
+            resource={item}
+            onToggleFavorite={toggleFavorite}
+            favoriteLoading={savingFavoriteId === item.id}
+          />
         )}
+        contentContainerStyle={{ paddingBottom: GlobalTheme.spacing.lg }}
+      />
+
+      {/* Find Resources Button */}
+      <StyledButton
+        text="Find Resources Near Me Now"
+        color="secondary"
+        rounded
+        style={{ marginTop: GlobalTheme.spacing.md }}
+        onPress={() => {}}
       />
     </View>
   );
@@ -131,100 +128,18 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#fff",
+    padding: GlobalTheme.spacing.md,
+    backgroundColor: GlobalTheme.colors.background,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 12,
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    resizeMode: "contain",
-  },
-  quickListButton: {
-    backgroundColor: "#4CAF50",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    marginLeft: 12,
-  },
-  quickListText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  instruction: {
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 12,
-  },
-  searchInput: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 12,
+    justifyContent: "space-between",
+    marginBottom: GlobalTheme.spacing.md,
   },
   toggleContainer: {
     flexDirection: "row",
-    marginBottom: 12,
-  },
-  toggleButton: {
-    flex: 1,
-    paddingVertical: 8,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-  toggleActive: {
-    backgroundColor: "#4CAF50",
-    borderColor: "#4CAF50",
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  findButton: {
-    backgroundColor: "#2196F3",
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  findButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  list: {
-    flex: 1,
-  },
-  resourceCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "#eee",
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  resourceImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 8,
-    marginRight: 12,
-  },
-  resourceText: {
-    flex: 1,
-  },
-  resourceName: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  resourceDesc: {
-    fontSize: 14,
-    color: "#666",
+    justifyContent: "space-around",
+    marginVertical: GlobalTheme.spacing.sm,
   },
 });

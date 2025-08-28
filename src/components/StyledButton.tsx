@@ -1,21 +1,33 @@
-import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle } from 'react-native';
+import React from "react";
+import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, View } from "react-native";
 import { GlobalTheme, ThemeColor } from "../constants/global-themes";
+import { Ionicons } from "@expo/vector-icons";
 
 type StyledButtonProps = PressableProps & {
-  text: string; 
-  color?: ThemeColor; 
-  rounded?: boolean;          
-  buttonStyles?: ViewStyle;      
-  textStyle?: TextStyle;  
+  text: string;
+  color?: ThemeColor;
+  rounded?: boolean;
+  buttonStyles?: ViewStyle;
+  textStyle?: TextStyle;
+  autoWidth?: boolean;
+  leftIcon?: keyof typeof Ionicons.glyphMap;
+  rightIcon?: keyof typeof Ionicons.glyphMap;
+  iconSize?: number;
+  iconColor?: string;
 };
 
 function StyledButton(props: StyledButtonProps) {
   const {
     text,
-    color = 'primary',
+    color = "primary",
     rounded = false,
     buttonStyles,
     textStyle,
+    autoWidth = false,
+    leftIcon,
+    rightIcon,
+    iconSize = 20,
+    iconColor,
     ...rest
   } = props;
 
@@ -25,15 +37,32 @@ function StyledButton(props: StyledButtonProps) {
     ...styles.button,
     ...borderStyles,
     backgroundColor: GlobalTheme.colors[color],
-    ...buttonStyles,       
+    width: autoWidth ? undefined : "100%",
+    ...buttonStyles,
   };
 
   return (
     <Pressable style={allButtonStyles} {...rest}>
-      <Text style={[styles.text, textStyle]}>{text}</Text>
+        {leftIcon && (
+          <Ionicons
+            name={leftIcon}
+            size={iconSize}
+            color={iconColor || GlobalTheme.colors.white}
+            style={{ marginRight: 8 }}
+          />
+        )}
+        <Text style={[styles.text, textStyle]}>{text}</Text>
+        {rightIcon && (
+          <Ionicons
+            name={rightIcon}
+            size={iconSize}
+            color={iconColor || GlobalTheme.colors.white}
+            style={{ marginLeft: 8 }}
+          />
+        )}
     </Pressable>
   );
-};
+}
 
 export default StyledButton;
 
@@ -41,9 +70,9 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 11,
     paddingHorizontal: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   rounded: {
     borderRadius: GlobalTheme.radius.lg,
@@ -54,6 +83,6 @@ const styles = StyleSheet.create({
   text: {
     color: GlobalTheme.colors.white,
     ...GlobalTheme.typography.medium,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
