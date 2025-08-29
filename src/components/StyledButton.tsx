@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, View } from "react-native";
+import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, DimensionValue } from "react-native";
 import { GlobalTheme, ThemeColor } from "../constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -9,7 +9,7 @@ type StyledButtonProps = PressableProps & {
   rounded?: boolean;
   buttonStyles?: ViewStyle;
   textStyle?: TextStyle;
-  autoWidth?: boolean;
+  width?: DimensionValue
   leftIcon?: keyof typeof Ionicons.glyphMap;
   rightIcon?: keyof typeof Ionicons.glyphMap;
   iconSize?: number;
@@ -23,7 +23,7 @@ function StyledButton(props: StyledButtonProps) {
     rounded = false,
     buttonStyles,
     textStyle,
-    autoWidth = false,
+    width="auto",
     leftIcon,
     rightIcon,
     iconSize = 20,
@@ -34,10 +34,10 @@ function StyledButton(props: StyledButtonProps) {
   const borderStyles = rounded ? styles.rounded : styles.box;
 
   const allButtonStyles: ViewStyle = {
+    width,
     ...styles.button,
     ...borderStyles,
     backgroundColor: GlobalTheme.colors[color],
-    width: autoWidth ? undefined : "100%",
     ...buttonStyles,
   };
 

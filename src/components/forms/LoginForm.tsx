@@ -34,6 +34,7 @@ export default function LoginForm() {
       <StyledButton 
         buttonStyles={{marginTop: GlobalTheme.spacing.lg}}
         text="Login"
+        width="100%"
         color="secondary"
         rounded={true}
         onPress={handleLogin}

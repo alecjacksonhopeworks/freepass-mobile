@@ -42,6 +42,7 @@ export default function RegisterForm() {
         buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
         text="Sign Up"
         color="secondary"
+        width="100%"
         rounded={true}
         onPress={handleSignup}
       />

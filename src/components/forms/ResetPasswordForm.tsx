@@ -27,6 +27,7 @@ export default function ResetPasswordForm() {
       <StyledButton
         buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
         text="Reset Password"
+        width="100%"
         color="secondary"
         rounded={true}
         onPress={handleReset}

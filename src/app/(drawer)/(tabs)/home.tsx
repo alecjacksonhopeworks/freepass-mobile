@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { View, FlatList, StyleSheet, Pressable } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { FreepassLogoImage } from "../../../components/Images";
 import StyledButton from "../../../components/StyledButton";
 import { StyledText } from "../../../components/StyledText";
 import { GlobalTheme } from "../../../constants/global-themes";
-import { SearchBar } from "react-native-screens";
+import SearchBar from "../../../components/SearchBar";
 import ResourceCard from "../../../components/resource/ResourceCard";
 import { Resource } from "../../../constants/types";
+import Spacer from "../../../components/Spacer";
 
 const defaultResources: Resource[] = [
   {
@@ -78,8 +79,8 @@ export default function Home() {
       {/* Search Bar */}
       <SearchBar
         placeholder="Search resources..."
-        value="temp"
-        onChangeText={() => {}}
+        value={search}
+        onChangeText={(text: string) => { setSearch(text) }}
         showIcon
       />
 
@@ -87,14 +88,14 @@ export default function Home() {
       <View style={styles.toggleContainer}>
         <StyledButton
           text="All"
+          width="50%"
           color={!showFavorites ? "primary" : "gray"}
-          rounded
           onPress={() => setShowFavorites(false)}
         />
         <StyledButton
           text="Favorites"
+          width="50%"
           color={showFavorites ? "primary" : "gray"}
-          rounded
           onPress={() => setShowFavorites(true)}
         />
       </View>
@@ -127,19 +128,19 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
     padding: GlobalTheme.spacing.md,
     backgroundColor: GlobalTheme.colors.background,
+    gap: GlobalTheme.spacing.md
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: GlobalTheme.spacing.md,
+    justifyContent: "center",
   },
   toggleContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    marginVertical: GlobalTheme.spacing.sm,
-  },
+    gap: GlobalTheme.spacing.md,
+    justifyContent: "center",  },
 });
