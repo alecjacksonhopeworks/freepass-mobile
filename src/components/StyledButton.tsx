@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, DimensionValue } from "react-native";
-import { GlobalTheme, ThemeColor } from "../constants/global-themes";
+import { GlobalTheme, ThemeColor } from "@constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
 
 type StyledButtonProps = PressableProps & {

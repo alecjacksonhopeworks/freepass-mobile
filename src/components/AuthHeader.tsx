@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledText } from './StyledText'
 import { BannerImage, FreepassLogoImage } from './Images'
 import { View, StyleSheet } from 'react-native'
-import { GlobalTheme } from '../constants/global-themes'
+import { GlobalTheme } from "@constants/global-themes"
 
 export type AuthHeaderProps = {
     title: string;

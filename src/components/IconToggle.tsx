@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, ViewStyle, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { GlobalTheme } from "../constants/global-themes";
+import { GlobalTheme } from "@constants/global-themes";
+import { Ionicon } from "@constants/types";
 
 type IconToggleProps = {
   isOn: boolean;
   onPress: () => void;
-  iconOn: keyof typeof Ionicons.glyphMap;
-  iconOff: keyof typeof Ionicons.glyphMap;
+  iconOn: Ionicon;
+  iconOff: Ionicon;
   size?: number;
   colorOn?: string;
   colorOff?: string;

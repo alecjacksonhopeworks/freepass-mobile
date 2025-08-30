@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import { FreepassLogoImage } from "../../../components/Images";
-import StyledButton from "../../../components/StyledButton";
-import { StyledText } from "../../../components/StyledText";
-import { GlobalTheme } from "../../../constants/global-themes";
-import SearchBar from "../../../components/SearchBar";
-import ResourceCard from "../../../components/resource/ResourceCard";
-import { Resource } from "../../../constants/types";
-import Spacer from "../../../components/Spacer";
+import { FreepassLogoImage } from "@components/Images";
+import StyledButton from "@components/StyledButton";
+import { StyledText } from "@components/StyledText";
+import { GlobalTheme } from "@constants/global-themes";
+import SearchBar from "@components/SearchBar";
+import ResourceCard from "@components/resource/ResourceCard";
+import { Resource } from "@constants/types";
 
 const defaultResources: Resource[] = [
   {

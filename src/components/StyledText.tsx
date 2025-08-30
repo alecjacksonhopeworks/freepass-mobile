@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextStyle, StyleSheet } from "react-native";
-import { GlobalTheme, ThemeColor, ThemeFont } from "../constants/global-themes";
+import { GlobalTheme, ThemeColor, ThemeFont } from "@constants/global-themes";
 
 export type StyledTextProps = TextStyle & {
   text: string;

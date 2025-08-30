@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { GlobalTheme } from "../constants/global-themes";
+import { GlobalTheme } from "@constants/global-themes";
 
 type SearchBarProps = {
   value: string;

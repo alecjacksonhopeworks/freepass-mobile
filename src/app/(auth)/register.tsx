@@ -1,9 +1,9 @@
 import { View, StyleSheet } from "react-native";
-import { GlobalTheme } from "../../constants/global-themes";
-import RegisterForm from "../../components/forms/RegisterForm";
-import { StyledText } from "../../components/StyledText";
-import { TextLink } from "../../components/TextLink";
-import AuthHeader from "../../components/AuthHeader";
+import { GlobalTheme } from "@constants/global-themes";
+import RegisterForm from "@components/forms/RegisterForm";
+import { StyledText } from "@components/StyledText";
+import { TextLink } from "@components/TextLink";
+import AuthHeader from "@components/AuthHeader";
 
 export default function Signup() {
   return (

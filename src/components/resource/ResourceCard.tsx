@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
-import { GlobalTheme } from "../../constants/global-themes";
+import { GlobalTheme } from "@constants/global-themes";
 import IconToggle from "../IconToggle";
-import { Resource } from "../../constants/types";
+import { Resource } from "@constants/types";
 
 export type ResourceCardProps = {
   resource: Resource

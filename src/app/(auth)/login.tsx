@@ -1,9 +1,9 @@
 import { View, StyleSheet } from "react-native";
-import { GlobalTheme } from "../../constants/global-themes";
-import LoginForm from "../../components/forms/LoginForm";
-import { StyledText } from "../../components/StyledText";
-import { TextLink } from "../../components/TextLink";
-import AuthHeader from "../../components/AuthHeader";
+import { GlobalTheme } from "@constants/global-themes";
+import LoginForm from "@components/forms/LoginForm";
+import { StyledText } from "@components/StyledText";
+import { TextLink } from "@components/TextLink";
+import AuthHeader from "@components/AuthHeader";
 
 export default function Login() {
   return (

@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import SamplePage from "../../../components/SamplePage";
+import SamplePage from "@components/SamplePage";
 
 export default function Events() {
   const name = arguments.callee.name

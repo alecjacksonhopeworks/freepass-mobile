@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, DimensionValue} from 'react-native';
-import { GlobalTheme, ThemeSpacing } from '../constants/global-themes';
+import { GlobalTheme, ThemeSpacing } from "@constants/global-themes";
 
 type SpacerProps = 
   | { size: DimensionValue; spacing?: never; horizontal?: boolean }

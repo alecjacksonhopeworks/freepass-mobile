@@ -1,5 +1,5 @@
 import { View, Text, TextInput, TextInputProps, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
-import { GlobalTheme } from "../constants/global-themes";
+import { GlobalTheme } from "@constants/global-themes";
 
 type LabeledTextInputProps = TextInputProps & {
   label: string;

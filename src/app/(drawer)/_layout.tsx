@@ -2,29 +2,44 @@
 import React from "react";
 import { Drawer } from "expo-router/drawer";
 import { Ionicons } from "@expo/vector-icons";
-import { GlobalTheme } from "../../constants/global-themes"; // adjust path if needed
+import { GlobalTheme } from "@constants/global-themes"; // adjust path if needed
+import { FreepassLogoImage } from "@components/Images";
 
 export default function MenuLayout() {
   return (
     <Drawer
-      screenOptions={{
-        headerShown: true,
-        headerStyle: {
-          backgroundColor: GlobalTheme.colors.background,
+        screenOptions={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: GlobalTheme.colors.primaryDark,
+          },
+          headerTintColor: GlobalTheme.colors.white,
+          headerTitle: () => (
+            <FreepassLogoImage size={40}/>
+          ),
+          headerTitleAlign: "center",
+          drawerType: "front",
+          drawerActiveTintColor: GlobalTheme.colors.primary,
+          drawerInactiveTintColor: GlobalTheme.colors.gray,
+          drawerLabelStyle: {
+            ...GlobalTheme.typography.medium,
+            color: GlobalTheme.colors.white
+          },
+        drawerContentStyle: {
+          backgroundColor: GlobalTheme.colors.primaryDark,
         },
-        headerTintColor: GlobalTheme.colors.primary,
-        headerTitleStyle: {
-          ...GlobalTheme.typography.medium,
-          color: GlobalTheme.colors.primary,
+        drawerStyle: {
+          backgroundColor: GlobalTheme.colors.primaryDark,
+          width: 260,
         },
-        drawerType: "front",
-        drawerActiveTintColor: GlobalTheme.colors.primary,
-        drawerInactiveTintColor: GlobalTheme.colors.gray,
-        drawerLabelStyle: {
-          ...GlobalTheme.typography.medium,
-        },
-      }}
+       }}
     >
+      <Drawer.Screen
+        name="(tabs)"
+        options={{
+          drawerItemStyle: { display: "none" }
+        }}
+      />
       <Drawer.Screen
         name="profile"
         options={{

@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, ImageProps } from "react-native";
-
+import { Image, ImageProps, ImageStyle } from "react-native";
 
 export default function AppImage(props: ImageProps) {
   return (
@@ -19,13 +18,22 @@ export function BannerImage({style, ...rest}: ImageProps) {
   );
 }
 
-export function FreepassLogoImage({style, ...rest}: ImageProps) {
+export type FreepassLogoImageProps = ImageProps & { size?: number };
+
+export function FreepassLogoImage({size, ...props}: FreepassLogoImageProps) {
+
+  let style: ImageStyle = {
+    width: size ?? 50,
+    height: size ?? 50,
+    alignSelf: "center"
+  }
+
   return (
     <AppImage
       source={require("../../assets/freepass-logo.png")}
-      style={[{width: 50, height: 50, alignSelf: "center"}, style]}
+      style={style}
       resizeMode="contain"
-      {...rest}
+      {...props}
     />
   );
 }

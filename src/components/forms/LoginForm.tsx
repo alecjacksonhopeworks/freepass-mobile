@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import LabeledTextInput from '../LabledTextInput'
-import { GlobalTheme } from '../../constants/global-themes'
+import { GlobalTheme } from "@constants/global-themes"
 import { useRouter } from 'expo-router';
 import StyledButton from '../StyledButton';
 

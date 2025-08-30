@@ -1,10 +1,10 @@
 import { View, StyleSheet } from "react-native";
-import { GlobalTheme } from "../../constants/global-themes";
-import ResetPasswordForm from "../../components/forms/ResetPasswordForm";
-import { StyledText } from "../../components/StyledText";
-import { TextLink } from "../../components/TextLink";
-import Spacer from "../../components/Spacer";
-import AuthHeader from "../../components/AuthHeader";
+import { GlobalTheme } from "@constants/global-themes";
+import ResetPasswordForm from "@components/forms/ResetPasswordForm";
+import { StyledText } from "@components/StyledText";
+import { TextLink } from "@components/TextLink";
+import Spacer from "@components/Spacer";
+import AuthHeader from "@components/AuthHeader";
 
 export default function ResetPassword() {
 

@@ -31,12 +31,14 @@ export type ThemeFontFamily =
 type GlobalColorTheme = {
   primary: string;
   primaryDark: string;
+  primaryLight: string;
   secondary: string;
   secondaryLight: string;
   background: string;
   text: string;
   black: string;
   white: string;
+  whiteInactive: string;
   gray: string
 };
 
@@ -104,12 +106,14 @@ export const GlobalTheme: GlobalTheme = {
   colors: {
     primary: "#B84F2B",
     primaryDark: "#822000",
+    primaryLight: "#bf6040",
     secondary: "#F28F38",
     secondaryLight: "#FFC067",
     text: "#333333",
     background: "#FFFFFF",
     black: "#000000",
     white: "#FFFFFF",
+    whiteInactive: "#F3F4F6",
     gray: "#9CA3AF"
   },
   spacing: {
