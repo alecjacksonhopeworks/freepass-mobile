@@ -9,7 +9,7 @@ export default function RegisterForm() {
   const router = useRouter();
 
   const handleSignup = () => {
-    router.replace("/home"); // Redirect after signup
+    router.replace("/signup/choose-role"); // Redirect after signup
   };
 
   return (

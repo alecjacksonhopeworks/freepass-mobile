@@ -15,7 +15,7 @@ export default function Login() {
           <View style={styles.divider} />
           <View style={styles.linksContainer}>
             <StyledText text="Don't have an account?" color="primaryDark"/>
-            <TextLink href="/register" text="Sign Up!" color="primary" replace/>
+            <TextLink href="/signup" text="Sign Up!" color="primary" replace/>
           </View>
         </View>
       </View>

@@ -29,8 +29,8 @@ export default function ResourceCard({
       <IconToggle
         isOn={resource.favorite}
         onPress={() => onToggleFavorite(resource.id)}
-        iconOn="star"
-        iconOff="star-outline"
+        iconOn="heart"
+        iconOff="heart-outline"
         size={28}
         loading={favoriteLoading}
       />
