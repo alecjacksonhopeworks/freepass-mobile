@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, ImageProps, ImageStyle } from "react-native";
+import { GlobalTheme } from "@constants/global-themes";
 
 export default function AppImage(props: ImageProps) {
   return (
@@ -20,12 +21,33 @@ export function BannerImage({style, ...rest}: ImageProps) {
 
 export type FreepassLogoImageProps = ImageProps & { size?: number };
 
-export function FreepassLogoImage({size, ...props}: FreepassLogoImageProps) {
+export function FreepassLogoImage({size = 50, ...props}: FreepassLogoImageProps) {
 
   let style: ImageStyle = {
-    width: size ?? 50,
-    height: size ?? 50,
+    width: size,
+    height: size,
     alignSelf: "center"
+  }
+
+  return (
+    <AppImage
+      source={require("../../assets/freepass-logo.png")}
+      style={style}
+      resizeMode="contain"
+      {...props}
+    />
+  );
+}
+
+export type ProfileImageProps = ImageProps & { size?: number };
+
+export function ProfileImage({size = 50, ...props}: FreepassLogoImageProps) {
+
+  let style: ImageStyle = {
+    width: size,
+    height: size,
+    alignSelf: "center",
+    borderRadius: GlobalTheme.radius.full
   }
 
   return (

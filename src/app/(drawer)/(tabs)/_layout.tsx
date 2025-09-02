@@ -12,6 +12,7 @@ type TabInfo = {
   name: string;
   title: string;
   icon: string;
+  
 };
 
 const tabs: TabInfo[] = [
@@ -45,6 +46,8 @@ export default function TabsLayout() {
         headerLeft: () => <DrawerToggleButton tintColor={GlobalTheme.colors.white} />,
       }}
     >
+      <Tabs.Screen name="(other)" options={{href: null}}/>
+            
       {tabs.map((tab) => {
         const outlineIcon = `${tab.icon}-outline` as Ionicon;
         const icon = tab.icon as Ionicon;

@@ -4,10 +4,12 @@ import { Drawer } from "expo-router/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { GlobalTheme } from "@constants/global-themes"; // adjust path if needed
 import { FreepassLogoImage } from "@components/Images";
+import { CustomDrawerContent } from "@components/CustomDrawerContent";
 
 export default function MenuLayout() {
   return (
     <Drawer
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
         screenOptions={{
           headerShown: true,
           headerStyle: {
@@ -33,49 +35,7 @@ export default function MenuLayout() {
           width: 260,
         },
        }}
-    >
-      <Drawer.Screen
-        name="(tabs)"
-        options={{
-          drawerItemStyle: { display: "none" }
-        }}
-      />
-      <Drawer.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="user-guide"
-        options={{
-          title: "User Guide",
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="book-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="your-calandar"
-        options={{
-          title: "Your Calendar",
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="calendar-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
-          ),
-        }}
-      />
-    </Drawer>
+    />
+
   );
 }

@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import SamplePage from "@components/SamplePage";
 
-export default function YourCalandar() {
+export default function YourCalendar() {
   const name = arguments.callee.name
   return (
     <View style={styles.container}>
