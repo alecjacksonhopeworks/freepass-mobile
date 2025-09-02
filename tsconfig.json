@@ -9,7 +9,7 @@
       "@screens/*": ["src/app/*"],
       "@context/*": ["src/app/context*"],
       "@hooks/*": ["src/app/hooks*"],
-      "@db/*": ["src/app/db*"]
+      "@db/*": ["src/db/*"]
     }
   }
 }
