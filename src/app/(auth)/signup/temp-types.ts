@@ -1,3 +1,5 @@
+// TODO: Remove these temporary types
+
 export type ResourceCategory =
   | "Housing"
   | "Food"
