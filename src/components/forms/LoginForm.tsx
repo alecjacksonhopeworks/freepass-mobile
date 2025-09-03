@@ -5,6 +5,9 @@ import { GlobalTheme } from "@constants/global-themes"
 import { useRouter } from 'expo-router';
 import StyledButton from '../StyledButton';
 
+// TODO: Implement validation with react hook form and yup
+// TODO: implement login functionality
+
 export default function LoginForm() {
   const router = useRouter();
   

@@ -3,6 +3,8 @@ import { View, TextInput, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { GlobalTheme } from "@constants/global-themes";
 
+// TODO: inspect generated search bar component, style (with icon) add reasonable design, (onChange or onEnter)
+
 type SearchBarProps = {
   value: string;
   placeholder?: string;

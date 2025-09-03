@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import storageAdapter from "./secure-storage";
+import storageAdapter from "../secure-storage";
 import 'react-native-get-random-values';
 
 

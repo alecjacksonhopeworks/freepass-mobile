@@ -4,6 +4,10 @@ import LabeledTextInput from "@components/LabledTextInput";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 
+
+//TODO: Revamp generated layout and implement signup step logic
+
+
 export default function CreateProfile() {
   const router = useRouter();
 

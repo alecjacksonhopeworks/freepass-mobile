@@ -2,6 +2,9 @@ import React from "react";
 import { FlatList } from "react-native";
 import ResourceCard from "./ResourceCard";
 
+
+// TODO: inspect and style generated ResourceList Component and later add  database resource type
+
 type Resource = {
   id: string;
   name: string;

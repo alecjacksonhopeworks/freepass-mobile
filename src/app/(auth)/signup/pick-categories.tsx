@@ -5,6 +5,10 @@ import { StyledText } from "@components/StyledText";
 import StyledButton from "@components/StyledButton";
 import { ResourceCategory } from "./temp-types";
 
+
+//TODO: Revamp generated layout and implement signup step logic
+
+
 const categories: ResourceCategory[] = [
   "Housing","Food","Community","Jobs","Education","Finance","Medical",
   "MentalHealth","Legal","Transportation","Clothing","SubstanceUse",

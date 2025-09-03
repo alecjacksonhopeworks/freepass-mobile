@@ -5,6 +5,10 @@ import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "../StyledButton";
 import { useRouter } from "expo-router";
 
+// TODO: Implement validation with react hook form and yup
+// TODO: implement register functionality
+
+
 export default function RegisterForm() {
   const router = useRouter();
 

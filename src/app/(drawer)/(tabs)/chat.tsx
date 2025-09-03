@@ -1,6 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import SamplePage from "@components/SamplePage";
 
+// TODO: Implement Chat layout
+
 export default function Chat() {
   const name = arguments.callee.name
   return (

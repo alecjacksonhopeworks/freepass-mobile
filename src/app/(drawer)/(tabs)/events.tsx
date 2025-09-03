@@ -1,6 +1,10 @@
 import { View, StyleSheet } from "react-native";
 import SamplePage from "@components/SamplePage";
 
+// TODO: Implement Events layout
+// TODO: calendar intergration
+
+
 export default function Events() {
   const name = arguments.callee.name
   return (

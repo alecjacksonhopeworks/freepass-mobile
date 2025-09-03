@@ -1,6 +1,9 @@
 import { View, StyleSheet } from "react-native";
 import SamplePage from "@components/SamplePage";
 
+// TODO: Implement FAQ layout, should just link to forums feature, giant foruma
+
+
 export default function FAQ() {
   const name = arguments.callee.name
   return (

@@ -3,6 +3,8 @@ import { useRouter } from "expo-router";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 
+//TODO: Revamp generated layout and implement signup step logic
+
 export default function ChooseRole() {
   const router = useRouter();
 
