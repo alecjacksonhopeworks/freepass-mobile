@@ -45,7 +45,7 @@ class LocalStorageAdapter implements IStorage {
   }
 }
 
-class LargeSecureStore implements IStorage {
+class LargeSecureStore {
   private storage: IStorage;
 
   constructor(storage: IStorage) {
@@ -90,7 +90,9 @@ class LargeSecureStore implements IStorage {
   }
 }
 
+
+
 const storageAdapter =
-    Platform.OS === "web" ? new LocalStorageAdapter() : new AsyncStorageAdapter();
+    Platform.OS === "web" ? new LargeSecureStore(new LocalStorageAdapter()) : new LargeSecureStore(new AsyncStorageAdapter()) ;
 
 export default storageAdapter;
