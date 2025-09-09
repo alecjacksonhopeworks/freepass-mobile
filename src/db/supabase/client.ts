@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import storageAdapter from "../secure-storage";
+import SecureStorage from "@db/supabase/secure-storage";
 import 'react-native-get-random-values';
 
 
@@ -9,7 +9,7 @@ const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 export const SupabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage: storageAdapter,
+    storage: SecureStorage,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,

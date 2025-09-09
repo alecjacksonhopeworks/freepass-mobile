@@ -39,7 +39,8 @@ type GlobalColorTheme = {
   black: string;
   white: string;
   whiteInactive: string;
-  gray: string
+  gray: string,
+  error: string
 };
 
 type GlobalSpacingTheme = {
@@ -63,6 +64,7 @@ type GlobalTypographyTheme = {
   large: TypographyEntry;
   medium: TypographyEntry;
   small: TypographyEntry;
+  error: TypographyEntry
 };
 
 
@@ -70,6 +72,7 @@ export type TypographyEntry = {
   fontSize: number;
   fontWeight: ThemeFontWeight;
   fontFamily: string;
+  color?: string
 };
 
 
@@ -114,7 +117,8 @@ export const GlobalTheme: GlobalTheme = {
     black: "#000000",
     white: "#FFFFFF",
     whiteInactive: "#F3F4F6",
-    gray: "#9CA3AF"
+    gray: "#9CA3AF",
+    error: "#f2545b"
   },
   spacing: {
     xs: 4,
@@ -141,6 +145,12 @@ export const GlobalTheme: GlobalTheme = {
       fontSize: 14,
       fontWeight: "medium",
       fontFamily: "Inter",
+    },
+    error: {
+      fontSize: 12,
+      fontWeight: "medium",
+      fontFamily: "Inter",
+      color: '#f2545b'
     },
     small: {
       fontSize: 12,

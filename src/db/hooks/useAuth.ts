@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { SupabaseClient } from "@db/supabase/client";
 import { useAuthStore } from "@db/store/useAuthStore";
+import { useRouter } from "expo-router";
 
 // TODO: test auth hooks, link with application and add auth types
 
@@ -23,6 +24,7 @@ export function useSignUp() {
 
 export function useSignIn() {
   const setSession = useAuthStore((s) => s.setSession);
+  const router = useRouter()
 
   return useMutation({
     mutationFn: async ({ email, password }: { email: string; password: string }) => {
@@ -30,11 +32,12 @@ export function useSignIn() {
         email,
         password,
       });
-      if (error) throw error;
+      if (error) throw new Error(error.message);
       return data;
     },
     onSuccess: (data) => {
       if (data.session) setSession(data.session, data.session.user);
+      router.replace('/home')
     },
   });
 }
