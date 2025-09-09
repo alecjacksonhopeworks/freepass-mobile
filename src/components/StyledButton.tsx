@@ -26,7 +26,7 @@ function StyledButton(props: StyledButtonProps) {
     width="auto",
     leftIcon,
     rightIcon,
-    iconSize = 20,
+    iconSize = 18,
     iconColor,
     ...rest
   } = props;
@@ -48,7 +48,7 @@ function StyledButton(props: StyledButtonProps) {
             name={leftIcon}
             size={iconSize}
             color={iconColor || GlobalTheme.colors.white}
-            style={{ marginRight: 8 }}
+            style={{ marginRight: GlobalTheme.spacing.xs }}
           />
         )}
         <Text style={[styles.text, textStyle]}>{text}</Text>
@@ -57,7 +57,7 @@ function StyledButton(props: StyledButtonProps) {
             name={rightIcon}
             size={iconSize}
             color={iconColor || GlobalTheme.colors.white}
-            style={{ marginLeft: 8 }}
+            style={{ marginLeft: GlobalTheme.spacing.xs }}
           />
         )}
     </Pressable>

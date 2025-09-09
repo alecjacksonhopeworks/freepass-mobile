@@ -8,9 +8,10 @@ interface AuthState {
   clear: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   session: null,
   user: null,
   setSession: (session, user) => set({ session, user }),
   clear: () => set({ session: null, user: null }),
+  isLoggedIn: () => !!get().session && !!get().user,
 }));

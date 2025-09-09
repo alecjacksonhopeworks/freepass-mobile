@@ -1,55 +1,99 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import LabeledTextInput from "../LabledTextInput";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "../StyledButton";
 import { useRouter } from "expo-router";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { StyledText } from "../StyledText";
+import { useSignUp } from "@db/hooks/auth";
+import { TextFormInput } from "./form-inputs";
 
-// TODO: Implement validation with react hook form and yup
-// TODO: implement register functionality
+// Validation schema
+const schema = yup.object({
+  email: yup
+    .string()
+    .required("Please enter your email")
+    .email("The email you entered is not valid"),
+  password: yup
+    .string()
+    .required("Please enter your password")
+    .min(8, "Password must be at least 8 characters"),
+  fullname: yup
+    .string()
+    .trim()
+    .required("Full name is required.")
+    .min(2, "Full name must be at least 2 characters")
+    .max(30, "Full name cannot exceed 100 characters")
+});
 
+type SignUpFormData = {
+  fullname: string;
+  email: string;
+  password: string;
+};
 
 export default function RegisterForm() {
   const router = useRouter();
 
-  const handleSignup = () => {
-    router.replace("/signup/choose-role"); // Redirect after signup
+  const {mutate, error } = useSignUp();
+
+  const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormData>({
+    resolver: yupResolver(schema),
+  });
+  
+
+  const onSubmit = (data: SignUpFormData) => {
+    mutate(data)
   };
 
   return (
     <View style={styles.container}>
-      <LabeledTextInput
-        inputStyle={styles.input}
-        label="Name"
-        placeholder="Enter your name..."
-        placeholderTextColor={GlobalTheme.colors.primary}
-      />
+    
+      <TextFormInput
+          label="Full Name"
+          name="fullname"
+          control={control}
+          errorText={errors.fullname?.message}
+          placeholder="Enter your full name..."
+          placeholderTextColor={GlobalTheme.colors.primary}
+        />
 
-      <LabeledTextInput
-        inputStyle={styles.input}
+      <TextFormInput
         label="Email"
+        name="email"
+        control={control}
+        errorText={errors.email?.message}
         placeholder="Enter email..."
         placeholderTextColor={GlobalTheme.colors.primary}
         keyboardType="email-address"
         autoCapitalize="none"
       />
 
-      <LabeledTextInput
-        inputStyle={styles.input}
+      <TextFormInput
         label="Password"
+        name="password"
+        control={control}
+        errorText={errors.password?.message}
         placeholder="Enter password..."
         placeholderTextColor={GlobalTheme.colors.primary}
         secureTextEntry
+        autoCapitalize="none"
       />
 
-      <StyledButton
-        buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
-        text="Sign Up"
-        color="secondary"
-        width="100%"
-        rounded={true}
-        onPress={handleSignup}
-      />
+      {/* Submit */}
+      <View style={styles.formItemContainer}>
+        <StyledButton
+          buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
+          text="Sign Up"
+          color="secondary"
+          width="100%"
+          rounded={true}
+          onPress={handleSubmit(onSubmit)}
+        />
+        <StyledText text={error?.message} font='error'/>
+      </View>
     </View>
   );
 }
@@ -66,4 +110,18 @@ const styles = StyleSheet.create({
   input: {
     borderColor: GlobalTheme.colors.primary,
   },
+  formItemContainer: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    gap: GlobalTheme.spacing.xs,
+    width: "100%",
+  },
+  nameInputContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    borderWidth: 2,
+    gap: GlobalTheme.spacing.md
+  }
 });

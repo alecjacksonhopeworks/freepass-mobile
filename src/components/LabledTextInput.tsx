@@ -1,14 +1,14 @@
 import { View, Text, TextInput, TextInputProps, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
 import { GlobalTheme } from "@constants/global-themes";
 
-type LabeledTextInputProps = TextInputProps & {
+export type LabeledTextInputProps = TextInputProps & {
   label: string;
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
 };
 
-function LabeledTextInput(props: LabeledTextInputProps) {
+export function LabeledTextInput(props: LabeledTextInputProps) {
   const {
     label,
     containerStyle,
@@ -28,7 +28,6 @@ function LabeledTextInput(props: LabeledTextInputProps) {
   )
 }
 
-export default LabeledTextInput;
 
 const styles = StyleSheet.create({
   container: {
