@@ -1,12 +1,14 @@
-import React from "react";
-import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, DimensionValue } from "react-native";
+import React, { useState } from "react";
+import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, DimensionValue, GestureResponderEvent } from "react-native";
 import { GlobalTheme, ThemeColor } from "@constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
+import { PressableEvent } from "react-native-gesture-handler/lib/typescript/components/Pressable/PressableProps";
 
 type StyledButtonProps = PressableProps & {
   text: string;
   color?: ThemeColor;
   rounded?: boolean;
+  delay?: number;
   buttonStyles?: ViewStyle;
   textStyle?: TextStyle;
   width?: DimensionValue
@@ -19,6 +21,7 @@ type StyledButtonProps = PressableProps & {
 function StyledButton(props: StyledButtonProps) {
   const {
     text,
+    delay = 500,
     color = "primary",
     rounded = false,
     buttonStyles,
@@ -31,6 +34,17 @@ function StyledButton(props: StyledButtonProps) {
     ...rest
   } = props;
 
+  const [disabled, setDisabled] = useState(false);
+
+  const handlePress = (event: GestureResponderEvent) => {
+    if (!props.onPress || disabled) return;
+    let onPress = props.onPress!
+    onPress(event);
+    setDisabled(true);
+    setTimeout(() => setDisabled(false), delay);
+
+  }
+
   const borderStyles = rounded ? styles.rounded : styles.box;
 
   const allButtonStyles: ViewStyle = {
@@ -42,7 +56,7 @@ function StyledButton(props: StyledButtonProps) {
   };
 
   return (
-    <Pressable style={allButtonStyles} {...rest}>
+    <Pressable style={allButtonStyles} {...rest} onPress={handlePress} disabled={disabled}>
         {leftIcon && (
           <Ionicons
             name={leftIcon}

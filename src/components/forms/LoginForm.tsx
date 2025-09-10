@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { GlobalTheme } from "@constants/global-themes"
-import { useRouter } from 'expo-router';
 import StyledButton from '@components/StyledButton';
 import { useSignIn } from '@db/hooks/auth';
 import {  useForm } from 'react-hook-form'
@@ -29,8 +28,11 @@ const schema = yup.object().shape({
 
 
 export default function LoginForm() {
-  const router = useRouter();
+  console.log('Rendering Login Form')
   const {mutate, error } = useSignIn()
+
+  //const mutate = (data: LoginFormData) => {}
+  //const error = {message: ''}
 
   const { control, handleSubmit, setValue, formState: { errors }} = useForm<LoginFormData>(
     {

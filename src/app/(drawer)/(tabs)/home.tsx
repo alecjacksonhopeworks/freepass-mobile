@@ -7,6 +7,7 @@ import { GlobalTheme } from "@constants/global-themes";
 import SearchBar from "@components/SearchBar";
 import ResourceCard from "@components/data/resource/ResourceCard";
 import { Resource } from "@constants/types";
+import DebugStoreButton from "@components/debug/DebugStoreButton";
 
 const defaultResources: Resource[] = [
   {
@@ -66,6 +67,7 @@ export default function Home() {
           onPress={() => {}}
         />
       </View>
+
 
       {/* Instruction */}
       <StyledText

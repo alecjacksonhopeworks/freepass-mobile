@@ -9,11 +9,9 @@ import { useEffect } from 'react'
 // TODO: implement email STMP sign up, check on setting in Supabase Authorization tab
 
 export function useSignUp() {
-  const { setSession, setPrivateUser, setUserSettings } = useAuthStore((s) => ({
-      setSession: s.setSession,
-      setPrivateUser: s.setPrivateUser,
-      setUserSettings: s.setUserSettings,
-    }));
+  const setSession = useAuthStore((s) => s.setSession);
+  const setPrivateUser = useAuthStore((s) => s.setPrivateUser);
+  const setUserSettings = useAuthStore((s) => s.setUserSettings);
 
   const router = useRouter()
 
@@ -59,16 +57,15 @@ export function useSignUp() {
 }
 
 export function useSignIn() {
-  const { setSession, setPrivateUser, setUserSettings } = useAuthStore((s) => ({
-    setSession: s.setSession,
-    setPrivateUser: s.setPrivateUser,
-    setUserSettings: s.setUserSettings,
-  }));
+  const setSession = useAuthStore((s) => s.setSession);
+  const setPrivateUser = useAuthStore((s) => s.setPrivateUser);
+  const setUserSettings = useAuthStore((s) => s.setUserSettings);
 
   const router = useRouter();
 
   return useMutation({
     mutationFn: async ({ email, password }: { email: string; password: string }) => {
+      console.log('MUTATE SIGN IN')
       const { data, error } = await SupabaseClient.auth.signInWithPassword({
         email,
         password,
@@ -91,10 +88,13 @@ export function useSignIn() {
         .eq("user_id", userId)
         .single();
       if (userSettingsError) throw userSettingsError;
+      
+      console.log({ authData: data, privateUser, userSettings })
 
       return { authData: data, privateUser, userSettings };
     },
     onSuccess: ({ authData, privateUser, userSettings }) => {
+      console.log("SIGN IN SUCCESS")
 
       if (authData.session) {
         setSession(authData.session, authData.session.user);
