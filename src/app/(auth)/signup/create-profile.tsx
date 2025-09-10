@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import LabeledTextInput from "@components/LabledTextInput";
+import { LabeledTextInput } from "@components/LabledTextInput";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 

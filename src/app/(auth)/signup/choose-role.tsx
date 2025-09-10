@@ -9,7 +9,7 @@ export default function ChooseRole() {
   const router = useRouter();
 
   const handleChoice = (choice: "Finder" | "Provider") => {
-    router.replace("/signup/pick-categories");
+    router.replace("/signup/pick-service-types");
   };
 
   return (
