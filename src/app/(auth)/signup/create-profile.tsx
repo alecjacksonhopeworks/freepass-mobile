@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { LabeledTextInput } from "@components/LabledTextInput";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
+import { useUpdateSignUpState } from "@db/hooks/auth";
 
 
 //TODO: Revamp generated layout and implement signup step logic
@@ -10,7 +11,7 @@ import { StyledText } from "@components/StyledText";
 
 export default function CreateProfile() {
   const router = useRouter();
-
+  const { mutate: mutateSignUpState } = useUpdateSignUpState(() => router.replace('/home'))
   const handleFinish = () => {
     // save data to Supabase or other backend
     router.replace("/home");

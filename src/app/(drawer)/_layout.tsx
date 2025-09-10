@@ -1,12 +1,13 @@
 // app/(menu)/_layout.tsx
 import React from "react";
 import { Drawer } from "expo-router/drawer";
-import { Ionicons } from "@expo/vector-icons";
 import { GlobalTheme } from "@constants/global-themes"; // adjust path if needed
 import { FreepassLogoImage } from "@components/Images";
 import { CustomDrawerContent } from "@components/CustomDrawerContent";
+import { useRedirectBasedOnLogin } from "@db/hooks/auth";
 
 export default function MenuLayout() {
+  useRedirectBasedOnLogin();
   return (
     <Drawer
         drawerContent={(props) => <CustomDrawerContent {...props} />}

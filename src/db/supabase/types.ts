@@ -7,3 +7,4 @@ export type ServiceType = Omit<
 
 export type PrivateUser = SupabaseTypes.Database["public"]["Tables"]["private_user"]["Row"];
 export type UserSettings = SupabaseTypes.Database["public"]["Tables"]["user_settings"]["Row"];
+export type SignUpState =  typeof SupabaseTypes.Constants.public.Enums.sign_up_state[number];

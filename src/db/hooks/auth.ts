@@ -2,7 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { SupabaseClient } from "@db/supabase/client";
 import { useAuthStore } from "@db/store/useAuthStore";
 import { useRouter } from "expo-router";
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
+import { SignUpState, PrivateUser } from "@db/supabase/types";
 
 // TODO: test auth hooks, link with application and add auth types
 
@@ -127,19 +128,16 @@ const SIGN_UP_ROUTES: Record<string, string> = {
   pick_categories: "/signup/pick-categories",
   create_profile: "/signup/create-profile",
   //add_resource_request: "/signup/add-resource-request",
-  complete: "/home"
+  complete: ""
 };
 
 export function useRedirectBasedOnLogin() {
   const router = useRouter();
-  const { session, privateUser, isLoggedIn } = useAuthStore((s) => ({
-    session: s.session,
-    privateUser: s.privateUser,
-    isLoggedIn: s.isLoggedIn
-  }));
+  const session = useAuthStore((store) => store.session)
+  const privateUser = useAuthStore((store) => store.privateUser)
 
   useEffect(() => {
-    if (!isLoggedIn()) {
+    if (!session) {
       router.replace("/login");
       return;
     }
@@ -147,9 +145,37 @@ export function useRedirectBasedOnLogin() {
     if (!privateUser) throw new Error("Private user data not loaded but user is logged in."); 
 
     const signUpState = privateUser.sign_up_state || "complete";
-    const route = SIGN_UP_ROUTES[signUpState] || "/home";
+    const route = SIGN_UP_ROUTES[signUpState] || '';
 
-    // Redirect if not already on the correct route
-    router.replace(route);
-  }, [session]);
+    if (signUpState != "complete")
+      router.replace(route);
+  }, [session, privateUser]);
+}
+
+
+export function useUpdateSignUpState(onComplete?: () => void) {
+  const user = useAuthStore((store) => store.user);
+  const setPrivateUser = useAuthStore((store) => store.setPrivateUser);
+  const userId = user?.id
+
+  return useMutation({
+    mutationFn: async (newState: SignUpState) => {
+      if (userId) throw new Error("User ID is required");
+
+      const { data, error } = await SupabaseClient
+        .from("private_user")
+        .update({ sign_up_state: newState })
+        .eq("id", userId)
+        .select()
+        .single<PrivateUser>();
+
+      if (error) throw error;
+
+      return data;
+    },
+    onSuccess: (data) => {
+      setPrivateUser(data);
+      if (onComplete) onComplete();
+    },
+  });
 }

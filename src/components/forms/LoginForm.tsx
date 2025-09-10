@@ -1,17 +1,16 @@
-import { StyleSheet, View } from 'react-native'
-import React from 'react'
-import { GlobalTheme } from "@constants/global-themes"
-import StyledButton from '@components/StyledButton';
-import { useSignIn } from '@db/hooks/auth';
-import {  useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup'
-import { StyledText } from '@components/StyledText';
-import { TextFormInput } from './form-inputs';
+import { StyleSheet, View } from "react-native";
+import React from "react";
+import { GlobalTheme } from "@constants/global-themes";
+import StyledButton from "@components/StyledButton";
+import { useSignIn } from "@db/hooks/auth";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { StyledText } from "@components/StyledText";
+import { TextFormInput } from "./form-inputs";
 
 // TODO: Implement validation with react hook form and yup
 // TODO: implement login functionality
-
 
 type LoginFormData = {
   email: string;
@@ -19,34 +18,35 @@ type LoginFormData = {
 };
 
 const schema = yup.object().shape({
-  email: yup.string().required("Please enter an email")
+  email: yup
+    .string()
+    .required("Please enter an email")
     .email("The email you entered is not valid email."),
-  password: yup.string()
-    .required('Please enter your password.')
-     .min(7, "Password longer than y chars"),
-})
-
+  password: yup
+    .string()
+    .required("Please enter your password.")
+    .min(7, "Password longer than y chars"),
+});
 
 export default function LoginForm() {
-  console.log('Rendering Login Form')
-  const {mutate, error } = useSignIn()
+  console.log("Rendering Login Form");
+  const { mutate, error } = useSignIn();
 
-  //const mutate = (data: LoginFormData) => {}
-  //const error = {message: ''}
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(schema),
+  });
 
-  const { control, handleSubmit, setValue, formState: { errors }} = useForm<LoginFormData>(
-    {
-      resolver: yupResolver(schema)
-    }
-  );
-
-  const onSubmit = (data : LoginFormData ) => {
-     mutate(data)
-  }
+  const onSubmit = (data: LoginFormData) => {
+    mutate(data);
+  };
 
   return (
     <View style={styles.container}>
-
       <TextFormInput
         label="Email"
         name="email"
@@ -70,7 +70,7 @@ export default function LoginForm() {
       />
 
       {/* Submit */}
-      <View style={[styles.formItemContainer, {alignItems: 'center'}]}>
+      <View style={[styles.formItemContainer, { alignItems: "center" }]}>
         <StyledButton
           buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
           text="Login"
@@ -79,21 +79,21 @@ export default function LoginForm() {
           rounded={true}
           onPress={handleSubmit(onSubmit)}
         />
-        <StyledText text={error?.message} font='error'/>
+        <StyledText text={error?.message} font="error" />
       </View>
 
       <StyledButton
         buttonStyles={{ marginTop: GlobalTheme.spacing.md }}
         text="Autofill Test Account"
         color="primaryDark"
-        leftIcon='alert-outline'
+        leftIcon="alert-outline"
         onPress={() => {
           setValue("email", "test@gmail.com");
           setValue("password", "password");
         }}
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
   formItemContainer: {
     flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     gap: GlobalTheme.spacing.xs,
     width: "100%",
-  }
-})
+  },
+});

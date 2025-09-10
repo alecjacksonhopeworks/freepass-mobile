@@ -5,18 +5,27 @@ import ServiceTypeList from "@components/data/service_type/ServiceTypeList";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
-import { useServiceTypes, useSyncUserServiceTypes } from "@db/hooks/service_type";
+import {
+  useServiceTypes,
+  useSyncUserServiceTypes,
+} from "@db/hooks/service_type";
+import { useUpdateSignUpState } from "@db/hooks/auth";
 
 // Example static data; replace with dynamic Supabase fetch if needed
-
 
 export default function PickServiceTypes() {
   const router = useRouter();
   const [selected, setSelected] = useState<number[]>([]);
 
-  const { data: serviceTypes, error: selectServiceTypesError } = useServiceTypes();
+  const { data: serviceTypes, error: selectServiceTypesError } =
+    useServiceTypes();
 
-  const { mutate, error: addServiceTypeError } = useSyncUserServiceTypes();
+  const { mutate: mutateServiceTypes, error: addServiceTypeError } =
+    useSyncUserServiceTypes();
+
+  const { mutate: mutateSignUpState } = useUpdateSignUpState(() =>
+    router.replace("/signup/create-profile")
+  );
 
   const handleNext = () => {
     if (selected.length < 2) {
@@ -24,18 +33,18 @@ export default function PickServiceTypes() {
       return;
     }
     // TODO: save selections via Supabase
-    router.push("signup/create-profile");
+    mutateServiceTypes(selected);
+    mutateSignUpState('create_profile')
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
       <StyledText
         text="What kind of resources are you interested in? (Pick at least 2)"
         font="large"
         color="black"
       />
-      
+
       <ServiceTypeList
         serviceTypes={serviceTypes || []}
         selectedIds={selected}
@@ -53,7 +62,6 @@ export default function PickServiceTypes() {
         text={selectServiceTypesError?.message || addServiceTypeError?.message}
         font="error"
       />
-
     </ScrollView>
   );
 }
@@ -71,5 +79,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: GlobalTheme.colors.text,
   },
-
 });
