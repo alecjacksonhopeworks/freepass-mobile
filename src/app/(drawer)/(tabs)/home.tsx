@@ -5,7 +5,7 @@ import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 import { GlobalTheme } from "@constants/global-themes";
 import SearchBar from "@components/SearchBar";
-import ResourceCard from "@components/resource/ResourceCard";
+import ResourceCard from "@components/data/resource/ResourceCard";
 import { Resource } from "@constants/types";
 
 const defaultResources: Resource[] = [
@@ -87,13 +87,13 @@ export default function Home() {
       <View style={styles.toggleContainer}>
         <StyledButton
           text="All"
-          width="50%"
+          width="48%"
           color={!showFavorites ? "primary" : "gray"}
           onPress={() => setShowFavorites(false)}
         />
         <StyledButton
           text="Favorites"
-          width="50%"
+          width="48%"
           color={showFavorites ? "primary" : "gray"}
           onPress={() => setShowFavorites(true)}
         />

@@ -10,7 +10,7 @@ export function useServiceTypes() {
     queryFn: async () => {         
       const { data, error } = await SupabaseClient
         .from("service_type")
-        .select("id, name, description");
+        .select("id, name, description, icon");
 
       if (error) throw error;
 
@@ -18,6 +18,9 @@ export function useServiceTypes() {
     },
   });
 }
+
+
+
 
 export function useSyncUserServiceTypes(userIdOverride?: string) {
   const user = useAuthStore((state) => state.user);
