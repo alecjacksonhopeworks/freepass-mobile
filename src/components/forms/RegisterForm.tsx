@@ -10,7 +10,6 @@ import { StyledText } from "../StyledText";
 import { useSignUp } from "@db/hooks/auth";
 import { TextFormInput } from "./form-inputs";
 
-// Validation schema
 const schema = yup.object({
   email: yup
     .string()
@@ -37,7 +36,7 @@ type SignUpFormData = {
 export default function RegisterForm() {
   const router = useRouter();
 
-  const {mutate, error } = useSignUp();
+  const { mutate, error } = useSignUp(() => router.replace('signup/choose-role'));
 
   const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormData>({
     resolver: yupResolver(schema),
@@ -82,7 +81,6 @@ export default function RegisterForm() {
         autoCapitalize="none"
       />
 
-      {/* Submit */}
       <View style={styles.formItemContainer}>
         <StyledButton
           buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}

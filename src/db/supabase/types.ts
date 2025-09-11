@@ -1,10 +1,20 @@
-import * as SupabaseTypes from '@db/supabase/gen_types'
+import * as SupabaseTypes from "@db/supabase/gen_types";
 
 export type ServiceType = Omit<
   SupabaseTypes.Database["public"]["Tables"]["service_type"]["Row"],
   "created_at" | "updated_at"
 >;
 
-export type PrivateUser = SupabaseTypes.Database["public"]["Tables"]["private_user"]["Row"];
-export type UserSettings = SupabaseTypes.Database["public"]["Tables"]["user_settings"]["Row"];
-export type SignUpState =  typeof SupabaseTypes.Constants.public.Enums.sign_up_state[number];
+export type PrivateUser =
+  SupabaseTypes.Database["public"]["Tables"]["private_user"]["Row"];
+
+export type PrivateUserUpdate = Omit<
+  SupabaseTypes.Database["public"]["Tables"]["private_user"]["Update"],
+  "user_id" | "created_at" | "updated_at"
+>;
+
+export type UserSettings =
+  SupabaseTypes.Database["public"]["Tables"]["user_settings"]["Row"];
+
+export type SignUpState =
+  (typeof SupabaseTypes.Constants.public.Enums.sign_up_state)[number];

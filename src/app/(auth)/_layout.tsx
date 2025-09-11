@@ -1,15 +1,19 @@
-import { useRedirectBasedOnLogin } from "@db/hooks/auth";
-import { Stack, Redirect } from "expo-router";
+import { getAuthRedirect } from "@db/hooks/auth";
+import { useAuthStore } from "@db/store/useAuthStore";
+import { Stack, useRouter } from "expo-router";
+import { useEffect } from "react";
 
 export default function AuthLayout() {
-  let isLoggedIn = false; 
-  console.log("AuthLayout rendered");
-  
-  // If logged in → go home
-  if (isLoggedIn) {
-    return <Redirect href="/" />;
-  }
-  
+  const session = useAuthStore((store) => store.session);
+  const signUpState = useAuthStore((store) => store.signUpState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if(session && signUpState){
+      let route = getAuthRedirect(signUpState)
+      if (route) router.replace(route)
+    }
+  }, [session, signUpState]);
 
   // If not logged in → go login
   return (
