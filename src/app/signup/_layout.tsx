@@ -14,6 +14,8 @@ export default function SignUpLayout() {
 
   useEffect(() => {
     console.log("use effect SignUpLayout");
+    //TODO: Refactor Redirect code
+
     if (!session || !signUpState) {
       router.replace("/login");
       return;

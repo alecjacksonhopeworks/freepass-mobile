@@ -9,8 +9,9 @@ import * as yup from "yup";
 import { StyledText } from "@components/StyledText";
 import { TextFormInput } from "./form-inputs";
 
-// TODO: Implement validation with react hook form and yup
-// TODO: implement login functionality
+
+//TODO: Test Login On Network failure, should produce error
+
 
 type LoginFormData = {
   email: string;

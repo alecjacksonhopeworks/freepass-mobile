@@ -10,6 +10,7 @@ export default function AuthLayout() {
 
   useEffect(() => {
     console.log("use effect AuthLayout");
+    //TODO: Refactor Redirect code
     if (session && signUpState) {
       let route = getAuthRedirect(signUpState);
             console.log('AuthLayout going to route', route)

@@ -15,6 +15,8 @@ export default function MenuLayout() {
   useEffect(() => {
     console.log("use effect MenuLayout");
     if (!session) {
+    //TODO: Refactor Redirect code
+
       router.replace("/login");
       return;
     }
