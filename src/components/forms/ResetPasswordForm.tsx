@@ -1,14 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import LabeledTextInput from "../LabledTextInput";
+import { LabeledTextInput } from "@components/LabledTextInput";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "../StyledButton";
 import { useRouter } from "expo-router";
 
-
 // TODO: Implement reset password form validation with react hook form and yup
 // TODO: implement reset password functionality
-
 
 export default function ResetPasswordForm() {
   const router = useRouter();
