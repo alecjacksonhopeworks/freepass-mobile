@@ -29,7 +29,6 @@ const schema = yup.object().shape({
 });
 
 export default function LoginForm() {
-  console.log("Rendering Login Form");
   const { mutate, error } = useSignIn();
 
   const {

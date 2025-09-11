@@ -13,6 +13,7 @@ export default function MenuLayout() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('use effect MenuLayout')
     if (!session) {
       router.replace("/login");
       return

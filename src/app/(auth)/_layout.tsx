@@ -9,7 +9,7 @@ export default function AuthLayout() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log('use effect auth layout', 'session', session)
+    console.log('use effect AuthLayout')
     if(session && signUpState){
       let route = getAuthRedirect(signUpState)
       if (route) router.replace(route)

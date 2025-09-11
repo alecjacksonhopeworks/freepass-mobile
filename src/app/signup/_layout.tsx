@@ -13,6 +13,7 @@ export default function SignUpLayout() {
   console.log("SignUpLayout", "currentPathname", currentPathname)
 
   useEffect(() => {
+    console.log('use effect SignUpLayout')
     if (!session || !signUpState) {
       router.replace("/login");
       return;
