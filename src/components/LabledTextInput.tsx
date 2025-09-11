@@ -1,4 +1,13 @@
-import { View, Text, TextInput, TextInputProps, StyleSheet, StyleProp, TextStyle, ViewStyle } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TextInputProps,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import { GlobalTheme } from "@constants/global-themes";
 
 export type LabeledTextInputProps = TextInputProps & {
@@ -9,32 +18,23 @@ export type LabeledTextInputProps = TextInputProps & {
 };
 
 export function LabeledTextInput(props: LabeledTextInputProps) {
-  const {
-    label,
-    containerStyle,
-    inputStyle,
-    labelStyle,
-    ...textInputProps
-  } = props;
+  const { label, containerStyle, inputStyle, labelStyle, ...textInputProps } =
+    props;
 
   return (
-     <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle]}>
       {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
-      <TextInput
-        style={[styles.input, inputStyle]}
-        {...textInputProps}
-      />
+      <TextInput style={[styles.input, inputStyle]} {...textInputProps} />
     </View>
-  )
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     alignItems: "flex-start",
     gap: GlobalTheme.spacing.xs,
-    width: "100%"
+    width: "100%",
   },
   label: {
     ...GlobalTheme.typography.medium,
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     color: GlobalTheme.colors.primary,
-    width: "100%"
+    width: "100%",
   },
 });

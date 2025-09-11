@@ -11,7 +11,12 @@ type Props = {
   control: Control<any>;
 };
 
-export default function CheckboxWithTooltip({ label, tooltip, name, control }: Props) {
+export default function CheckboxWithTooltip({
+  label,
+  tooltip,
+  name,
+  control,
+}: Props) {
   return (
     <Controller
       control={control}
@@ -19,7 +24,9 @@ export default function CheckboxWithTooltip({ label, tooltip, name, control }: P
       render={({ field: { value, onChange } }) => (
         <View style={styles.container}>
           <Checkbox value={value} onValueChange={onChange} />
-          <Text style={styles.label}>{label} ({tooltip})</Text>
+          <Text style={styles.label}>
+            {label} ({tooltip})
+          </Text>
         </View>
       )}
     />

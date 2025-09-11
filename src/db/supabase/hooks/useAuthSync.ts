@@ -5,7 +5,7 @@ import { useAuthStore } from "@db/store/useAuthStore";
 import { PrivateUser, UserSettings } from "@db/supabase/types";
 
 async function fetchUserData(
-  userId: string
+  userId: string,
 ): Promise<{ privateUser: PrivateUser; userSettings: UserSettings }> {
   const [privateUser, userSettings] = await Promise.all([
     getPrivateUser(userId),
@@ -23,7 +23,7 @@ export function useAuthSync() {
       SupabaseClient.auth.getSession().then(async ({ data: { session } }) => {
         if (session) {
           const { privateUser, userSettings } = await fetchUserData(
-            session.user.id
+            session.user.id,
           );
           setAuthData(session, privateUser, userSettings);
         } else {
@@ -37,13 +37,13 @@ export function useAuthSync() {
       async (_event, session) => {
         if (session) {
           const { privateUser, userSettings } = await fetchUserData(
-            session.user.id
+            session.user.id,
           );
           setAuthData(session, privateUser, userSettings);
         } else {
           clearAuthStore();
         }
-      }
+      },
     );
 
     return () => listener?.subscription.unsubscribe();

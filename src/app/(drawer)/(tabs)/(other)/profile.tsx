@@ -3,12 +3,10 @@ import SamplePage from "@components/SamplePage";
 
 // TODO: Implement Profile layout
 
-
 export default function Profile() {
-  const name = arguments.callee.name
   return (
     <View style={styles.container}>
-      <SamplePage pageName={name} />
+      <SamplePage pageName={"Profile"} />
     </View>
   );
 }

@@ -3,16 +3,14 @@ import { Image, ImageProps, ImageStyle } from "react-native";
 import { GlobalTheme } from "@constants/global-themes";
 
 export default function AppImage(props: ImageProps) {
-  return (
-    <Image {...props}/>
-  );
+  return <Image {...props} />;
 }
 
-export function BannerImage({style, ...rest}: ImageProps) {
+export function BannerImage({ style, ...rest }: ImageProps) {
   return (
     <AppImage
       source={require("../../assets/login-banner.png")}
-      style={[{width: "100%", height: 150}, style]}
+      style={[{ width: "100%", height: 150 }, style]}
       resizeMode="cover"
       {...rest}
     />
@@ -21,13 +19,15 @@ export function BannerImage({style, ...rest}: ImageProps) {
 
 export type FreepassLogoImageProps = ImageProps & { size?: number };
 
-export function FreepassLogoImage({size = 50, ...props}: FreepassLogoImageProps) {
-
+export function FreepassLogoImage({
+  size = 50,
+  ...props
+}: FreepassLogoImageProps) {
   let style: ImageStyle = {
     width: size,
     height: size,
-    alignSelf: "center"
-  }
+    alignSelf: "center",
+  };
 
   return (
     <AppImage
@@ -41,14 +41,13 @@ export function FreepassLogoImage({size = 50, ...props}: FreepassLogoImageProps)
 
 export type ProfileImageProps = ImageProps & { size?: number };
 
-export function ProfileImage({size = 50, ...props}: FreepassLogoImageProps) {
-
+export function ProfileImage({ size = 50, ...props }: FreepassLogoImageProps) {
   let style: ImageStyle = {
     width: size,
     height: size,
     alignSelf: "center",
-    borderRadius: GlobalTheme.radius.full
-  }
+    borderRadius: GlobalTheme.radius.full,
+  };
 
   return (
     <AppImage

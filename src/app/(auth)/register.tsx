@@ -12,7 +12,7 @@ export default function Signup() {
         <RegisterForm />
         <View style={styles.footerContainer}>
           <StyledText text="Already have an account?" color="primaryDark" />
-          <TextLink href="/login" text="Login" color="primaryDark"/>
+          <TextLink href="/login" text="Login" color="primaryDark" />
         </View>
       </View>
     </AuthHeader>
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     flexDirection: "row",
-    gap: GlobalTheme.spacing.xs 
+    gap: GlobalTheme.spacing.xs,
   },
 });

@@ -4,14 +4,12 @@ import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 import { useUpdateSignUpState } from "@db/hooks/auth";
 
-
 //TODO: Revamp generated layout and implement signup step logic
 
-
 export default function CreateProfile() {
-  const { mutate: mutateSignUpState } = useUpdateSignUpState()
+  const { mutate: mutateSignUpState } = useUpdateSignUpState();
   const handleFinish = () => {
-    mutateSignUpState('complete')
+    mutateSignUpState("complete");
   };
 
   return (

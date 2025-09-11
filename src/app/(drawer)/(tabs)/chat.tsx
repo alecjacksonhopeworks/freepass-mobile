@@ -4,10 +4,9 @@ import SamplePage from "@components/SamplePage";
 // TODO: Implement Chat layout
 
 export default function Chat() {
-  const name = arguments.callee.name
   return (
     <View style={styles.container}>
-      <SamplePage pageName={name} />
+      <SamplePage pageName={"Chat"} />
     </View>
   );
 }

@@ -10,18 +10,38 @@ type ServiceTypeCardProps = {
   onPress: () => void;
 };
 
-export default function ServiceTypeCard({ serviceType, selected, onPress }: ServiceTypeCardProps) {
+export default function ServiceTypeCard({
+  serviceType,
+  selected,
+  onPress,
+}: ServiceTypeCardProps) {
   return (
     <Pressable
       onPress={onPress}
       style={[
         styles.card,
-        selected && { borderColor: GlobalTheme.colors.primary, backgroundColor: GlobalTheme.colors.primaryLight }
+        selected && {
+          borderColor: GlobalTheme.colors.primary,
+          backgroundColor: GlobalTheme.colors.primaryLight,
+        },
       ]}
     >
       <View style={styles.row}>
-        <Ionicons name={serviceType.icon} size={20} color={selected ? GlobalTheme.colors.primary : GlobalTheme.colors.gray} />
-        <Text style={[styles.name, selected && { color: GlobalTheme.colors.primary }]}>{serviceType.name}</Text>
+        <Ionicons
+          name={serviceType.icon}
+          size={20}
+          color={
+            selected ? GlobalTheme.colors.primary : GlobalTheme.colors.gray
+          }
+        />
+        <Text
+          style={[
+            styles.name,
+            selected && { color: GlobalTheme.colors.primary },
+          ]}
+        >
+          {serviceType.name}
+        </Text>
       </View>
       <Text style={styles.description}>{serviceType.description}</Text>
     </Pressable>
@@ -45,7 +65,7 @@ const styles = StyleSheet.create({
   },
   name: {
     marginLeft: GlobalTheme.spacing.sm,
-    ...GlobalTheme.typography.medium
+    ...GlobalTheme.typography.medium,
   },
   description: {
     ...GlobalTheme.typography.small,

@@ -5,14 +5,13 @@ import { DrawerToggleButton } from "@react-navigation/drawer";
 import { GlobalTheme } from "@constants/global-themes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicon } from "@constants/types";
-import * as NavigationBar from 'expo-navigation-bar';
+import * as NavigationBar from "expo-navigation-bar";
 import { useEffect } from "react";
 
 type TabInfo = {
   name: string;
   title: string;
   icon: string;
-  
 };
 
 const tabs: TabInfo[] = [
@@ -43,11 +42,13 @@ export default function TabsLayout() {
         tabBarLabelStyle: {
           fontSize: 12,
         },
-        headerLeft: () => <DrawerToggleButton tintColor={GlobalTheme.colors.white} />,
+        headerLeft: () => (
+          <DrawerToggleButton tintColor={GlobalTheme.colors.white} />
+        ),
       }}
     >
-      <Tabs.Screen name="(other)" options={{href: null}}/>
-            
+      <Tabs.Screen name="(other)" options={{ href: null }} />
+
       {tabs.map((tab) => {
         const outlineIcon = `${tab.icon}-outline` as Ionicon;
         const icon = tab.icon as Ionicon;

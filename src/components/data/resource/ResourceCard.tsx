@@ -6,10 +6,8 @@ import { Resource } from "@constants/types";
 
 // TODO: inspect and style generated ResourceCard Component and later add  database resource type
 
-
-
 export type ResourceCardProps = {
-  resource: Resource
+  resource: Resource;
   onToggleFavorite: (id: string) => void;
   favoriteLoading?: boolean;
 };

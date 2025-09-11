@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, DimensionValue, GestureResponderEvent } from "react-native";
+import {
+  Pressable,
+  Text,
+  StyleSheet,
+  PressableProps,
+  ViewStyle,
+  TextStyle,
+  DimensionValue,
+  GestureResponderEvent,
+} from "react-native";
 import { GlobalTheme, ThemeColor } from "@constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -10,7 +19,7 @@ type StyledButtonProps = PressableProps & {
   delay?: number;
   buttonStyles?: ViewStyle;
   textStyle?: TextStyle;
-  width?: DimensionValue
+  width?: DimensionValue;
   leftIcon?: keyof typeof Ionicons.glyphMap;
   rightIcon?: keyof typeof Ionicons.glyphMap;
   iconSize?: number;
@@ -25,7 +34,7 @@ function StyledButton(props: StyledButtonProps) {
     rounded = false,
     buttonStyles,
     textStyle,
-    width="auto",
+    width = "auto",
     leftIcon,
     rightIcon,
     iconSize = 18,
@@ -37,12 +46,11 @@ function StyledButton(props: StyledButtonProps) {
 
   const handlePress = (event: GestureResponderEvent) => {
     if (!props.onPress || disabled) return;
-    let onPress = props.onPress!
+    let onPress = props.onPress!;
     onPress(event);
     setDisabled(true);
     setTimeout(() => setDisabled(false), delay);
-
-  }
+  };
 
   const borderStyles = rounded ? styles.rounded : styles.box;
 
@@ -55,24 +63,29 @@ function StyledButton(props: StyledButtonProps) {
   };
 
   return (
-    <Pressable style={allButtonStyles} {...rest} onPress={handlePress} disabled={disabled}>
-        {leftIcon && (
-          <Ionicons
-            name={leftIcon}
-            size={iconSize}
-            color={iconColor || GlobalTheme.colors.white}
-            style={{ marginRight: GlobalTheme.spacing.xs }}
-          />
-        )}
-        <Text style={[styles.text, textStyle]}>{text}</Text>
-        {rightIcon && (
-          <Ionicons
-            name={rightIcon}
-            size={iconSize}
-            color={iconColor || GlobalTheme.colors.white}
-            style={{ marginLeft: GlobalTheme.spacing.xs }}
-          />
-        )}
+    <Pressable
+      style={allButtonStyles}
+      {...rest}
+      onPress={handlePress}
+      disabled={disabled}
+    >
+      {leftIcon && (
+        <Ionicons
+          name={leftIcon}
+          size={iconSize}
+          color={iconColor || GlobalTheme.colors.white}
+          style={{ marginRight: GlobalTheme.spacing.xs }}
+        />
+      )}
+      <Text style={[styles.text, textStyle]}>{text}</Text>
+      {rightIcon && (
+        <Ionicons
+          name={rightIcon}
+          size={iconSize}
+          color={iconColor || GlobalTheme.colors.white}
+          style={{ marginLeft: GlobalTheme.spacing.xs }}
+        />
+      )}
     </Pressable>
   );
 }

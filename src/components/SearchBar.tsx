@@ -12,10 +12,22 @@ type SearchBarProps = {
   showIcon?: boolean;
 };
 
-export default function SearchBar({ value, placeholder, onChangeText, showIcon = false }: SearchBarProps) {
+export default function SearchBar({
+  value,
+  placeholder,
+  onChangeText,
+  showIcon = false,
+}: SearchBarProps) {
   return (
     <View style={styles.container}>
-      {showIcon && <FontAwesome name="search" size={20} color={GlobalTheme.colors.gray} style={styles.icon} />}
+      {showIcon && (
+        <FontAwesome
+          name="search"
+          size={20}
+          color={GlobalTheme.colors.gray}
+          style={styles.icon}
+        />
+      )}
       <TextInput
         style={[styles.input, showIcon && { paddingLeft: 36 }]}
         placeholder={placeholder}

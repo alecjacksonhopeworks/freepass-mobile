@@ -4,7 +4,6 @@ import ServiceTypeCard from "./ServiceTypeCard";
 import { GlobalTheme } from "@constants/global-themes";
 import { ServiceType } from "@db/supabase/types";
 
-
 type ServiceTypeListzProps = {
   serviceTypes: ServiceType[];
   selectedIds?: number[]; // optional controlled selection

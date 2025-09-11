@@ -6,14 +6,16 @@ import { TextLink } from "@components/TextLink";
 import AuthHeader from "@components/AuthHeader";
 
 export default function ResetPassword() {
-
   return (
-    <AuthHeader title="Reset Password" subtitle="Enter your email to reset your password">
+    <AuthHeader
+      title="Reset Password"
+      subtitle="Enter your email to reset your password"
+    >
       <View style={styles.container}>
         <ResetPasswordForm />
         <View style={styles.footerContainer}>
-          <StyledText text="Remembered your password?" color="primaryDark"/>
-          <TextLink href="/login" text="Login" color="primaryDark" replace/>
+          <StyledText text="Remembered your password?" color="primaryDark" />
+          <TextLink href="/login" text="Login" color="primaryDark" replace />
         </View>
       </View>
     </AuthHeader>

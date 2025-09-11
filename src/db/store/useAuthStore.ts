@@ -13,7 +13,11 @@ interface AuthState {
   setUserSettings: (settings: UserSettings | null) => void;
   setSignUpState: (signUpState: SignUpState) => void;
   clearAuthStore: () => void;
-  setAuthData: (session: Session | null, privateUser: PrivateUser, userSettings: UserSettings) => void
+  setAuthData: (
+    session: Session | null,
+    privateUser: PrivateUser,
+    userSettings: UserSettings,
+  ) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({

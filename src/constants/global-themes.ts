@@ -15,18 +15,9 @@ export type FontWeight =
   | "800"
   | "900";
 
-export type ThemeFontWeight =
-  | "regular"
-  | "medium"
-  | "semibold"
-  | "bold";
-  
-export type ThemeFontFamily =
-  | "system"
-  | "heading"
-  | "body"
-  | "monospace";
+export type ThemeFontWeight = "regular" | "medium" | "semibold" | "bold";
 
+export type ThemeFontFamily = "system" | "heading" | "body" | "monospace";
 
 type GlobalColorTheme = {
   primary: string;
@@ -39,8 +30,8 @@ type GlobalColorTheme = {
   black: string;
   white: string;
   whiteInactive: string;
-  gray: string,
-  error: string
+  gray: string;
+  error: string;
 };
 
 type GlobalSpacingTheme = {
@@ -64,22 +55,20 @@ type GlobalTypographyTheme = {
   large: TypographyEntry;
   medium: TypographyEntry;
   small: TypographyEntry;
-  error: TypographyEntry
+  error: TypographyEntry;
 };
-
 
 export type TypographyEntry = {
   fontSize: number;
   fontWeight: ThemeFontWeight;
   fontFamily: string;
-  color?: string
+  color?: string;
 };
-
 
 export type GlobalFonts = {
   weights: Record<ThemeFontWeight, string>;
   families: Record<ThemeFontFamily, string>;
-}
+};
 
 export type GlobalTheme = {
   colors: GlobalColorTheme;
@@ -87,7 +76,6 @@ export type GlobalTheme = {
   radius: GlobalRadiusTheme;
   typography: GlobalTypographyTheme;
 };
-
 
 export const GlobalFonts: GlobalFonts = {
   weights: {
@@ -104,7 +92,6 @@ export const GlobalFonts: GlobalFonts = {
   },
 };
 
-
 export const GlobalTheme: GlobalTheme = {
   colors: {
     primary: "#B84F2B",
@@ -118,7 +105,7 @@ export const GlobalTheme: GlobalTheme = {
     white: "#FFFFFF",
     whiteInactive: "#F3F4F6",
     gray: "#9CA3AF",
-    error: "#f2545b"
+    error: "#f2545b",
   },
   spacing: {
     xs: 4,
@@ -150,7 +137,7 @@ export const GlobalTheme: GlobalTheme = {
       fontSize: 12,
       fontWeight: "medium",
       fontFamily: "Inter",
-      color: '#f2545b'
+      color: "#f2545b",
     },
     small: {
       fontSize: 12,
@@ -159,7 +146,6 @@ export const GlobalTheme: GlobalTheme = {
     },
   },
 } as const satisfies GlobalTheme;
-
 
 export type ThemeColor = keyof typeof GlobalTheme.colors;
 export type ThemeFont = keyof typeof GlobalTheme.typography;

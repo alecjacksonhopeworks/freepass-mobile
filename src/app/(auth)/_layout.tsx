@@ -9,14 +9,12 @@ export default function AuthLayout() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log('use effect AuthLayout')
-    if(session && signUpState){
-      let route = getAuthRedirect(signUpState)
-      if (route) router.replace(route)
+    console.log("use effect AuthLayout");
+    if (session && signUpState) {
+      let route = getAuthRedirect(signUpState);
+      if (route) router.replace(route);
     }
-  }, [session, signUpState]);
+  }, [signUpState]);
 
-  return (
-      <Stack screenOptions={{ headerShown: false }}/>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 }

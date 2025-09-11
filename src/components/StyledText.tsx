@@ -26,7 +26,7 @@ export function StyledText({
 
 const styles = StyleSheet.create({
   text: {
-    width: 'auto',
-    textAlign: 'center'
+    width: "auto",
+    textAlign: "center",
   },
 });

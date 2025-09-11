@@ -8,7 +8,10 @@ type Props = {
   initialImage?: string;
 };
 
-export default function ProfileImagePicker({ onImageSelected, initialImage }: Props) {
+export default function ProfileImagePicker({
+  onImageSelected,
+  initialImage,
+}: Props) {
   const [imageUri, setImageUri] = useState<string | undefined>(initialImage);
 
   const pickImage = async () => {

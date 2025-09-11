@@ -3,12 +3,10 @@ import SamplePage from "@components/SamplePage";
 
 // TODO: Implement User Guide layout
 
-
 export default function UserGuide() {
-  const name = arguments.callee.name
   return (
     <View style={styles.container}>
-      <SamplePage pageName={name} />
+      <SamplePage pageName={"UserGuide"} />
     </View>
   );
 }

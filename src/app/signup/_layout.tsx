@@ -10,23 +10,21 @@ export default function SignUpLayout() {
   const session = useAuthStore((store) => store.session);
   const signUpState = useAuthStore((store) => store.signUpState);
 
-  console.log("SignUpLayout", "currentPathname", currentPathname)
+  console.log("SignUpLayout", "currentPathname", currentPathname);
 
   useEffect(() => {
-    console.log('use effect SignUpLayout')
+    console.log("use effect SignUpLayout");
     if (!session || !signUpState) {
       router.replace("/login");
       return;
     }
 
     const redirectRoute = getAuthRedirect(signUpState);
-    
+
     if (redirectRoute && currentPathname !== redirectRoute) {
       router.replace(redirectRoute);
     }
-  }, [session, signUpState]);
+  }, [signUpState]);
 
-  return (
-    <Stack screenOptions={{ headerShown: false }}/>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 }

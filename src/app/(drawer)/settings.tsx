@@ -3,12 +3,10 @@ import SamplePage from "@components/SamplePage";
 
 // TODO: Implement Settings layout
 
-
 export default function Settings() {
-  const name = arguments.callee.name
   return (
     <View style={styles.container}>
-      <SamplePage pageName={name} />
+      <SamplePage pageName={"Settings"} />
     </View>
   );
 }

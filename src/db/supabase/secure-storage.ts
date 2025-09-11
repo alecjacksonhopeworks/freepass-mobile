@@ -2,8 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from "expo-secure-store";
 import * as aesjs from "aes-js";
 import { Platform } from "react-native";
-import 'react-native-get-random-values';
-
+import "react-native-get-random-values";
 
 // Large Secure Store implementation from:
 // https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native?queryGroups=auth-store&auth-store=secure-store
@@ -27,7 +26,6 @@ class AsyncStorageAdapter implements IStorage {
     await AsyncStorage.removeItem(key);
   }
 }
-
 
 class LocalStorageAdapter implements IStorage {
   async getItem(key: string): Promise<string | null> {
@@ -54,10 +52,16 @@ class LargeSecureStore implements IStorage {
 
   private async _encrypt(key: string, value: string): Promise<string> {
     const encryptionKey = crypto.getRandomValues(new Uint8Array(256 / 8));
-    const cipher = new aesjs.ModeOfOperation.ctr(encryptionKey, new aesjs.Counter(1));
+    const cipher = new aesjs.ModeOfOperation.ctr(
+      encryptionKey,
+      new aesjs.Counter(1),
+    );
     const encryptedBytes = cipher.encrypt(aesjs.utils.utf8.toBytes(value));
 
-    await SecureStore.setItemAsync(key, aesjs.utils.hex.fromBytes(encryptionKey));
+    await SecureStore.setItemAsync(
+      key,
+      aesjs.utils.hex.fromBytes(encryptionKey),
+    );
     return aesjs.utils.hex.fromBytes(encryptedBytes);
   }
 
@@ -67,7 +71,7 @@ class LargeSecureStore implements IStorage {
 
     const cipher = new aesjs.ModeOfOperation.ctr(
       aesjs.utils.hex.toBytes(encryptionKeyHex),
-      new aesjs.Counter(1)
+      new aesjs.Counter(1),
     );
     const decryptedBytes = cipher.decrypt(aesjs.utils.hex.toBytes(value));
     return aesjs.utils.utf8.fromBytes(decryptedBytes);
@@ -91,7 +95,7 @@ class LargeSecureStore implements IStorage {
 }
 
 const storageAdapter =
-    Platform.OS === "web" ? new LocalStorageAdapter() : new AsyncStorageAdapter();
+  Platform.OS === "web" ? new LocalStorageAdapter() : new AsyncStorageAdapter();
 
 const SecureStorage = new LargeSecureStore(storageAdapter);
 

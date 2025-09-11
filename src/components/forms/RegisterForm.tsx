@@ -24,7 +24,7 @@ const schema = yup.object({
     .trim()
     .required("Full name is required.")
     .min(2, "Full name must be at least 2 characters")
-    .max(30, "Full name cannot exceed 100 characters")
+    .max(30, "Full name cannot exceed 100 characters"),
 });
 
 type SignUpFormData = {
@@ -36,28 +36,32 @@ type SignUpFormData = {
 export default function RegisterForm() {
   const router = useRouter();
 
-  const { mutate, error } = useSignUp(() => router.replace('signup/choose-role'));
+  const { mutate, error } = useSignUp(() =>
+    router.replace("signup/choose-role"),
+  );
 
-  const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormData>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormData>({
     resolver: yupResolver(schema),
   });
-  
 
   const onSubmit = (data: SignUpFormData) => {
-    mutate(data)
+    mutate(data);
   };
 
   return (
     <View style={styles.container}>
-    
       <TextFormInput
-          label="Full Name"
-          name="fullname"
-          control={control}
-          errorText={errors.fullname?.message}
-          placeholder="Enter your full name..."
-          placeholderTextColor={GlobalTheme.colors.primary}
-        />
+        label="Full Name"
+        name="fullname"
+        control={control}
+        errorText={errors.fullname?.message}
+        placeholder="Enter your full name..."
+        placeholderTextColor={GlobalTheme.colors.primary}
+      />
 
       <TextFormInput
         label="Email"
@@ -90,7 +94,7 @@ export default function RegisterForm() {
           rounded={true}
           onPress={handleSubmit(onSubmit)}
         />
-        <StyledText text={error?.message} font='error'/>
+        <StyledText text={error?.message} font="error" />
       </View>
     </View>
   );
@@ -120,6 +124,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     borderWidth: 2,
-    gap: GlobalTheme.spacing.md
-  }
+    gap: GlobalTheme.spacing.md,
+  },
 });

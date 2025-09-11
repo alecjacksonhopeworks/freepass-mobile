@@ -13,17 +13,17 @@ export default function MenuLayout() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log('use effect MenuLayout')
+    console.log("use effect MenuLayout");
     if (!session) {
       router.replace("/login");
-      return
+      return;
     }
 
     if (signUpState != "complete") {
       let route = getAuthRedirect(signUpState!);
       if (route) router.replace(route);
     }
-  }, [session, signUpState]);
+  }, [signUpState]);
 
   return (
     <Drawer

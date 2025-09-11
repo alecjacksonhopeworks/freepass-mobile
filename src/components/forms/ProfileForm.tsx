@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "@components/StyledButton";
 import { TextFormInput } from "./form-inputs";
-import  CheckboxWithTooltip from "@components/CheckboxWithTooltip";
+import CheckboxWithTooltip from "@components/CheckboxWithTooltip";
 import ProfileImagePicker from "@components/data/user/ProfileImagePicker";
 import { useAuthStore } from "@db/store/useAuthStore";
 
@@ -26,7 +26,11 @@ type UserProfileFormData = {
 
 const schema = yup.object().shape({
   profile_pic_url: yup.string().trim().default(""),
-  email: yup.string().email("Invalid email.").required("Email required.").trim(),
+  email: yup
+    .string()
+    .email("Invalid email.")
+    .required("Email required.")
+    .trim(),
   username: yup.string().required("Username is required").trim(),
   phone_number: yup.string().trim().default(""),
   full_name: yup.string().trim().default(""),
@@ -39,23 +43,27 @@ const schema = yup.object().shape({
 });
 
 export default function UserProfileForm() {
-  const { control, handleSubmit, setValue, formState: { errors } } =
-    useForm<UserProfileFormData>({
-      resolver: yupResolver(schema),
-      defaultValues: {
-        show_email: false,
-        show_phone_number: false,
-        show_full_name: false,
-        show_address: false,
-      },
-    });
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<UserProfileFormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      show_email: false,
+      show_phone_number: false,
+      show_full_name: false,
+      show_address: false,
+    },
+  });
 
   const onSubmit = (data: UserProfileFormData) => {
     console.log("Submitted user profile data:", data);
     // call mutation to save user data
   };
 
-  const privateUser = useAuthStore((store) => store.privateUser)
+  const privateUser = useAuthStore((store) => store.privateUser);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

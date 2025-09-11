@@ -31,7 +31,7 @@ export async function signOut() {
 export async function insertPrivateUser(
   userId: string,
   email: string,
-  fullName: string
+  fullName: string,
 ) {
   const { data, error } = await SupabaseClient.from("private_user")
     .insert([{ id: userId, email, full_name: fullName }])
@@ -52,7 +52,7 @@ export async function getPrivateUser(userId: string): Promise<PrivateUser> {
 
 export async function updatePrivateUser(
   userId: string,
-  updates: PrivateUserUpdate
+  updates: PrivateUserUpdate,
 ): Promise<PrivateUser> {
   const { data, error } = await SupabaseClient.from("private_user")
     .update(updates)
@@ -65,7 +65,7 @@ export async function updatePrivateUser(
 }
 
 export async function insertUserSettings(
-  userId: string
+  userId: string,
 ): Promise<UserSettings> {
   const { data, error } = await SupabaseClient.from("user_settings")
     .insert([{ user_id: userId }])
@@ -75,7 +75,7 @@ export async function insertUserSettings(
   return data;
 }
 
-export async function getUserSettings(userId: string): Promise<UserSettings>{
+export async function getUserSettings(userId: string): Promise<UserSettings> {
   const { data, error } = await SupabaseClient.from("user_settings")
     .select("*")
     .eq("user_id", userId)

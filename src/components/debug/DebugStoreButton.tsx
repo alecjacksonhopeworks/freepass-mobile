@@ -20,12 +20,27 @@ export default function DebugStoreButton() {
 
   return (
     <View style={styles.container}>
-      <StyledButton text="Log Auth Store" onPress={handleLogStore} color="primary" />
-      <ScrollView style={styles.debugBox} contentContainerStyle={{ padding: GlobalTheme.spacing.sm }}>
-        <Text style={styles.debugText}>Session: {JSON.stringify(session, null, 2)}</Text>
-        <Text style={styles.debugText}>User: {JSON.stringify(user, null, 2)}</Text>
-        <Text style={styles.debugText}>Private User: {JSON.stringify(privateUser, null, 2)}</Text>
-        <Text style={styles.debugText}>User Settings: {JSON.stringify(userSettings, null, 2)}</Text>
+      <StyledButton
+        text="Log Auth Store"
+        onPress={handleLogStore}
+        color="primary"
+      />
+      <ScrollView
+        style={styles.debugBox}
+        contentContainerStyle={{ padding: GlobalTheme.spacing.sm }}
+      >
+        <Text style={styles.debugText}>
+          Session: {JSON.stringify(session, null, 2)}
+        </Text>
+        <Text style={styles.debugText}>
+          User: {JSON.stringify(user, null, 2)}
+        </Text>
+        <Text style={styles.debugText}>
+          Private User: {JSON.stringify(privateUser, null, 2)}
+        </Text>
+        <Text style={styles.debugText}>
+          User Settings: {JSON.stringify(userSettings, null, 2)}
+        </Text>
       </ScrollView>
     </View>
   );

@@ -14,7 +14,7 @@ type IconToggleProps = {
   colorOff?: string;
   style?: ViewStyle;
   loading?: boolean;
-  loadingDelay?: number; // milliseconds delay before showing indicator
+  loadingDelay?: number;
 };
 
 export default function IconToggle({
@@ -32,7 +32,7 @@ export default function IconToggle({
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let timeout: number;
     if (loading) {
       timeout = setTimeout(() => setShowLoading(true), loadingDelay);
     } else {

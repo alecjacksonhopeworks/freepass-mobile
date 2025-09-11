@@ -20,7 +20,7 @@ type AddressFormData = {
 
 const schema = yup.object().shape({
   address1: yup.string().required("Address Line 1 is required").trim(),
-  address2: yup.string().trim().default(""), 
+  address2: yup.string().trim().default(""),
   city: yup.string().required("City is required").trim(),
   state: yup.string().required("State is required").trim(),
   zip: yup.string().required("ZIP code is required").trim(),
@@ -32,7 +32,10 @@ type AddressFormProps = {
   defaultValues?: Partial<AddressFormData>;
 };
 
-export default function AddressForm({ onSubmit, defaultValues }: AddressFormProps) {
+export default function AddressForm({
+  onSubmit,
+  defaultValues,
+}: AddressFormProps) {
   const {
     control,
     handleSubmit,
@@ -99,7 +102,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
               onValueChange={onChange}
               color={value ? GlobalTheme.colors.primary : undefined}
             />
-            <StyledText text="Show this address on profile"/>
+            <StyledText text="Show this address on profile" />
           </View>
         )}
       />

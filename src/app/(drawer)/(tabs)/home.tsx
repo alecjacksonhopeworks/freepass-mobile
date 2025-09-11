@@ -47,9 +47,7 @@ export default function Home() {
     setSavingFavoriteId(id);
     setTimeout(() => {
       setResources((prev) =>
-        prev.map((r) =>
-          r.id === id ? { ...r, favorite: !r.favorite } : r
-        )
+        prev.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r)),
       );
       setSavingFavoriteId(null);
     }, 500); // simulate async save delay
@@ -68,7 +66,6 @@ export default function Home() {
         />
       </View>
 
-
       {/* Instruction */}
       <StyledText
         text="To find relevant services in your area, you may use the Search bar, choose Search by Category, or view Resources near you."
@@ -81,7 +78,9 @@ export default function Home() {
       <SearchBar
         placeholder="Search resources..."
         value={search}
-        onChangeText={(text: string) => { setSearch(text) }}
+        onChangeText={(text: string) => {
+          setSearch(text);
+        }}
         showIcon
       />
 
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: GlobalTheme.spacing.md,
     backgroundColor: GlobalTheme.colors.background,
-    gap: GlobalTheme.spacing.md
+    gap: GlobalTheme.spacing.md,
   },
   header: {
     flexDirection: "row",
@@ -143,5 +142,6 @@ const styles = StyleSheet.create({
   toggleContainer: {
     flexDirection: "row",
     gap: GlobalTheme.spacing.md,
-    justifyContent: "center",  },
+    justifyContent: "center",
+  },
 });

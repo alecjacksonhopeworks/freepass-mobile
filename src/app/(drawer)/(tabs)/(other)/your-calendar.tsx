@@ -3,12 +3,10 @@ import SamplePage from "@components/SamplePage";
 
 // TODO: Implement Your Calander layout
 
-
 export default function YourCalendar() {
-  const name = arguments.callee.name
   return (
     <View style={styles.container}>
-      <SamplePage pageName={name} />
+      <SamplePage pageName={"Your Calendar"} />
     </View>
   );
 }

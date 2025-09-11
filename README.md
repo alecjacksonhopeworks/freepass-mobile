@@ -20,7 +20,7 @@ FreePass is intended to serve as a centralized hub for guidance, learning, and s
 - **Backend**: Supabase (Authentication, Database, Realtime)
 - **State Management**: TBD
 - **Navigation**: Expo Router
-- **External APIs**: Google Maps 
+- **External APIs**: Google Maps
 
 ## Acknowledgments
 
@@ -33,23 +33,23 @@ This project was developed by [Hopeworks](https://hopeworks.org/), a nonprofit s
 Make sure you have the following installed before setting up the project:
 
 - **Node.js** (v18 or higher recommended) → [Download Node.js](https://nodejs.org/)
-- **Expo Go** – a mobile app that lets you open and test your React Native projects quickly without building native binaries.  
-  - [Download for iOS](https://apps.apple.com/app/expo-go/id982107779)  
+- **Expo Go** – a mobile app that lets you open and test your React Native projects quickly without building native binaries.
+  - [Download for iOS](https://apps.apple.com/app/expo-go/id982107779)
   - [Download for Android](https://play.google.com/store/apps/details?id=host.exp.exponent)
 
 ## Getting Started
 
-   ```bash
-   # clone the git repository 
-   git clone https://github.com/alecjacksonhopeworks/freepass-mobile.git
+```bash
+# clone the git repository
+git clone https://github.com/alecjacksonhopeworks/freepass-mobile.git
 
-   # enter the root directory of the cloned reppository 
-   cd freepass-mobile
+# enter the root directory of the cloned reppository
+cd freepass-mobile
 
-   # install packages using node 
-   npm install
+# install packages using node
+npm install
 
-   # Run to launch application for demo on Expo Go app. Scan QR Code to view 
-   npx expo start
+# Run to launch application for demo on Expo Go app. Scan QR Code to view
+npx expo start
 
-   ```
+```

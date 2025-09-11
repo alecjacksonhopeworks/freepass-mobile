@@ -2,7 +2,6 @@ import React from "react";
 import { FlatList } from "react-native";
 import ResourceCard from "./ResourceCard";
 
-
 // TODO: inspect and style generated ResourceList Component and later add  database resource type
 
 type Resource = {
@@ -18,12 +17,17 @@ type ResourceListProps = {
   toggleFavorite: (id: string) => void;
 };
 
-export default function ResourceList({ resources, toggleFavorite }: ResourceListProps) {
+export default function ResourceList({
+  resources,
+  toggleFavorite,
+}: ResourceListProps) {
   return (
     <FlatList
       data={resources}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <ResourceCard resource={item} onToggleFavorite={toggleFavorite} />}
+      renderItem={({ item }) => (
+        <ResourceCard resource={item} onToggleFavorite={toggleFavorite} />
+      )}
     />
   );
 }

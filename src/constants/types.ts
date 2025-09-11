@@ -8,4 +8,4 @@ export type Resource = {
   favorite: boolean;
 };
 
-export type Ionicon = keyof typeof Ionicons.glyphMap
+export type Ionicon = keyof typeof Ionicons.glyphMap;

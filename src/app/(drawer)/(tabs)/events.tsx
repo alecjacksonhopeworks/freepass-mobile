@@ -4,12 +4,10 @@ import SamplePage from "@components/SamplePage";
 // TODO: Implement Events layout
 // TODO: calendar intergration
 
-
 export default function Events() {
-  const name = arguments.callee.name
   return (
     <View style={styles.container}>
-      <SamplePage pageName={name} />
+      <SamplePage pageName={"Events"} />
     </View>
   );
 }
