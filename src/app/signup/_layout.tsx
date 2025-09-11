@@ -22,6 +22,8 @@ export default function SignUpLayout() {
     const redirectRoute = getAuthRedirect(signUpState);
 
     if (redirectRoute && currentPathname !== redirectRoute) {
+      console.log('SignUpLayout going to route', redirectRoute)
+
       router.replace(redirectRoute);
     }
   }, [signUpState]);

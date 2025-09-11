@@ -52,6 +52,9 @@ type GlobalRadiusTheme = {
 };
 
 type GlobalTypographyTheme = {
+  h1: TypographyEntry;
+  h2: TypographyEntry;
+  h3: TypographyEntry;
   large: TypographyEntry;
   medium: TypographyEntry;
   small: TypographyEntry;
@@ -123,6 +126,21 @@ export const GlobalTheme: GlobalTheme = {
     full: 9999,
   },
   typography: {
+    h1: {
+      fontSize: 20,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    h2: {
+      fontSize: 20,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    h3: {
+      fontSize: 18,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
     large: {
       fontSize: 16,
       fontWeight: "bold",

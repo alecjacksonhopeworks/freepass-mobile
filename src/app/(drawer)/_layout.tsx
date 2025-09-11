@@ -21,6 +21,7 @@ export default function MenuLayout() {
 
     if (signUpState != "complete") {
       let route = getAuthRedirect(signUpState!);
+      console.log('MenuLayout going to route', route)
       if (route) router.replace(route);
     }
   }, [signUpState]);

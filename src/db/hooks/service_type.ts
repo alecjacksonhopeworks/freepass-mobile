@@ -6,12 +6,11 @@ import { useAuthStore } from "@db/store/useAuthStore";
 
 export function useServiceTypes() {
   return useQuery<ServiceType[]>({
-    queryKey: ["service_types"],
+    queryKey: ["service_type"],
     queryFn: async () => {
       const { data, error } = await SupabaseClient.from("service_type").select(
         "id, name, description, icon",
       );
-
       if (error) throw error;
 
       return data!;

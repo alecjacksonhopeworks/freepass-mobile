@@ -12,6 +12,8 @@ export default function AuthLayout() {
     console.log("use effect AuthLayout");
     if (session && signUpState) {
       let route = getAuthRedirect(signUpState);
+            console.log('AuthLayout going to route', route)
+
       if (route) router.replace(route);
     }
   }, [signUpState]);

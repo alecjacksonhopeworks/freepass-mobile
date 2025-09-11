@@ -89,7 +89,7 @@ export function useSignOut() {
 
 const SIGN_UP_ROUTES: Record<SignUpState, string> = {
   choose_role: "/signup/choose-role",
-  pick_categories: "/signup/pick-categories",
+  pick_categories: "/signup/pick-service-types",
   create_profile: "/signup/create-profile",
   add_resource_request: "/signup/add-resource-request",
   complete: "/home",

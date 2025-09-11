@@ -3,6 +3,8 @@ import { View, Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { GlobalTheme } from "@constants/global-themes";
 import { ServiceType } from "@db/supabase/types";
+import { Ionicon } from "@constants/types";
+import { StyledText } from "@components/StyledText";
 
 type ServiceTypeCardProps = {
   serviceType: ServiceType;
@@ -26,24 +28,21 @@ export default function ServiceTypeCard({
         },
       ]}
     >
-      <View style={styles.row}>
-        <Ionicons
-          name={serviceType.icon}
-          size={20}
+       <Ionicons
+          name={serviceType.icon as Ionicon}
+          size={40}
           color={
             selected ? GlobalTheme.colors.primary : GlobalTheme.colors.gray
           }
         />
-        <Text
-          style={[
-            styles.name,
-            selected && { color: GlobalTheme.colors.primary },
-          ]}
-        >
-          {serviceType.name}
-        </Text>
-      </View>
-      <Text style={styles.description}>{serviceType.description}</Text>
+        <StyledText
+          text={serviceType.name}
+          color={selected ? "primary" : "black"}
+          font="medium"
+          style={{fontWeight: "bold"}}
+          numberOfLines={2} 
+          ellipsizeMode="tail"
+        />
     </Pressable>
   );
 }
@@ -51,24 +50,19 @@ export default function ServiceTypeCard({
 const styles = StyleSheet.create({
   card: {
     width: "48%",
+    height: 120,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-evenly",
     padding: GlobalTheme.spacing.md,
     borderRadius: GlobalTheme.spacing.lg,
-    borderWidth: 1,
+    borderWidth: 1.2,
     borderColor: GlobalTheme.colors.primary,
     backgroundColor: GlobalTheme.colors.white,
     marginBottom: GlobalTheme.spacing.sm,
   },
   row: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
-    marginBottom: GlobalTheme.spacing.xs,
-  },
-  name: {
-    marginLeft: GlobalTheme.spacing.sm,
-    ...GlobalTheme.typography.medium,
-  },
-  description: {
-    ...GlobalTheme.typography.small,
-    color: GlobalTheme.colors.gray,
   },
 });

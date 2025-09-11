@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import ServiceTypeCard from "./ServiceTypeCard";
 import { GlobalTheme } from "@constants/global-themes";
 import { ServiceType } from "@db/supabase/types";
 
-type ServiceTypeListzProps = {
+type ServiceTypeListProps = {
   serviceTypes: ServiceType[];
-  selectedIds?: number[]; // optional controlled selection
+  selectedIds?: number[];
   onSelectionChange?: (selected: number[]) => void;
-  minSelection?: number; // optional minimum selection
 };
 
 export default function ServiceTypeList({
   serviceTypes,
   selectedIds = [],
   onSelectionChange,
-}: ServiceTypeListzProps) {
+}: ServiceTypeListProps) {
   const [selected, setSelected] = useState<number[]>(selectedIds);
 
   const toggle = (id: number) => {
@@ -27,30 +26,38 @@ export default function ServiceTypeList({
     onSelectionChange?.(newSelected);
   };
 
+  const renderItem = ({ item }: { item: ServiceType }) => (
+    <ServiceTypeCard
+      serviceType={item}
+      selected={selected.includes(item.id)}
+      onPress={() => toggle(item.id)}
+    />
+  );
+
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.gridContainer}>
-        {serviceTypes.map((st) => (
-          <ServiceTypeCard
-            key={st.id}
-            serviceType={st}
-            selected={selected.includes(st.id)}
-            onPress={() => toggle(st.id)}
-          />
-        ))}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <FlatList
+      data={serviceTypes}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id.toString()}
+      numColumns={2} // grid with 2 columns
+      contentContainerStyle={styles.listContainer}
+      columnWrapperStyle={styles.row} // spacing between columns
+      showsVerticalScrollIndicator={false}
+    />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
+  container: {
+    height: "70%"
+  },
+  listContainer: {
     padding: GlobalTheme.spacing.md,
   },
-  gridContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between", // space between columns
+  row: {
+    justifyContent: "space-between",
+    marginBottom: GlobalTheme.spacing.md,
   },
 });

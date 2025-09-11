@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { View, StyleSheet } from "react-native";
 import ServiceTypeList from "@components/data/service_type/ServiceTypeList";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "@components/StyledButton";
@@ -35,12 +34,19 @@ export default function PickServiceTypes() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <StyledText
-        text="What kind of resources are you interested in? (Pick at least 2)"
-        font="large"
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <StyledText
+        text="What kind of resources are you interested in?"
+        font="h1"
         color="black"
       />
+      <StyledText
+        text="(Pick at least 2)"
+        font="medium"
+        color="black"
+      />
+      </View>
 
       <ServiceTypeList
         serviceTypes={serviceTypes || []}
@@ -59,7 +65,7 @@ export default function PickServiceTypes() {
         text={selectServiceTypesError?.message || addServiceTypeError?.message}
         font="error"
       />
-    </ScrollView>
+    </View>
   );
 }
 
@@ -68,12 +74,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: GlobalTheme.spacing.lg,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-evenly",
   },
-  header: {
-    ...GlobalTheme.typography.large,
-    marginBottom: GlobalTheme.spacing.md,
-    textAlign: "center",
-    color: GlobalTheme.colors.text,
+  headerContainer: {
+    flexDirection: "column",
+    gap: GlobalTheme.spacing.md
   },
 });
