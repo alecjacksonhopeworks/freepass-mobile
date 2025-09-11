@@ -16,7 +16,7 @@ export default function Login() {
           <View style={styles.divider} />
           <View style={styles.linksContainer}>
             <StyledText text="Don't have an account?" color="primaryDark"/>
-            <TextLink href="/signup" text="Sign Up!" color="primary" replace/>
+            <TextLink href="/register" text="Sign Up!" color="primary" replace/>
           </View>
         </View>
       </View>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: GlobalTheme.spacing.lg,
     backgroundColor: GlobalTheme.colors.white,
-    paddingVertical: GlobalTheme.spacing.xl,
+    paddingVertical: GlobalTheme.spacing.lg,
   },
   footerContainer: {
     width: "100%",

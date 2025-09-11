@@ -1,14 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "@db/store/useAuthStore";
-import { useRouter } from "expo-router";
 import { SignUpState } from "@db/supabase/types";
 import {
   signIn,
   signOut,
   insertPrivateUser,
   insertUserSettings,
-  getUserSettings,
-  getPrivateUser,
   updatePrivateUser,
 } from "@db/supabase/queries/user";
 
@@ -16,11 +13,8 @@ import {
 
 // TODO: implement email STMP sign up, check on setting in Supabase Authorization tab
 
-export function useSignUp(onComplete: () => void) {
-  const setSession = useAuthStore((s) => s.setSession);
-  const setPrivateUser = useAuthStore((s) => s.setPrivateUser);
-  const setUserSettings = useAuthStore((s) => s.setUserSettings);
-  const setSignUpState = useAuthStore((s) => s.setSignUpState);
+export function useSignUp(onComplete?: () => void) {
+  const { setAuthData } = useAuthStore();
 
   return useMutation({
     mutationFn: async ({
@@ -33,8 +27,8 @@ export function useSignUp(onComplete: () => void) {
       fullname: string;
     }) => {
       try {
-        const authData = await signIn(email, password);
-        const userId = authData.user?.id;
+        const { session } = await signIn(email, password);
+        const userId = session.user?.id;
 
         if (!userId) throw new Error("User ID missing");
 
@@ -43,28 +37,19 @@ export function useSignUp(onComplete: () => void) {
           insertUserSettings(userId),
         ]);
 
-        return { authData, privateUser, userSettings };
+        return { session, privateUser, userSettings };
       } catch (error) {
         throw error;
       }
     },
-    onSuccess: ({ authData, privateUser, userSettings }) => {
-      if (authData.session) setSession(authData.session, authData.session.user);
-      setPrivateUser(privateUser);
-      setUserSettings(userSettings);
-      setSignUpState(privateUser.sign_up_state);
-
-      onComplete();
+    onSuccess: ({ session, privateUser, userSettings }) => {
+      setAuthData(session, privateUser, userSettings);
+      if (onComplete) onComplete();
     },
   });
 }
 
 export function useSignIn(onComplete?: () => void) {
-  const setSession = useAuthStore((s) => s.setSession);
-  const setPrivateUser = useAuthStore((s) => s.setPrivateUser);
-  const setUserSettings = useAuthStore((s) => s.setUserSettings);
-  const router = useRouter();
-
   return useMutation({
     mutationFn: async ({
       email,
@@ -74,37 +59,19 @@ export function useSignIn(onComplete?: () => void) {
       password: string;
     }) => {
       try {
-        const authData = await signIn(email, password);
-
-        const userId = authData.user?.id;
-        if (!userId) throw new Error("User ID missing");
-
-        const [privateUser, userSettings] = await Promise.all([
-          getPrivateUser(userId),
-          getUserSettings(userId),
-        ]);
-
-        return { authData, privateUser, userSettings };
+        await signIn(email, password);
       } catch (error) {
         throw error;
       }
     },
-    onSuccess: ({ authData, privateUser, userSettings }) => {
-      if (authData.session) setSession(authData.session, authData.session.user);
-      setPrivateUser(privateUser);
-      setUserSettings(userSettings);
-
-      if (onComplete) {
-        onComplete();
-      } else {
-        router.replace("/home");
-      }
+    onSuccess: () => {
+      if (onComplete) onComplete();
     },
   });
 }
 
 export function useSignOut() {
-  const clear = useAuthStore((s) => s.clearAuthStore);
+  const { clearAuthStore } = useAuthStore();
 
   return useMutation({
     mutationFn: async () => {
@@ -115,7 +82,7 @@ export function useSignOut() {
       }
     },
     onSuccess: () => {
-      clear();
+      clearAuthStore();
     },
   });
 }
@@ -131,8 +98,6 @@ const SIGN_UP_ROUTES: Record<SignUpState, string> = {
 export function getAuthRedirect(signUpState: SignUpState): string {
   return SIGN_UP_ROUTES[signUpState] || "";
 }
-
-
 
 export function useUpdateSignUpState(onComplete?: () => void) {
   const user = useAuthStore((store) => store.user);

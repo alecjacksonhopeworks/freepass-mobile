@@ -9,13 +9,13 @@ export default function AuthLayout() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('use effect auth layout', 'session', session)
     if(session && signUpState){
       let route = getAuthRedirect(signUpState)
       if (route) router.replace(route)
     }
   }, [session, signUpState]);
 
-  // If not logged in → go login
   return (
       <Stack screenOptions={{ headerShown: false }}/>
   );

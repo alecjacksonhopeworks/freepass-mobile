@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle, DimensionValue, GestureResponderEvent } from "react-native";
 import { GlobalTheme, ThemeColor } from "@constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
-import { PressableEvent } from "react-native-gesture-handler/lib/typescript/components/Pressable/PressableProps";
 
 type StyledButtonProps = PressableProps & {
   text: string;

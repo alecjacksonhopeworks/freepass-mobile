@@ -14,7 +14,6 @@ import { useUpdateSignUpState } from "@db/hooks/auth";
 // Example static data; replace with dynamic Supabase fetch if needed
 
 export default function PickServiceTypes() {
-  const router = useRouter();
   const [selected, setSelected] = useState<number[]>([]);
 
   const { data: serviceTypes, error: selectServiceTypesError } =
@@ -23,9 +22,7 @@ export default function PickServiceTypes() {
   const { mutate: mutateServiceTypes, error: addServiceTypeError } =
     useSyncUserServiceTypes();
 
-  const { mutate: mutateSignUpState } = useUpdateSignUpState(() =>
-    router.replace("/signup/create-profile")
-  );
+  const { mutate: mutateSignUpState } = useUpdateSignUpState();
 
   const handleNext = () => {
     if (selected.length < 2) {
@@ -34,7 +31,7 @@ export default function PickServiceTypes() {
     }
     // TODO: save selections via Supabase
     mutateServiceTypes(selected);
-    mutateSignUpState('create_profile')
+    mutateSignUpState("create_profile");
   };
 
   return (

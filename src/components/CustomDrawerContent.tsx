@@ -12,38 +12,46 @@ import { ProfileImage } from "./Images";
 import { StyledText } from "./StyledText";
 import { Ionicon } from "@constants/types";
 import { DrawerNavigationHelpers } from "node_modules/@react-navigation/drawer/lib/typescript/src/types";
+import { useSignOut } from "@db/hooks/auth";
 
 
-export type CustomDrawerItemProps = {
+
+type CustomDrawerItem = {
   href: string;
   label: string;
   icon: Ionicon;
-  navigation: DrawerNavigationHelpers
+  navigation?: DrawerNavigationHelpers
+  doInstead?: () => void 
 };
 
-export function CustomDrawerItem({ href, label, icon, navigation }: CustomDrawerItemProps) {
+export function CustomDrawerItem({item} : {item: CustomDrawerItem} ) {
   const currentPathname = usePathname();
   return (
     <DrawerItem
         icon={() => (
           <Ionicons
-            name={icon}
+            name={item.icon}
             size={25}
-            color={currentPathname === href ? GlobalTheme.colors.white : GlobalTheme.colors.black}
+            color={currentPathname === item.href ? GlobalTheme.colors.white : GlobalTheme.colors.black}
           />
         )}
-        label={label}
+        label={item.label}
         labelStyle={[
           styles.navItemLabel,
-          { color: currentPathname === href ? GlobalTheme.colors.white : GlobalTheme.colors.black },
+          { color: currentPathname === item.href ? GlobalTheme.colors.white : GlobalTheme.colors.black },
         ]}
         style={{
           backgroundColor:
-            currentPathname === href ? GlobalTheme.colors.primaryDark : GlobalTheme.colors.white,
+            currentPathname === item.href ? GlobalTheme.colors.primaryDark : GlobalTheme.colors.white,
         }}
         onPress={() => {
-          router.push(href)
-          navigation.closeDrawer()
+          if(item.doInstead){
+            item.doInstead()
+          }
+          else{
+            router.push(item.href)
+          }
+          item.navigation?.closeDrawer()
         }}
       />
   );
@@ -53,14 +61,15 @@ export function CustomDrawerItem({ href, label, icon, navigation }: CustomDrawer
 
 
 export function CustomDrawerContent(props: DrawerContentComponentProps) {
-  const pathname: string = usePathname();
-
-  const drawerItems = [
-  { href: "/profile", label: "Profile", icon: "person-outline" },
-  { href: "/user-guide", label: "User Guide", icon: "book-outline" },
-  { href: "/your-calendar", label: "Your Calendar", icon: "calendar-outline" },
-  { href: "/settings", label: "Settings", icon: "settings-outline" },
-];
+  const {mutate: signOut} = useSignOut()
+  
+  const drawerItems: CustomDrawerItem[] = [
+    { href: "/profile", label: "Profile", icon: "person-outline" },
+    { href: "/user-guide", label: "User Guide", icon: "book-outline" },
+    { href: "/your-calendar", label: "Your Calendar", icon: "calendar-outline" },
+    { href: "/settings", label: "Settings", icon: "settings-outline" },
+    { href: "/login", label: "Sign Out", icon: "settings-outline",  'doInstead': signOut}
+  ];
 
   return (
     <DrawerContentScrollView {...props}>
@@ -76,10 +85,7 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
        {drawerItems.map((item) => (
         <CustomDrawerItem
           key={item.href}
-          href={item.href}
-          label={item.label}
-          icon={item.icon as Ionicon}
-          navigation={props.navigation}
+          item={item}
         />
       ))}
     </DrawerContentScrollView>

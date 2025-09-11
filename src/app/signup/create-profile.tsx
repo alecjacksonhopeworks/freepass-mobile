@@ -1,5 +1,4 @@
 import { View, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
 import { LabeledTextInput } from "@components/LabledTextInput";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
@@ -10,11 +9,9 @@ import { useUpdateSignUpState } from "@db/hooks/auth";
 
 
 export default function CreateProfile() {
-  const router = useRouter();
-  const { mutate: mutateSignUpState } = useUpdateSignUpState(() => router.replace('/home'))
+  const { mutate: mutateSignUpState } = useUpdateSignUpState()
   const handleFinish = () => {
-    // save data to Supabase or other backend
-    router.replace("/home");
+    mutateSignUpState('complete')
   };
 
   return (

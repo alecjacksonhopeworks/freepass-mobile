@@ -3,7 +3,6 @@ import { GlobalTheme } from "@constants/global-themes";
 import ResetPasswordForm from "@components/forms/ResetPasswordForm";
 import { StyledText } from "@components/StyledText";
 import { TextLink } from "@components/TextLink";
-import Spacer from "@components/Spacer";
 import AuthHeader from "@components/AuthHeader";
 
 export default function ResetPassword() {
@@ -16,7 +15,6 @@ export default function ResetPassword() {
           <StyledText text="Remembered your password?" color="primaryDark"/>
           <TextLink href="/login" text="Login" color="primaryDark" replace/>
         </View>
-        <Spacer spacing='xxxl' />
       </View>
     </AuthHeader>
   );
