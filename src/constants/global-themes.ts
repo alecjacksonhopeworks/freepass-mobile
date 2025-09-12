@@ -35,6 +35,7 @@ type GlobalColorTheme = {
 };
 
 type GlobalSpacingTheme = {
+  xxs: number;
   xs: number;
   sm: number;
   md: number;
@@ -52,14 +53,19 @@ type GlobalRadiusTheme = {
 };
 
 type GlobalTypographyTheme = {
+  title: TypographyEntry;
   h1: TypographyEntry;
   h2: TypographyEntry;
   h3: TypographyEntry;
+  h4: TypographyEntry;
+  h5: TypographyEntry;
+  h6: TypographyEntry;
   large: TypographyEntry;
   medium: TypographyEntry;
   small: TypographyEntry;
   error: TypographyEntry;
 };
+
 
 export type TypographyEntry = {
   fontSize: number;
@@ -111,6 +117,7 @@ export const GlobalTheme: GlobalTheme = {
     error: "#f2545b",
   },
   spacing: {
+    xxs: 2,
     xs: 4,
     sm: 8,
     md: 16,
@@ -126,24 +133,44 @@ export const GlobalTheme: GlobalTheme = {
     full: 9999,
   },
   typography: {
+     title: {
+      fontSize: 30,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
     h1: {
-      fontSize: 20,
+      fontSize: 28,
       fontWeight: "bold",
       fontFamily: "Inter",
     },
     h2: {
-      fontSize: 20,
+      fontSize: 26,
       fontWeight: "bold",
       fontFamily: "Inter",
     },
     h3: {
+      fontSize: 24,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    h4: {
+      fontSize: 22,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    h5: {
+      fontSize: 20,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    h6: {
       fontSize: 18,
       fontWeight: "bold",
       fontFamily: "Inter",
     },
     large: {
       fontSize: 16,
-      fontWeight: "bold",
+      fontWeight: "medium",
       fontFamily: "Inter",
     },
     medium: {

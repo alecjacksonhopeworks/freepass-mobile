@@ -9,15 +9,18 @@ import {
   DimensionValue,
   GestureResponderEvent,
 } from "react-native";
-import { GlobalTheme, ThemeColor } from "@constants/global-themes";
+import { GlobalTheme, ThemeColor, ThemeFont } from "@constants/global-themes";
 import { Ionicons } from "@expo/vector-icons";
 
 type StyledButtonProps = PressableProps & {
-  text: string;
+  text?: string;
   color?: ThemeColor;
   rounded?: boolean;
   delay?: number;
+  noBackground?: boolean
   buttonStyles?: ViewStyle;
+  font?: ThemeFont,
+  textColor?: ThemeColor,
   textStyle?: TextStyle;
   width?: DimensionValue;
   leftIcon?: keyof typeof Ionicons.glyphMap;
@@ -32,7 +35,10 @@ function StyledButton(props: StyledButtonProps) {
     delay = 500,
     color = "primary",
     rounded = false,
+    noBackground = false,
     buttonStyles,
+    font = "medium",
+    textColor = "white",
     textStyle,
     width = "auto",
     leftIcon,
@@ -53,14 +59,21 @@ function StyledButton(props: StyledButtonProps) {
   };
 
   const borderStyles = rounded ? styles.rounded : styles.box;
-
+  const backgroundColor = noBackground ? undefined : GlobalTheme.colors[color]
   const allButtonStyles: ViewStyle = {
     width,
     ...styles.button,
     ...borderStyles,
-    backgroundColor: GlobalTheme.colors[color],
+    backgroundColor,
     ...buttonStyles,
   };
+
+  const textStyles: TextStyle = {
+    ...GlobalTheme.typography[font],
+    color: GlobalTheme.colors[textColor],
+    fontWeight: 'bold',
+    ...textStyle
+  }
 
   return (
     <Pressable
@@ -77,7 +90,7 @@ function StyledButton(props: StyledButtonProps) {
           style={{ marginRight: GlobalTheme.spacing.xs }}
         />
       )}
-      <Text style={[styles.text, textStyle]}>{text}</Text>
+      <Text style={textStyles}>{text}</Text>
       {rightIcon && (
         <Ionicons
           name={rightIcon}
@@ -105,10 +118,5 @@ const styles = StyleSheet.create({
   },
   box: {
     borderRadius: GlobalTheme.radius.sm,
-  },
-  text: {
-    color: GlobalTheme.colors.white,
-    ...GlobalTheme.typography.medium,
-    fontWeight: "bold",
-  },
+  }
 });

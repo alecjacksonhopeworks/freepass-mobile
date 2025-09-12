@@ -1,18 +1,20 @@
 import React from "react";
 import { Text, TextStyle, TextProps, StyleSheet } from "react-native";
-import { GlobalTheme, ThemeColor, ThemeFont } from "@constants/global-themes";
+import { FontWeight, GlobalTheme, ThemeColor, ThemeFont } from "@constants/global-themes";
 
 export type StyledTextProps = TextProps & {
   text: string | undefined;
-  color?: ThemeColor; // theme color keys
-  font?: ThemeFont; // theme font size keys
-  style?: TextStyle; // additional custom styles
+  color?: ThemeColor; 
+  font?: ThemeFont; 
+  style?: TextStyle; 
+  weight?: FontWeight;
 };
 
 export function StyledText({
   text,
   color = "black",
   font = "medium",
+  weight,
   style,
 }: StyledTextProps) {
   const textStyles: TextStyle = {
@@ -20,6 +22,8 @@ export function StyledText({
     color: GlobalTheme.colors[color],
     ...GlobalTheme.typography[font],
   };
+
+  if (weight) textStyles.fontWeight = weight
 
   return text && <Text style={[textStyles, style]}>{text}</Text>;
 }

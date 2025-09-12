@@ -34,11 +34,7 @@ type SignUpFormData = {
 };
 
 export default function RegisterForm() {
-  const router = useRouter();
-
-  const { mutate, error } = useSignUp(() =>
-    router.replace("signup/choose-role"),
-  );
+  const { mutate, error } = useSignUp();
 
   const {
     control,

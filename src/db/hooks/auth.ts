@@ -7,6 +7,7 @@ import {
   insertPrivateUser,
   insertUserSettings,
   updatePrivateUser,
+  signUp,
 } from "@db/supabase/queries/user";
 
 // TODO: test auth hooks, link with application and add auth types
@@ -27,10 +28,12 @@ export function useSignUp(onComplete?: () => void) {
       fullname: string;
     }) => {
       try {
-        const { session } = await signIn(email, password);
-        const userId = session.user?.id;
+        const { session } = await signUp(email, password);
 
-        if (!userId) throw new Error("User ID missing");
+        if(!session)
+          throw new Error("There was a problem signing in.");
+
+        const userId = session.user?.id;
 
         const [privateUser, userSettings] = await Promise.all([
           insertPrivateUser(userId, email, fullname),

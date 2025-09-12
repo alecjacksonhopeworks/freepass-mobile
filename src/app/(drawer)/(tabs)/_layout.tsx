@@ -36,7 +36,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: GlobalTheme.colors.white,
         tabBarInactiveTintColor: GlobalTheme.colors.whiteInactive,
         tabBarStyle: {
-          backgroundColor: GlobalTheme.colors.primaryDark,
+          backgroundColor: GlobalTheme.colors.primary,
           paddingBottom: insets.bottom,
         },
         tabBarLabelStyle: {
