@@ -1,6 +1,6 @@
-import 'expo-router/entry';
-
+import { Redirect } from "expo-router";
+import "expo-router/entry";
 
 export default function Index() {
-  return <></>
+  return <Redirect href="/login" />;
 }
