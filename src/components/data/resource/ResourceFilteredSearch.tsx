@@ -4,8 +4,9 @@ import SearchBar from "@components/SearchBar";
 import StyledButton from "@components/StyledButton";
 import { GlobalTheme } from "@constants/global-themes";
 import { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import ResourceList from "./ResourceList";
+import { Keyboard } from "react-native";
 
 type Resource = {
   id: string;
@@ -63,14 +64,12 @@ function ResourceFilteredSearch() {
   };
   return (
     <View style={styles.filterContainer}>
-
       <StyledButton
         text="Find Resources Near Me Now"
         onPress={loadResourceMapView}
         color="secondary"
         leftIcon="navigate"
       />
-
       <SearchBar
         placeholder="Search resources..."
         value={search}
@@ -88,7 +87,7 @@ function ResourceFilteredSearch() {
           iconOn="heart"
           iconOff="heart-outline"
           size={28}
-          style={{marginTop: GlobalTheme.spacing.sm}}
+          style={{ marginTop: GlobalTheme.spacing.sm }}
         />
 
         <ServiceTypeDropdown
@@ -119,8 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    width: '100%',
-    marginTop: -14
-
+    width: "100%",
+    marginTop: -14,
   },
 });

@@ -47,7 +47,7 @@ export default function TabsLayout() {
         ),
       }}
     >
-      <Tabs.Screen name="(other)" options={{ href: null }} />
+      <Tabs.Screen name="(drawer-tabs)" options={{ href: null }} />
 
       {tabs.map((tab) => {
         const outlineIcon = `${tab.icon}-outline` as Ionicon;

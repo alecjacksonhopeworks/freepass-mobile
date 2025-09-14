@@ -31,7 +31,7 @@ export default function ResourceCard({
         onPress={() => onToggleFavorite(resource.id)}
         iconOn="heart"
         iconOff="heart-outline"
-        size={20}
+        size={28}
       />
     </View>
   );

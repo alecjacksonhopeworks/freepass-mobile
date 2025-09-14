@@ -3,11 +3,13 @@ import { LabeledTextInput } from "@components/LabledTextInput";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 import { useUpdateSignUpState } from "@db/hooks/auth";
+import { useRouter } from "expo-router";
 
 //TODO: Revamp generated layout and implement signup step logic
 
 export default function CreateProfile() {
-  const { mutate: mutateSignUpState } = useUpdateSignUpState();
+  const router = useRouter();
+  const { mutate: mutateSignUpState } = useUpdateSignUpState(() => router.replace('/home'));
   const handleFinish = () => {
     mutateSignUpState("complete");
   };

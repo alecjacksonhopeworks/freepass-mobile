@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { StyledText } from "../StyledText";
 import { useSignUp } from "@db/hooks/auth";
 import { TextFormInput } from "./form-inputs";
+import { useRouter } from "expo-router";
 
 const schema = yup.object({
   email: yup
@@ -33,7 +34,8 @@ type SignUpFormData = {
 };
 
 export default function RegisterForm() {
-  const { mutate, error } = useSignUp();
+  const router = useRouter()
+  const { mutate, error } = useSignUp(() => router.replace('signup/choose-role'));
 
   const {
     control,
