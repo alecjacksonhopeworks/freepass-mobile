@@ -6,10 +6,12 @@ import {
 } from "@db/supabase/types";
 
 export async function signIn(email: string, password: string) {
+
   const { data, error } = await SupabaseClient.auth.signInWithPassword({
     email,
     password,
   });
+
   if (error) throw error;
   return data;
 }
@@ -27,6 +29,13 @@ export async function signUp(email: string, password: string) {
 export async function signOut() {
   const { error } = await SupabaseClient.auth.signOut();
   if (error) throw error;
+}
+
+export async function isLoggedIn(): Promise<boolean> {
+  const { data: user, error } = await SupabaseClient.auth.getUser();
+  if (error) throw error;
+  return Boolean(user)
+
 }
 
 export async function insertPrivateUser(

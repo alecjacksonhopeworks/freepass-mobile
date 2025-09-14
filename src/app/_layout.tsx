@@ -2,8 +2,7 @@ import { useAuthSync } from "@db/supabase/hooks/useAuthSync";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import 'expo-router/entry';
-
+import "expo-router/entry";
 
 const queryClient = new QueryClient();
 

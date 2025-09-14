@@ -17,10 +17,10 @@ type StyledButtonProps = PressableProps & {
   color?: ThemeColor;
   rounded?: boolean;
   delay?: number;
-  noBackground?: boolean
   buttonStyles?: ViewStyle;
-  font?: ThemeFont,
-  textColor?: ThemeColor,
+  noBackground?: boolean;
+  font?: ThemeFont;
+  textColor?: ThemeColor;
   textStyle?: TextStyle;
   width?: DimensionValue;
   leftIcon?: keyof typeof Ionicons.glyphMap;
@@ -34,9 +34,9 @@ function StyledButton(props: StyledButtonProps) {
     text,
     delay = 500,
     color = "primary",
+    buttonStyles,
     rounded = false,
     noBackground = false,
-    buttonStyles,
     font = "medium",
     textColor = "white",
     textStyle,
@@ -45,6 +45,7 @@ function StyledButton(props: StyledButtonProps) {
     rightIcon,
     iconSize = 18,
     iconColor,
+    style,
     ...rest
   } = props;
 
@@ -52,42 +53,44 @@ function StyledButton(props: StyledButtonProps) {
 
   const handlePress = (event: GestureResponderEvent) => {
     if (!props.onPress || disabled) return;
-    let onPress = props.onPress!;
-    onPress(event);
+    props.onPress(event);
     setDisabled(true);
     setTimeout(() => setDisabled(false), delay);
   };
 
   const borderStyles = rounded ? styles.rounded : styles.box;
-  const backgroundColor = noBackground ? undefined : GlobalTheme.colors[color]
-  const allButtonStyles: ViewStyle = {
-    width,
-    ...styles.button,
-    ...borderStyles,
-    backgroundColor,
-    ...buttonStyles,
-  };
+  const backgroundColor = noBackground ? undefined : GlobalTheme.colors[color];
 
   const textStyles: TextStyle = {
     ...GlobalTheme.typography[font],
     color: GlobalTheme.colors[textColor],
-    fontWeight: 'bold',
-    ...textStyle
-  }
+    fontWeight: "bold",
+    ...textStyle,
+  };
+
+  const allButtonStyles = [
+    styles.button,
+    borderStyles,
+    {
+      width,
+      backgroundColor,
+    },
+    buttonStyles,
+  ];
 
   return (
     <Pressable
       style={allButtonStyles}
-      {...rest}
       onPress={handlePress}
       disabled={disabled}
+      {...rest}
     >
       {leftIcon && (
         <Ionicons
           name={leftIcon}
           size={iconSize}
           color={iconColor || GlobalTheme.colors.white}
-          style={{ marginRight: GlobalTheme.spacing.xs }}
+          style={{ marginRight: GlobalTheme.spacing.sm }}
         />
       )}
       <Text style={textStyles}>{text}</Text>
@@ -96,7 +99,7 @@ function StyledButton(props: StyledButtonProps) {
           name={rightIcon}
           size={iconSize}
           color={iconColor || GlobalTheme.colors.white}
-          style={{ marginLeft: GlobalTheme.spacing.xs }}
+          style={{ marginLeft: GlobalTheme.spacing.sm }}
         />
       )}
     </Pressable>
@@ -108,7 +111,7 @@ export default StyledButton;
 const styles = StyleSheet.create({
   button: {
     paddingVertical: 11,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -118,5 +121,5 @@ const styles = StyleSheet.create({
   },
   box: {
     borderRadius: GlobalTheme.radius.sm,
-  }
+  },
 });

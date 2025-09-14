@@ -10,7 +10,6 @@ import {
   signUp,
 } from "@db/supabase/queries/user";
 
-// TODO: test auth hooks, link with application and add auth types
 
 // TODO: implement email STMP sign up, check on setting in Supabase Authorization tab
 

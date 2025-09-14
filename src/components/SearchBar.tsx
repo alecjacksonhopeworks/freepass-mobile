@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, DimensionValue } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { GlobalTheme } from "@constants/global-themes";
 
@@ -7,6 +7,7 @@ import { GlobalTheme } from "@constants/global-themes";
 
 type SearchBarProps = {
   value: string;
+  width?: DimensionValue;
   placeholder?: string;
   onChangeText: (text: string) => void;
   showIcon?: boolean;
@@ -17,9 +18,10 @@ export default function SearchBar({
   placeholder,
   onChangeText,
   showIcon = false,
+  width = "100%",
 }: SearchBarProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width }]}>
       {showIcon && (
         <FontAwesome
           name="search"
@@ -40,12 +42,19 @@ export default function SearchBar({
 }
 
 const styles = StyleSheet.create({
-  container: { position: "relative" },
-  icon: { position: "absolute", left: 10, top: "50%", marginTop: -10 },
+  container: {
+    position: "relative",
+  },
+  icon: {
+    position: "absolute",
+    left: 10,
+    top: "50%",
+    marginTop: -10,
+  },
   input: {
     borderWidth: 1,
     borderColor: GlobalTheme.colors.primary,
-    borderRadius: GlobalTheme.radius.sm,
+    borderRadius: GlobalTheme.radius.lg,
     padding: GlobalTheme.spacing.sm,
   },
 });

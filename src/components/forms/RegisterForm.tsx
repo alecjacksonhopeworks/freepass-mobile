@@ -2,7 +2,6 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "../StyledButton";
-import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -83,7 +82,7 @@ export default function RegisterForm() {
 
       <View style={styles.formItemContainer}>
         <StyledButton
-          buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
+          buttonStyles={{ marginTop: GlobalTheme.spacing.sm }}
           text="Sign Up"
           color="secondary"
           width="100%"
