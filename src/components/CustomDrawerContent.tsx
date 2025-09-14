@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/drawer";
 import { View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { usePathname, router } from "expo-router";
+import { usePathname, router, useRouter } from "expo-router";
 import { GlobalTheme } from "@constants/global-themes";
 import { StyledText } from "./StyledText";
 import { Ionicon } from "@constants/types";
@@ -69,15 +69,16 @@ export function CustomDrawerItem({
           content.doInstead();
         } else {
           router.push(content.href);
+          navigation?.closeDrawer();
         }
-        navigation?.closeDrawer();
       }}
     />
   );
 }
 
 export function CustomDrawerContent(props: DrawerContentComponentProps) {
-  const { mutate: signOut } = useSignOut();
+  const router = useRouter();
+  const { mutate: signOut } = useSignOut(() => router.replace('/login'));
   const privateUser = useAuthStore((store) => store.privateUser);
 
   const drawerItems: CustomDrawerItemContent[] = [

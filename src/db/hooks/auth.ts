@@ -72,8 +72,7 @@ export function useSignIn(onComplete?: () => void) {
   });
 }
 
-export function useSignOut() {
-  const { clearAuthStore } = useAuthStore();
+export function useSignOut(onComplete?: () => void) {
 
   return useMutation({
     mutationFn: async () => {
@@ -84,7 +83,8 @@ export function useSignOut() {
       }
     },
     onSuccess: () => {
-      clearAuthStore();
+      if (onComplete) onComplete();
+
     },
   });
 }
