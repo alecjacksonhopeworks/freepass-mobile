@@ -140,6 +140,7 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
           color="secondary"
           leftIcon="open-outline"
           width="100%"
+          onPress={() => console.error('Learn More unimplemented')}
         />
       </View>
     </DrawerContentScrollView>

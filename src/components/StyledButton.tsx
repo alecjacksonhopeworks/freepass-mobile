@@ -32,7 +32,7 @@ type StyledButtonProps = PressableProps & {
 function StyledButton(props: StyledButtonProps) {
   const {
     text,
-    delay = 500,
+    delay = 300,
     color = "primary",
     buttonStyles,
     rounded = false,
@@ -77,6 +77,7 @@ function StyledButton(props: StyledButtonProps) {
     {
       width,
       backgroundColor,
+      opacity: (disabled || delayIsActive) ? 0.7: 1.0
     },
     buttonStyles,
   ];

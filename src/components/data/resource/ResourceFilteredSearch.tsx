@@ -59,7 +59,7 @@ function ResourceFilteredSearch() {
   };
 
   const loadResourceMapView = () => {
-    console.log("load resource map view");
+    console.error("Find Resources unimplemented");
     //TODO: Load filtered Resources into map view search
   };
   return (
