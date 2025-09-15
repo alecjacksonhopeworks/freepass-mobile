@@ -46,16 +46,19 @@ function StyledButton(props: StyledButtonProps) {
     iconSize = 18,
     iconColor,
     style,
+    disabled,
+    onPress,
     ...rest
   } = props;
 
-  const [disabled, setDisabled] = useState(false);
+  const [delayIsActive, setDelayIsActive] = useState(false);
+  
 
   const handlePress = (event: GestureResponderEvent) => {
-    if (!props.onPress || disabled) return;
-    props.onPress(event);
-    setDisabled(true);
-    setTimeout(() => setDisabled(false), delay);
+    if (!onPress || disabled || delayIsActive) return;
+    onPress(event);
+    setDelayIsActive(true);
+    setTimeout(() => setDelayIsActive(false), delay);
   };
 
   const borderStyles = rounded ? styles.rounded : styles.box;
@@ -82,7 +85,7 @@ function StyledButton(props: StyledButtonProps) {
     <Pressable
       style={allButtonStyles}
       onPress={handlePress}
-      disabled={disabled}
+      disabled={disabled || delayIsActive}
       {...rest}
     >
       {leftIcon && (

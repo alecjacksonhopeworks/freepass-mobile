@@ -31,7 +31,7 @@ const schema = yup.object().shape({
 
 export default function LoginForm() {
   const router = useRouter()
-  const { mutate: mutateSignIn, error } = useSignIn(() => router.replace('/home'));
+  const { mutate: mutateSignIn, isPending, error } = useSignIn(() => router.replace('/home'));
 
   const {
     control,
@@ -79,6 +79,7 @@ export default function LoginForm() {
           color="secondary"
           rounded={true}
           onPress={handleSubmit(onSubmit)}
+          disabled={isPending}
         />
         <StyledText text={error?.message} font="error" />
       </View>
