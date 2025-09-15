@@ -5,7 +5,7 @@ import { StyledText } from "@components/StyledText";
 import { TextLink } from "@components/TextLink";
 import AuthHeader from "@components/AuthHeader";
 
-export default function Signup() {
+export default function Register() {
   return (
     <AuthHeader title="Create Account" subtitle="Sign up to get started">
       <View style={styles.container}>

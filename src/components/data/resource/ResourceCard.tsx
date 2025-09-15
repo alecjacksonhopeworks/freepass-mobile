@@ -9,13 +9,11 @@ import { Resource } from "@constants/types";
 export type ResourceCardProps = {
   resource: Resource;
   onToggleFavorite: (id: string) => void;
-  favoriteLoading?: boolean;
 };
 
 export default function ResourceCard({
   resource,
   onToggleFavorite,
-  favoriteLoading = false,
 }: ResourceCardProps) {
   return (
     <View style={styles.card}>
@@ -34,7 +32,6 @@ export default function ResourceCard({
         iconOn="heart"
         iconOff="heart-outline"
         size={28}
-        loading={favoriteLoading}
       />
     </View>
   );

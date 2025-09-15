@@ -1,23 +1,22 @@
 import { getAuthRedirect } from "@db/hooks/auth";
 import { useAuthStore } from "@db/store/useAuthStore";
-import { Stack, useRouter } from "expo-router";
-import { useEffect } from "react";
+import { Redirect, Stack } from "expo-router";
 
 export default function AuthLayout() {
+  console.log("rendering AuthLayout");
   const session = useAuthStore((store) => store.session);
   const signUpState = useAuthStore((store) => store.signUpState);
-  const router = useRouter();
 
-  useEffect(() => {
-    console.log("use effect AuthLayout");
-    //TODO: Refactor Redirect code
-    if (session && signUpState) {
-      let route = getAuthRedirect(signUpState);
-            console.log('AuthLayout going to route', route)
-
-      if (route) router.replace(route);
-    }
-  }, [signUpState]);
-
-  return <Stack screenOptions={{ headerShown: false }} />;
+  if (session && signUpState) {
+    const route = getAuthRedirect(signUpState);
+    console.log("AuthLayout redirect guard", route);
+    if (route) return <Redirect href={route} />;
+  }
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="login" options={{ headerShown: false }} />
+      <Stack.Screen name="register" options={{ headerShown: false }} />
+      <Stack.Screen name="reset-password" options={{ headerShown: false }} />
+    </Stack>
+  );
 }

@@ -2,11 +2,13 @@ import { View, StyleSheet } from "react-native";
 import StyledButton from "@components/StyledButton";
 import { StyledText } from "@components/StyledText";
 import { useUpdateSignUpState } from "@db/hooks/auth";
+import { useRouter } from "expo-router";
 
 //TODO: Revamp generated layout and implement signup step logic
 
 export default function ChooseRole() {
-  const { mutate: mutateSignUpState } = useUpdateSignUpState();
+  const router = useRouter()
+  const { mutate: mutateSignUpState } = useUpdateSignUpState(() => router.replace('signup/pick-service-types'));
 
   const handleChoice = (choice: "Finder" | "Provider") => {
     mutateSignUpState("pick_categories");

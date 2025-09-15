@@ -36,7 +36,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: GlobalTheme.colors.white,
         tabBarInactiveTintColor: GlobalTheme.colors.whiteInactive,
         tabBarStyle: {
-          backgroundColor: GlobalTheme.colors.primaryDark,
+          backgroundColor: GlobalTheme.colors.primary,
           paddingBottom: insets.bottom,
         },
         tabBarLabelStyle: {
@@ -47,7 +47,7 @@ export default function TabsLayout() {
         ),
       }}
     >
-      <Tabs.Screen name="(other)" options={{ href: null }} />
+      <Tabs.Screen name="(drawer-tabs)" options={{ href: null }} />
 
       {tabs.map((tab) => {
         const outlineIcon = `${tab.icon}-outline` as Ionicon;

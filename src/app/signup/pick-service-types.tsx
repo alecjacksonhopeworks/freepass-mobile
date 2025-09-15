@@ -9,10 +9,12 @@ import {
   useSyncUserServiceTypes,
 } from "@db/hooks/service_type";
 import { useUpdateSignUpState } from "@db/hooks/auth";
+import { useRouter } from "expo-router";
 
 // Example static data; replace with dynamic Supabase fetch if needed
 
 export default function PickServiceTypes() {
+  const router = useRouter();
   const [selected, setSelected] = useState<number[]>([]);
 
   const { data: serviceTypes, error: selectServiceTypesError } =
@@ -21,7 +23,7 @@ export default function PickServiceTypes() {
   const { mutate: mutateServiceTypes, error: addServiceTypeError } =
     useSyncUserServiceTypes();
 
-  const { mutate: mutateSignUpState } = useUpdateSignUpState();
+  const { mutate: mutateSignUpState } = useUpdateSignUpState(() => router.replace('/signup/create-profile'));
 
   const handleNext = () => {
     if (selected.length < 2) {

@@ -6,10 +6,12 @@ import {
 } from "@db/supabase/types";
 
 export async function signIn(email: string, password: string) {
+
   const { data, error } = await SupabaseClient.auth.signInWithPassword({
     email,
     password,
   });
+
   if (error) throw error;
   return data;
 }
@@ -19,6 +21,7 @@ export async function signUp(email: string, password: string) {
     email,
     password,
   });
+
   if (error) throw error;
   return data;
 }
@@ -28,10 +31,17 @@ export async function signOut() {
   if (error) throw error;
 }
 
+export async function isLoggedIn(): Promise<boolean> {
+  const { data: user, error } = await SupabaseClient.auth.getUser();
+  if (error) throw error;
+  return Boolean(user)
+
+}
+
 export async function insertPrivateUser(
   userId: string,
   email: string,
-  fullName: string,
+  fullName: string
 ) {
   const { data, error } = await SupabaseClient.from("private_user")
     .insert([{ id: userId, email, full_name: fullName }])
@@ -52,7 +62,7 @@ export async function getPrivateUser(userId: string): Promise<PrivateUser> {
 
 export async function updatePrivateUser(
   userId: string,
-  updates: PrivateUserUpdate,
+  updates: PrivateUserUpdate
 ): Promise<PrivateUser> {
   const { data, error } = await SupabaseClient.from("private_user")
     .update(updates)
@@ -65,7 +75,7 @@ export async function updatePrivateUser(
 }
 
 export async function insertUserSettings(
-  userId: string,
+  userId: string
 ): Promise<UserSettings> {
   const { data, error } = await SupabaseClient.from("user_settings")
     .insert([{ user_id: userId }])

@@ -8,6 +8,8 @@ interface AuthState {
   privateUser: PrivateUser | null;
   userSettings: UserSettings | null;
   signUpState: SignUpState | null;
+  authIsLoading: boolean;
+  setAuthIsLoading: (authIsLoading: boolean) => void;
   setSession: (session: Session | null, user: User | null) => void;
   setPrivateUser: (privateUser: PrivateUser | null) => void;
   setUserSettings: (settings: UserSettings | null) => void;
@@ -16,7 +18,7 @@ interface AuthState {
   setAuthData: (
     session: Session | null,
     privateUser: PrivateUser,
-    userSettings: UserSettings,
+    userSettings: UserSettings
   ) => void;
 }
 
@@ -26,6 +28,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   privateUser: null,
   userSettings: null,
   signUpState: null,
+  authIsLoading: true,
+  setAuthIsLoading: (authIsLoading) => set({ authIsLoading }),
 
   setSession: (session, user) => set({ session, user }),
   setPrivateUser: (privateUser) => set({ privateUser }),

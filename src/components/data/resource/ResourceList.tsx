@@ -1,6 +1,8 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { DimensionValue, StyleSheet, View } from "react-native";
 import ResourceCard from "./ResourceCard";
+import { FlatList } from 'react-native-gesture-handler'
+
 
 // TODO: inspect and style generated ResourceList Component and later add  database resource type
 
@@ -15,19 +17,28 @@ type Resource = {
 type ResourceListProps = {
   resources: Resource[];
   toggleFavorite: (id: string) => void;
+  width?: DimensionValue;
 };
 
 export default function ResourceList({
   resources,
   toggleFavorite,
+  width = "100%",
 }: ResourceListProps) {
   return (
-    <FlatList
-      data={resources}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <ResourceCard resource={item} onToggleFavorite={toggleFavorite} />
-      )}
-    />
+    <View style={[styles.list, { width }]}>
+      <FlatList
+        data={resources}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ResourceCard resource={item} onToggleFavorite={toggleFavorite} />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  list: { height: "55%" },
+});

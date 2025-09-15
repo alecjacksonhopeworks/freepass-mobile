@@ -7,9 +7,9 @@ import {
   insertPrivateUser,
   insertUserSettings,
   updatePrivateUser,
+  signUp,
 } from "@db/supabase/queries/user";
 
-// TODO: test auth hooks, link with application and add auth types
 
 // TODO: implement email STMP sign up, check on setting in Supabase Authorization tab
 
@@ -27,10 +27,12 @@ export function useSignUp(onComplete?: () => void) {
       fullname: string;
     }) => {
       try {
-        const { session } = await signIn(email, password);
-        const userId = session.user?.id;
+        const { session } = await signUp(email, password);
 
-        if (!userId) throw new Error("User ID missing");
+        if(!session)
+          throw new Error("There was a problem signing in.");
+
+        const userId = session.user?.id;
 
         const [privateUser, userSettings] = await Promise.all([
           insertPrivateUser(userId, email, fullname),
@@ -70,8 +72,7 @@ export function useSignIn(onComplete?: () => void) {
   });
 }
 
-export function useSignOut() {
-  const { clearAuthStore } = useAuthStore();
+export function useSignOut(onComplete?: () => void) {
 
   return useMutation({
     mutationFn: async () => {
@@ -82,7 +83,8 @@ export function useSignOut() {
       }
     },
     onSuccess: () => {
-      clearAuthStore();
+      if (onComplete) onComplete();
+
     },
   });
 }

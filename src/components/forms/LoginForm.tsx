@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { StyledText } from "@components/StyledText";
 import { TextFormInput } from "./form-inputs";
+import { useRouter } from "expo-router";
 
 
 //TODO: Test Login On Network failure, should produce error
@@ -29,7 +30,8 @@ const schema = yup.object().shape({
 });
 
 export default function LoginForm() {
-  const { mutate, error } = useSignIn();
+  const router = useRouter()
+  const { mutate: mutateSignIn, error } = useSignIn(() => router.replace('/home'));
 
   const {
     control,
@@ -41,7 +43,7 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    mutate(data);
+    mutateSignIn(data);
   };
 
   return (
@@ -82,7 +84,6 @@ export default function LoginForm() {
       </View>
 
       <StyledButton
-        buttonStyles={{ marginTop: GlobalTheme.spacing.md }}
         text="Autofill Test Account"
         color="primaryDark"
         leftIcon="alert-outline"

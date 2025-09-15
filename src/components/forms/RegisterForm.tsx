@@ -2,13 +2,13 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import { GlobalTheme } from "@constants/global-themes";
 import StyledButton from "../StyledButton";
-import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { StyledText } from "../StyledText";
 import { useSignUp } from "@db/hooks/auth";
 import { TextFormInput } from "./form-inputs";
+import { useRouter } from "expo-router";
 
 const schema = yup.object({
   email: yup
@@ -34,11 +34,8 @@ type SignUpFormData = {
 };
 
 export default function RegisterForm() {
-  const router = useRouter();
-
-  const { mutate, error } = useSignUp(() =>
-    router.replace("signup/choose-role"),
-  );
+  const router = useRouter()
+  const { mutate, error } = useSignUp(() => router.replace('signup/choose-role'));
 
   const {
     control,
@@ -87,7 +84,7 @@ export default function RegisterForm() {
 
       <View style={styles.formItemContainer}>
         <StyledButton
-          buttonStyles={{ marginTop: GlobalTheme.spacing.lg }}
+          buttonStyles={{ marginTop: GlobalTheme.spacing.sm }}
           text="Sign Up"
           color="secondary"
           width="100%"
