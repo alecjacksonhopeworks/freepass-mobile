@@ -52,7 +52,7 @@ function StyledButton(props: StyledButtonProps) {
   } = props;
 
   const [delayIsActive, setDelayIsActive] = useState(false);
-  
+
 
   const handlePress = (event: GestureResponderEvent) => {
     if (!onPress || disabled || delayIsActive) return;

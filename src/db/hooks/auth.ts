@@ -10,7 +10,6 @@ import {
   signUp,
 } from "@db/supabase/queries/user";
 
-
 // TODO: implement email STMP sign up, check on setting in Supabase Authorization tab
 
 export function useSignUp(onComplete?: () => void) {
@@ -29,8 +28,7 @@ export function useSignUp(onComplete?: () => void) {
       try {
         const { session } = await signUp(email, password);
 
-        if(!session)
-          throw new Error("There was a problem signing in.");
+        if (!session) throw new Error("There was a problem signing in.");
 
         const userId = session.user?.id;
 
@@ -41,6 +39,10 @@ export function useSignUp(onComplete?: () => void) {
 
         return { session, privateUser, userSettings };
       } catch (error) {
+        console.log(
+          "[db/hooks/auth.ts] Error in useSignUp:",
+          (error as any)?.message || error
+        );
         throw error;
       }
     },
@@ -63,6 +65,10 @@ export function useSignIn(onComplete?: () => void) {
       try {
         await signIn(email, password);
       } catch (error) {
+        console.log(
+          "[db/hooks/auth.ts] Error in useSignIn:",
+          (error as any)?.message || error
+        );
         throw error;
       }
     },
@@ -73,18 +79,20 @@ export function useSignIn(onComplete?: () => void) {
 }
 
 export function useSignOut(onComplete?: () => void) {
-
   return useMutation({
     mutationFn: async () => {
       try {
         await signOut();
       } catch (error) {
+        console.log(
+          "[db/hooks/auth.ts] Error in useSignOut:",
+          (error as any)?.message || error
+        );
         throw error;
       }
     },
     onSuccess: () => {
       if (onComplete) onComplete();
-
     },
   });
 }
@@ -117,6 +125,10 @@ export function useUpdateSignUpState(onComplete?: () => void) {
         });
         return privateUser;
       } catch (error) {
+        console.log(
+          "[db/hooks/auth.ts] Error in useUpdateSignUpState:",
+          (error as any)?.message || error
+        );
         throw error;
       }
     },
