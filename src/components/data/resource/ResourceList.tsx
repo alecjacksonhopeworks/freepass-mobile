@@ -1,6 +1,8 @@
 import React from "react";
-import { DimensionValue, FlatList, StyleSheet, View } from "react-native";
+import { DimensionValue, StyleSheet, View } from "react-native";
 import ResourceCard from "./ResourceCard";
+import { FlatList } from 'react-native-gesture-handler'
+
 
 // TODO: inspect and style generated ResourceList Component and later add  database resource type
 
@@ -31,6 +33,7 @@ export default function ResourceList({
         renderItem={({ item }) => (
           <ResourceCard resource={item} onToggleFavorite={toggleFavorite} />
         )}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
