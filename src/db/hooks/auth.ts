@@ -32,6 +32,7 @@ export function useSignUp(onComplete?: () => void) {
 
         const userId = session.user?.id;
 
+        console.log('signed up with ', userId, 'inserting settings an private')
         const [privateUser, userSettings] = await Promise.all([
           insertPrivateUser(userId, email, fullname),
           insertUserSettings(userId),

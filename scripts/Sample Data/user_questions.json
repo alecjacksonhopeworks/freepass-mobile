@@ -1,0 +1,66 @@
+[
+    {
+        " ID": "8",
+        "Question": "Testing if this works",
+        "User Asking": "emmanuelguzman@hopeworks.org",
+        "Question Category": "Young Adults",
+        "Upvotes": "",
+        "FAQ?": ""
+    },
+    {
+        " ID": "7",
+        "Question": "How do I download documents?",
+        "User Asking": "colleennguyn@hotmail.edu",
+        "Question Category": "",
+        "Upvotes": "9",
+        "FAQ?": "TRUE"
+    },
+    {
+        " ID": "6",
+        "Question": "How long can I access an event?",
+        "User Asking": "andrewrichardson59@example.com",
+        "Question Category": "",
+        "Upvotes": "4",
+        "FAQ?": "TRUE"
+    },
+    {
+        " ID": "5",
+        "Question": "How do I reset my password?",
+        "User Asking": "carlyherrera8150@yahoo.ca",
+        "Question Category": "",
+        "Upvotes": "6",
+        "FAQ?": "TRUE"
+    },
+    {
+        " ID": "4",
+        "Question": "How do I login to my FreePass?",
+        "User Asking": "nellhe@hotmail.edu",
+        "Question Category": "",
+        "Upvotes": "10",
+        "FAQ?": "TRUE"
+    },
+    {
+        " ID": "3",
+        "Question": "What platforms are supported by the FreePass app?",
+        "User Asking": "anjolieschippers1129@hotmail.ca",
+        "Question Category": "",
+        "Upvotes": "9",
+        "FAQ?": "TRUE"
+    },
+    {
+        " ID": "2",
+        "Question": "How can I get money to help with renting a house",
+        "User Asking": "projectfree83@gmail.com",
+        "Question Category": "Housing",
+        "Upvotes": "7",
+        "FAQ?": ""
+    },
+    {
+        " ID": "1",
+        "Question": "What should I get ready for my housing search?",
+        "User Asking": "macy3297@yahoo.net",
+        "Question Category": "Housing",
+        "Upvotes": "9",
+        "FAQ?": ""
+    }
+]

@@ -1,0 +1,30 @@
+- (auth)
+  - _layout.tsx
+  - login
+    - _layout.tsx
+    - index.tsx
+  - register.tsx
+  - reset-password.tsx
+- (drawer)
+  - (tabs)
+    - (drawer-tabs)
+      - _layout.tsx
+      - profile.tsx
+      - settings.tsx
+      - user-guide.tsx
+      - your-calendar.tsx
+    - _layout.tsx
+    - chat.tsx
+    - courses.tsx
+    - events.tsx
+    - faq.tsx
+    - home.tsx
+  - _layout.tsx
+- _layout.tsx
+- index.tsx
+- signup
+  - _layout.tsx
+  - add-resource-request.tsx
+  - choose-role.tsx
+  - create-profile.tsx
+  - pick-service-types.tsx

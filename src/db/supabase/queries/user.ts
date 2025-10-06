@@ -6,7 +6,7 @@ import {
 } from "@db/supabase/types";
 
 export async function signIn(email: string, password: string) {
-  const { data, error } = await SupabaseClient.auth.signInWithPassword({
+  const { error } = await SupabaseClient.auth.signInWithPassword({
     email,
     password,
   });
@@ -18,7 +18,6 @@ export async function signIn(email: string, password: string) {
     );
     throw error;
   }
-  return data;
 }
 
 export async function signUp(email: string, password: string) {
@@ -79,11 +78,15 @@ export async function insertPrivateUser(
   return data;
 }
 
-export async function getPrivateUser(userId: string): Promise<PrivateUser> {
+export async function getPrivateUser(
+  userId: string,
+  email: string | undefined
+): Promise<PrivateUser> {
   const { data, error } = await SupabaseClient.from("private_user")
     .select("*")
     .eq("id", userId)
-    .single<PrivateUser>();
+    .maybeSingle<PrivateUser>();
+
   if (error) {
     console.log(
       "[db/supabase/queries/user.ts] Error in getPrivateUser:",
@@ -91,7 +94,19 @@ export async function getPrivateUser(userId: string): Promise<PrivateUser> {
     );
     throw error;
   }
-  return data;
+
+  if (data) return data;
+
+  try {
+    const privateUser = await insertPrivateUser(userId, email || "", "");
+    return privateUser;
+  } catch (error) {
+    console.log(
+      "[db/supabase/queries/user.ts] Error in getPrivateUser (insert):",
+      error
+    );
+    throw error;
+  }
 }
 
 export async function updatePrivateUser(
@@ -128,14 +143,16 @@ export async function insertUserSettings(
     );
     throw error;
   }
-  return data;
+  return data || null;
 }
 
-export async function getUserSettings(userId: string): Promise<UserSettings> {
+export async function getUserSettings(
+  userId: string
+): Promise<UserSettings> {
   const { data, error } = await SupabaseClient.from("user_settings")
     .select("*")
     .eq("user_id", userId)
-    .single<UserSettings>();
+    .maybeSingle<UserSettings>();
   if (error) {
     console.log(
       "[db/supabase/queries/user.ts] Error in getUserSettings:",
@@ -143,5 +160,16 @@ export async function getUserSettings(userId: string): Promise<UserSettings> {
     );
     throw error;
   }
-  return data;
+  if (data) return data;
+
+  try {
+    const userSettings = await insertUserSettings(userId);
+    return userSettings;
+  } catch (error) {
+    console.log(
+      "[db/supabase/queries/user.ts] Error in getUserSettings (insert):",
+      error
+    );
+    throw error;
+  }
 }

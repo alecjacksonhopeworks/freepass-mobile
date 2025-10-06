@@ -5,10 +5,11 @@ import { useAuthStore } from "@db/store/useAuthStore";
 import { PrivateUser, UserSettings } from "@db/supabase/types";
 
 async function fetchUserData(
-  userId: string
-): Promise<{ privateUser: PrivateUser; userSettings: UserSettings }> {
+  userId: string,
+  email: string | undefined
+): Promise<{ privateUser: PrivateUser | null; userSettings: UserSettings | null }> {
   const [privateUser, userSettings] = await Promise.all([
-    getPrivateUser(userId),
+    getPrivateUser(userId, email),
     getUserSettings(userId),
   ]);
 
@@ -18,27 +19,38 @@ async function fetchUserData(
 export function useAuthSync() {
   const { clearAuthStore, setAuthData, setAuthIsLoading } = useAuthStore();
 
+  const init = async () => {
+    try {
+      const {
+        data: { session },
+      } = await SupabaseClient.auth.getSession();
+
+      if (session) {
+        const { privateUser, userSettings } = await fetchUserData(
+          session.user.id,
+          session.user?.email
+        );
+        setAuthData(session, privateUser, userSettings);
+      } else {
+        clearAuthStore();
+      }
+    } catch (error) {
+      console.error("Error initializing auth:", error);
+      clearAuthStore(); 
+    } finally {
+      setAuthIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const init = async () => {
-      SupabaseClient.auth.getSession().then(async ({ data: { session } }) => {
-        if (session) {
-          const { privateUser, userSettings } = await fetchUserData(
-            session.user.id
-          );
-          setAuthData(session, privateUser, userSettings);
-        } else {
-          clearAuthStore();
-        }
-        setAuthIsLoading(false);
-      });
-    };
     init();
 
     const { data: listener } = SupabaseClient.auth.onAuthStateChange(
       async (_event, session) => {
         if (session) {
           const { privateUser, userSettings } = await fetchUserData(
-            session.user.id
+            session.user.id,
+            session.user?.email
           );
           setAuthData(session, privateUser, userSettings);
         } else {
@@ -49,5 +61,4 @@ export function useAuthSync() {
 
     return () => listener?.subscription.unsubscribe();
   }, []);
-
 }

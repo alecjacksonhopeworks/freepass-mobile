@@ -1,38 +1,64 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet } from "react-native";
+import { StyledText } from "@components/StyledText";
 import { GlobalTheme } from "@constants/global-themes";
 import IconToggle from "@components/IconToggle";
-import { Resource } from "@constants/types";
+import { ResourceSearchResult } from "@db/supabase/types";
+import { TextLink } from "@components/TextLink";
 
 // TODO: inspect and style generated ResourceCard Component and later add  database resource type
 
 export type ResourceCardProps = {
-  resource: Resource;
-  onToggleFavorite: (id: string) => void;
+  data: ResourceSearchResult;
+  toggleFavorite: (id: number, isFavorited: boolean) => void;
 };
 
 export default function ResourceCard({
-  resource,
-  onToggleFavorite,
+  data,
+  toggleFavorite,
 }: ResourceCardProps) {
+  const [isFavorited, setIsFavorited] = useState<boolean>(data.is_favorited);
+
+  const onToggleFavorite = () => {
+    console.log('ResourceCard toggling favorite for resource:', data.resource_name, 'Currently favorited:', isFavorited);
+    setIsFavorited((prev) => !prev);
+    toggleFavorite(data.resource_id, isFavorited);
+  };
   return (
     <View style={styles.card}>
-      {resource.image ? (
-        <Image source={{ uri: resource.image }} style={styles.image} />
+      {data.org_logo_uri ? (
+        <Image source={{ uri: data.org_logo_uri }} style={styles.image} />
       ) : (
         <View style={styles.placeholderImage} />
       )}
-      <View style={styles.textContainer}>
-        <Text style={styles.name}>{resource.name}</Text>
-        <Text style={styles.description}>{resource.description}</Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.headerContainer}>
+          <TextLink
+            href={`/resource/${data.resource_id}`}
+            push={true}
+            text={data.resource_name}
+            font="large"
+            weight="bold"
+            style={styles.name}
+            numberOfLines={2}
+            ellipsizeMode="tail"
+          />
+          <IconToggle
+            isOn={isFavorited}
+            onPress={onToggleFavorite}
+            iconOn="heart"
+            iconOff="heart-outline"
+            size={28}
+          />
+        </View>
+        <StyledText
+          text={data.resource_description || ""}
+          font="medium"
+          style={styles.description}
+          numberOfLines={2}
+          ellipsizeMode="tail"
+        />
       </View>
-      <IconToggle
-        isOn={resource.favorite}
-        onPress={() => onToggleFavorite(resource.id)}
-        iconOn="heart"
-        iconOff="heart-outline"
-        size={28}
-      />
     </View>
   );
 }
@@ -41,35 +67,47 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    padding: GlobalTheme.spacing.md,
+    padding: GlobalTheme.spacing.sm,
+    gap: GlobalTheme.spacing.sm,
     borderWidth: 1,
     borderColor: GlobalTheme.colors.gray,
     borderRadius: GlobalTheme.radius.md,
     marginBottom: GlobalTheme.spacing.md,
   },
   image: {
-    width: 60,
-    height: 60,
+    width: 75,
+    height: 75,
     borderRadius: GlobalTheme.radius.sm,
-    marginRight: GlobalTheme.spacing.md,
   },
   placeholderImage: {
-    width: 60,
-    height: 60,
+    width: 75,
+    height: 75,
     borderRadius: GlobalTheme.radius.sm,
-    marginRight: GlobalTheme.spacing.md,
     backgroundColor: GlobalTheme.colors.gray,
   },
-  textContainer: {
+  contentContainer: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    height: "100%"
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: GlobalTheme.spacing.xs,
+    width: "100%",
+    paddingRight: GlobalTheme.spacing.sm,
   },
   name: {
-    fontWeight: "bold",
-    fontSize: 16,
-    marginBottom: 4,
+    ...GlobalTheme.typography.large,
+    marginBottom: GlobalTheme.spacing.xs,
+    width: "90%",
+    textAlign: "left",
   },
   description: {
-    fontSize: 14,
-    color: GlobalTheme.colors.text,
+    ...GlobalTheme.typography.medium,
+    textAlign: "left",
+    width: "95%",
   },
 });

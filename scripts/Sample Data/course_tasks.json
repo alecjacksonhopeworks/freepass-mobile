@@ -1,0 +1,86 @@
+[
+    {
+        " ID": "12",
+        "Name": "Resume",
+        "Order": "1",
+        "Description": "Get information about each job and position I had",
+        "Course": "How to Write a Great Resume"
+    },
+    {
+        " ID": "11",
+        "Name": "Bank Account",
+        "Order": "1.23",
+        "Description": "Find a banking institution that fits my needs",
+        "Course": "Manage a Savings Account"
+    },
+    {
+        " ID": "10",
+        "Name": "Step 10: Focus on Self-Care and Adjustment",
+        "Order": "10",
+        "Description": "Healthy Routines: Establish daily routines that include exercise, healthy eating, and mindfulness practices.\nCommunity Involvement: Engage with your community through activities, workshops, or local events to foster a sense of belonging.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "9",
+        "Name": "Step 9: Build a Support Network",
+        "Order": "9",
+        "Description": "Reconnect with Family and Friends: Strengthen your support system by reaching out to loved ones.\nSupport Groups: Join support groups for people reentering society to share experiences and coping strategies.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "8",
+        "Name": "Step 8: Understand Your Rights",
+        "Order": "8",
+        "Description": "Know Your Legal Rights: Familiarize yourself with your rights regarding housing and employment, particularly concerning discrimination due to your criminal record.\nLegal Aid Resources: Connect with organizations that provide legal assistance if you face discrimination or challenges.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "7",
+        "Name": "Step 7: Prepare for Interviews",
+        "Order": "7",
+        "Description": "Mock Interviews: Practice interviewing with friends, family, or career coaches to build confidence.\nDiscuss Your Background: Be prepared to explain your incarceration in a positive light, focusing on what you learned and how you've changed.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "6",
+        "Name": "Step 6: Job Search and Application",
+        "Order": "6",
+        "Description": "Resume and Cover Letter: Create a professional resume and cover letter that highlight your skills and experience.\nJob Portals and Networking: Use job search websites (like Indeed or LinkedIn) and network through community organizations or job fairs.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "5",
+        "Name": "Step 5: Develop Job Skills",
+        "Order": "5",
+        "Description": "Job Training Programs: Enroll in programs that offer skills training and workshops to enhance your employability.\nVolunteer Opportunities: Gain experience and build your resume by volunteering with local nonprofits.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "4",
+        "Name": "Step 4: Connect with Support Services",
+        "Order": "4",
+        "Description": "Reentry Programs: Seek out local organizations that offer support for formerly incarcerated individuals, such as the Philadelphia Reentry Coalition.\nMental Health Services: Consider accessing counseling or mental health services to help with the transition.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "3",
+        "Name": "Step 3: Find Stable Housing",
+        "Order": "3",
+        "Description": "Temporary Housing: Look for shelters or transitional housing programs specifically for those reentering society.\nSearch for Permanent Housing: Use resources like the Philadelphia Housing Authority or local housing agencies. Check for any programs that assist individuals with criminal records.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "2",
+        "Name": "Step 2: Secure Identification",
+        "Order": "2",
+        "Description": "Obtain Necessary IDs: Ensure you have a government-issued ID, Social Security card, and any necessary documents that can aid in employment and housing applications.\nContact Local Organizations: Organizations like the Philadelphia Office of Reentry Partnerships can help with obtaining these documents.",
+        "Course": "Ten Reentry Steps"
+    },
+    {
+        " ID": "1",
+        "Name": "Step 1: Create a Reentry Plan",
+        "Order": "1",
+        "Description": "Assess Your Needs: Outline your immediate needs for housing, employment, and support.\nSet Goals: Identify short-term and long-term goals, such as finding a job within three months or stable housing within six.",
+        "Course": "Ten Reentry Steps"
+    }
+]

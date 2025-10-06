@@ -1,25 +1,27 @@
-import React from "react";
-import { View, TextInput, StyleSheet, DimensionValue } from "react-native";
+import React, { useState } from "react";
+import { View, TextInput, StyleSheet, DimensionValue, Keyboard } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { GlobalTheme } from "@constants/global-themes";
 
-// TODO: inspect generated search bar component, style (with icon) add reasonable design, (onChange or onEnter)
-
 type SearchBarProps = {
-  value: string;
+  searchText: string;
   width?: DimensionValue;
   placeholder?: string;
-  onChangeText: (text: string) => void;
+  onSearch: (text: string) => void;
   showIcon?: boolean;
+
 };
 
 export default function SearchBar({
-  value,
+  searchText,
   placeholder,
-  onChangeText,
+  onSearch,
   showIcon = false,
   width = "100%",
 }: SearchBarProps) {
+
+  const [searchTextValue, setSearchTextValue] = useState<string>(searchText);
+
   return (
     <View style={[styles.container, { width }]}>
       {showIcon && (
@@ -34,8 +36,13 @@ export default function SearchBar({
         style={[styles.input, showIcon && { paddingLeft: 36 }]}
         placeholder={placeholder}
         placeholderTextColor={GlobalTheme.colors.gray}
-        value={value}
-        onChangeText={onChangeText}
+        value={searchTextValue}
+        returnKeyType="search"
+        onChangeText={setSearchTextValue}
+        onSubmitEditing={(e) => {
+          Keyboard.dismiss();              
+          onSearch(e.nativeEvent.text);                  
+        }}
       />
     </View>
   );

@@ -7,7 +7,7 @@ import { DimensionValue } from "react-native";
 
 export type ServiceTypeDropdownProps = {
   onChange: (value: string | undefined) => void;
-  value: string | undefined;
+  value: number | undefined;
   width?: DimensionValue
 };
 
@@ -27,7 +27,7 @@ export function ServiceTypeDropdown({
       choices={choices}
       onChange={onChange}
       label="Service Type"
-      value={value}
+      value={value?.toString()}
       width={width}
     />
   );

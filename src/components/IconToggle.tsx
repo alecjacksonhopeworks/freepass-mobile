@@ -13,7 +13,6 @@ type IconToggleProps = {
   colorOn?: string;
   colorOff?: string;
   style?: ViewStyle;
-  loading?: boolean;
   loadingDelay?: number;
 };
 
@@ -26,24 +25,27 @@ export default function IconToggle({
   colorOn = GlobalTheme.colors.primary,
   colorOff = GlobalTheme.colors.primary,
   style,
-  loading = false,
-  loadingDelay = 200,
+  loadingDelay = 500,
 }: IconToggleProps) {
-  const [showLoading, setShowLoading] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     let timeout: number;
     if (loading) {
-      timeout = setTimeout(() => setShowLoading(true), loadingDelay);
-    } else {
-      setShowLoading(false);
-    }
+      timeout = setTimeout(() => setLoading(false), loadingDelay);
+    } 
     return () => clearTimeout(timeout);
-  }, [loading, loadingDelay]);
+  }, [loading]);
+
+  const handlePress = () => {
+    if (!loading) {
+      onPress();
+      setLoading(true);
+    }
+  }
 
   return (
-    <Pressable onPress={onPress} style={style} disabled={loading}>
-      {showLoading ? (
+    <Pressable onPress={handlePress} style={style} disabled={loading}>
+      {loading ? (
         <ActivityIndicator size={size} color={colorOn} />
       ) : (
         <Ionicons

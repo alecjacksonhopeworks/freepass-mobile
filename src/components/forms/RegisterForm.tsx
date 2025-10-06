@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   formItemContainer: {
     flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: GlobalTheme.spacing.xs,
     width: "100%",
   },

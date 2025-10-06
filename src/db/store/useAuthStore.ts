@@ -17,8 +17,8 @@ interface AuthState {
   clearAuthStore: () => void;
   setAuthData: (
     session: Session | null,
-    privateUser: PrivateUser,
-    userSettings: UserSettings
+    privateUser: PrivateUser | null,
+    userSettings: UserSettings | null
   ) => void;
 }
 

@@ -4,57 +4,49 @@ import SearchBar from "@components/SearchBar";
 import StyledButton from "@components/StyledButton";
 import { GlobalTheme } from "@constants/global-themes";
 import { useState } from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet } from "react-native";
 import ResourceList from "./ResourceList";
-import { Keyboard } from "react-native";
-
-type Resource = {
-  id: string;
-  name: string;
-  description: string;
-  image: any;
-  favorite: boolean;
-};
-
-const defaultResources: Resource[] = [
-  {
-    id: "1",
-    name: "Local Food Bank",
-    description: "Provides meals and groceries for those in need.",
-    image: null,
-    favorite: false,
-  },
-  {
-    id: "2",
-    name: "Job Training Center",
-    description: "Career development and skills training programs.",
-    image: null,
-    favorite: true,
-  },
-  {
-    id: "3",
-    name: "Community Shelter",
-    description: "Temporary housing and support services.",
-    image: null,
-    favorite: false,
-  },
-];
+import {
+  useFavoriteResource,
+  useSearchResources,
+  useUnfavoriteResource,
+} from "@db/hooks/resource";
+import { ResourceSearchParams } from "@db/supabase/types";
+import { useAuthStore } from "@db/store/useAuthStore";
 
 function ResourceFilteredSearch() {
-  const [resources, setResources] = useState<Resource[]>(defaultResources);
-  const [search, setSearch] = useState("");
-  const [showFavorites, setShowFavorites] = useState(false);
-  const [serviceType, setServiceType] = useState<string | undefined>(undefined);
+  console.log("rerender component", "ResourceFilterSearch");
+  const session = useAuthStore((store) => store.session);
+  const [searchParams, setSearchParams] = useState<ResourceSearchParams>({
+    search_text: "",
+    input_service_type_id: undefined,
+    input_user_id: session?.user.id,
+    only_favorites: false,
+  });
 
-  const filteredResources = resources
-    .filter((r) => (showFavorites ? r.favorite : true))
-    .filter((r) => r.name.toLowerCase().includes(search.toLowerCase()));
+  const { data: searchResults, error } = useSearchResources(searchParams);
 
-  const toggleFavorite = (id: string) => {
+  const { mutate: callFavoriteResource } = useFavoriteResource();
+  const { mutate: callUnfavoriteResource } = useUnfavoriteResource();
+
+  const setSearch = (text: string) => {
+    setSearchParams((prev) => ({ ...prev, search_text: text }));
+  };
+
+  const setShowFavorites = (value: boolean) => {
+    setSearchParams((prev) => ({ ...prev, only_favorites: value }));
+  };
+
+  const setServiceType = (service_type_id: number | undefined) => {
+    setSearchParams((prev) => ({
+      ...prev,
+      input_service_type_id: service_type_id,
+    }));
+  };
+
+  const toggleFavorite = (id: number, isFavorited: boolean) => {
     setTimeout(() => {
-      setResources((prev) =>
-        prev.map((r) => (r.id === id ? { ...r, favorite: !r.favorite } : r))
-      );
+      isFavorited ? callUnfavoriteResource(id) : callFavoriteResource(id);
     }, 500);
   };
 
@@ -72,18 +64,16 @@ function ResourceFilteredSearch() {
       />
       <SearchBar
         placeholder="Search resources..."
-        value={search}
-        onChangeText={(text: string) => {
-          setSearch(text);
-        }}
+        searchText={searchParams.search_text || ""}
+        onSearch={setSearch}
         showIcon
         width="95%"
       />
 
       <View style={styles.toggleContainer}>
         <IconToggle
-          isOn={showFavorites}
-          onPress={() => setShowFavorites(!showFavorites)}
+          isOn={searchParams.only_favorites}
+          onPress={() => setShowFavorites(!searchParams.only_favorites)}
           iconOn="heart"
           iconOff="heart-outline"
           size={28}
@@ -91,14 +81,14 @@ function ResourceFilteredSearch() {
         />
 
         <ServiceTypeDropdown
-          onChange={(st) => setServiceType(st)}
-          value={serviceType}
+          onChange={(stId) => setServiceType(Number(stId))}
+          value={searchParams.input_service_type_id}
           width="80%"
         />
       </View>
 
       <ResourceList
-        resources={filteredResources}
+        data={searchResults || []}
         toggleFavorite={toggleFavorite}
       />
     </View>

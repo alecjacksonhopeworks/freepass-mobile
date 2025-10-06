@@ -1,52 +1,33 @@
-// hooks/useServiceTypes.ts
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { SupabaseClient } from "@db/supabase/client";
-import { ServiceType } from "@db/supabase/types";
+import { getServiceTypes, syncUserServiceTypes, getUserServiceTypeIds } from "@db/supabase/queries/service_type";
 import { useAuthStore } from "@db/store/useAuthStore";
 
 export function useServiceTypes() {
-  return useQuery<ServiceType[]>({
+  return useQuery({
     queryKey: ["service_type"],
-    queryFn: async () => {
-      const { data, error } = await SupabaseClient.from("service_type").select(
-        "id, name, description, icon",
-      );
-      if (error) throw error;
-
-      return data!;
-    },
+    queryFn: getServiceTypes,
   });
 }
 
 export function useSyncUserServiceTypes(userIdOverride?: string) {
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore((store) => store.user);
   const userId = userIdOverride ?? user?.id;
-
-  if (!user?.id) throw new Error("User not logged in");
+  if (!userId) throw new Error("User ID is required");
 
   return useMutation({
     mutationFn: async (selectedIds: number[]) => {
-      if (!userId) throw new Error("User ID is required");
-
-      const { error: deleteError } = await SupabaseClient.from(
-        "user_service_types",
-      )
-        .delete()
-        .eq("user_id", userId)
-        .not("service_type_id", "in", `(${selectedIds.join(",")})`);
-
-      if (deleteError) throw deleteError;
-
-      const rows = selectedIds.map((id) => ({
-        user_id: userId,
-        service_type_id: id,
-      }));
-
-      const { error: upsertError } = await SupabaseClient.from(
-        "user_service_types",
-      ).upsert(rows, { onConflict: "user_id,service_type_id" });
-
-      if (upsertError) throw upsertError;
+      await syncUserServiceTypes(userId, selectedIds);
     },
+  });
+}
+
+export function useUserServiceTypeIds(userIdOverride?: string) {
+  const user = useAuthStore((store) => store.user);
+  const userId = userIdOverride ?? user?.id;
+  if (!userId) throw new Error("User ID is required");
+
+  return useQuery({
+    queryKey: ["user_service_types", userId],
+    queryFn: () => getUserServiceTypeIds(userId),
   });
 }
