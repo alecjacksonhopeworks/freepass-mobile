@@ -92,7 +92,6 @@ export function StyledDropdown({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     paddingTop: 16,
   },
   dropdown: {
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   },
   label: {
     position: "absolute",
-    backgroundColor: GlobalTheme.colors.white,
+    backgroundColor: GlobalTheme.colors.whiteInactive,
     left: 8,
     top: 8,
     zIndex: 999,
