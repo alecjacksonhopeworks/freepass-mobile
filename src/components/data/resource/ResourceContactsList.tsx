@@ -4,6 +4,9 @@ import { StyledText } from "@components/StyledText";
 import { GlobalTheme } from "@constants/global-themes";
 import { Contact } from "@db/supabase/types";
 
+
+//TODO: add styling for ResourceContactsList
+
 export default function ResourceContactsList({
   contacts,
 }: {

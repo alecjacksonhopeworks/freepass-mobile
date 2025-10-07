@@ -13,6 +13,7 @@ import {
 } from "@db/hooks/resource";
 import { ResourceSearchParams } from "@db/supabase/types";
 import { useAuthStore } from "@db/store/useAuthStore";
+import { router } from "expo-router";
 
 function ResourceFilteredSearch() {
   console.log("rerender component", "ResourceFilterSearch");
@@ -51,8 +52,16 @@ function ResourceFilteredSearch() {
   };
 
   const loadResourceMapView = () => {
-    console.error("Find Resources unimplemented");
-    //TODO: Load filtered Resources into map view search
+    let resourceIds: number[] = searchResults?.map((r) => r.resource_id) || [];
+    if (resourceIds.length > 0) {
+      router.push({
+        pathname: '/map',
+        params: { data: JSON.stringify(resourceIds) },
+      });
+    }
+    else{
+      console.error("No resources to show on map");
+    }
   };
   return (
     <View style={styles.filterContainer}>

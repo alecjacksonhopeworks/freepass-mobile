@@ -4,6 +4,9 @@ import { StyledText } from "@components/StyledText";
 import { GlobalTheme } from "@constants/global-themes";
 import { Organization } from "@db/supabase/types";
 
+
+//TODO: add styling for OrganizationCard
+
 export default function OrganizationCard({ organization }: { organization: Organization }) {
   return (
     <View style={styles.card}>

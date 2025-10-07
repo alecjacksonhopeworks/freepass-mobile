@@ -42,6 +42,7 @@ export default function ResourceCard({
             style={styles.name}
             numberOfLines={2}
             ellipsizeMode="tail"
+            noUnderline
           />
           <IconToggle
             isOn={isFavorited}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Resource Map</title>
+    <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@protomaps/pmtiles"></script>
+    <style>html, body { margin:0; padding:0; height:100%; }</style>
+  </head>
+  <body>
+    <div id="map" style="width:100%;height:100%;"></div>
+    <script>
+      const mapTilesUrl = window.MAP_TILES_URL;
+      const resourceMapDetails = window.RESOURCE_MAP_DETAILS;
+
+      const map = new maplibregl.Map({
+        container: 'map',
+        style: {
+          version: 8,
+          sources: {
+            pmtiles: {
+              type: 'raster',
+              tiles: [mapTilesUrl],
+              tileSize: 256
+            }
+          },
+          layers: [
+            { id: 'pmtiles-layer', type: 'raster', source: 'pmtiles' }
+          ]
+        },
+        center: [-75.16, 39.95],
+        zoom: 10
+      });
+
+      resourceMapDetails.forEach(r => {
+        const el = document.createElement('div');
+        el.style.background = 'red';
+        el.style.width = '18px';
+        el.style.height = '18px';
+        el.style.borderRadius = '7px';
+
+        new maplibregl.Marker(el)
+          .setLngLat([r.longitude, r.latitude])
+          .setPopup(new maplibregl.Popup().setText(r.name))
+          .addTo(map);
+      });
+    </script>
+  </body>
+</html>

@@ -14,12 +14,14 @@ import {
   getResourceContacts,
   getResourceServiceTypes,
   getResourceDetails,
+  getResourceMapDetails,
 } from "@db/supabase/queries/resource";
 import {
   Address,
   Contact,
   Resource,
   ResourceDetails,
+  ResourceMapDetails,
   ResourceSearchParams,
   ResourceSearchResult,
   ResourceServiceType,
@@ -136,3 +138,14 @@ export function useResourceDetails(resourceId: number) : UseQueryResult<Resource
     enabled: !!resourceId,
   })
 }
+
+export function useResourceMapDetails(
+  resourceIds: number[]
+): UseQueryResult<ResourceMapDetails[], Error> {
+  return useQuery({
+    queryKey: ["resource_map_details", resourceIds],
+    queryFn: () => getResourceMapDetails(resourceIds),
+    enabled: !!resourceIds,
+  });
+}
+

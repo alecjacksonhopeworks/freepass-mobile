@@ -33,7 +33,7 @@ export type SignUpState =
 
   export type Resource = Omit<
   SupabaseTypes.Database["public"]["Tables"]["resource"]["Row"],
-  "created_at" | "updated_at"
+  "created_at" | "updated_at" | "is_active"
 >;
 
 export type Organization = Omit<
@@ -74,3 +74,8 @@ export type ResourceDetails = {
   address: Address
   serviceTypes: ServiceType[]
 }
+
+export type ResourceMapDetails = {
+   resource: Resource,
+   address: Address
+};

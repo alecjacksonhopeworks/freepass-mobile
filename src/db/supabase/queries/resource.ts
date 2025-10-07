@@ -6,7 +6,8 @@ import {
   Contact,
   ResourceServiceType,
   ResourceSearchParams,
-  ResourceDetails
+  ResourceDetails,
+  ResourceMapDetails,
 } from "@db/supabase/types";
 
 export async function searchResources(
@@ -87,7 +88,9 @@ export async function getResourceServiceTypes(
   }));
 }
 
-export async function getResourceDetails(resourceId: number): Promise<ResourceDetails | null> {
+export async function getResourceDetails(
+  resourceId: number
+): Promise<ResourceDetails | null> {
   const { data, error } = await SupabaseClient.rpc("get_resource_details", {
     input_resource_id: resourceId,
   });
@@ -95,4 +98,32 @@ export async function getResourceDetails(resourceId: number): Promise<ResourceDe
   if (error) throw error;
 
   return data as ResourceDetails;
+}
+
+export async function getResourceMapDetails(
+  resourceIds: number[]
+): Promise<ResourceMapDetails[]> {
+  const { data, error } = await SupabaseClient.from("resource")
+    .select(
+      `
+      *,
+      address:address_id(*) 
+    `
+    )
+    .in("id", resourceIds);
+
+  if (error) throw error;
+
+  return (data || []).map((row: any) => ({
+    resource: {
+      id: row.id,
+      name: row.name,
+      description: row.description,
+      hours: row.hours,
+      logo_uri: row.logo_uri,
+      organization_id: row.organization_id,
+      address_id: row.address_id,
+    } as Resource,
+    address: row.address as Address,
+  }));
 }

@@ -9,6 +9,10 @@ import ResourceContactsList from "@components/data/resource/ResourceContactsList
 import ResourceServiceTypeCard from "@components/data/resource/ResourceServiceTypeCard";
 import { GlobalTheme } from "@constants/global-themes";
 
+
+//TODO: add styling for ResourceDetails
+
+
 export default function ResourceDetailPage() {
   const { id } = useLocalSearchParams();
   const resourceId = Number(id);
